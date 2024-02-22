@@ -1,12 +1,14 @@
 CREATE TABLE MEAL
 (
     MEAL_ID             SERIAL       NOT NULL,
-    CATEGORY            VARCHAR(20)  NOT NULL,
-    MENU_ID             INT          NOT NULL,
-    DESCRIPTION         VARCHAR(64)  NOT NULL,
-    PRICE               NUMERIC(3,2) NOT NULL,
+    NAME                VARCHAR(255) NOT NULL,
+    CATEGORY            VARCHAR(255) NOT NULL,
+    DESCRIPTION         TEXT         NOT NULL,
+    PRICE               NUMERIC(4,2) NOT NULL,
+    RESTAURANT_ID       INT          NOT NULL,
     PRIMARY KEY (MEAL_ID),
-    CONSTRAINT FK_MEAL_MENU_ID
-            FOREIGN KEY (MENU_ID)
-                REFERENCES MENU (MENU_ID)
+    CONSTRAINT FK_MEAL_RESTAURANT
+                FOREIGN KEY (RESTAURANT_ID)
+                    REFERENCES RESTAURANT (RESTAURANT_ID)
+
 );
