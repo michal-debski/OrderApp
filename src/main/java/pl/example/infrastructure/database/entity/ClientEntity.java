@@ -1,6 +1,7 @@
 package pl.example.infrastructure.database.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 
@@ -23,13 +24,15 @@ public class ClientEntity {
     private String surname;
     @Column(name = "phone")
     private String phone;
+    @Email
     @Column(name = "email")
     private String email;
-    @Column(name = "password")
-    private String password;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id")
+    private CartEntity cart;
 
    }

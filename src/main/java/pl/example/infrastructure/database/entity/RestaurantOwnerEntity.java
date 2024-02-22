@@ -27,9 +27,6 @@ public class RestaurantOwnerEntity {
 
     @Column(name = "email")
     private String email;
-    @Column(name = "password")
-    private String password;
-
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurantOwner")
     private Set<RestaurantEntity> restaurants;

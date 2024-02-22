@@ -22,12 +22,16 @@ public class RestaurantEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "name")
-    private Long deliveryArea;
-
+    @ManyToMany
+    @JoinTable(
+            name = "restaurant_street",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "street_id")
+    )
+    private Set<StreetEntity> streets;
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private RestaurantOwnerEntity restaurantOwner;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private Set<MenuEntity> menus;
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<MealEntity> meals;
 }
