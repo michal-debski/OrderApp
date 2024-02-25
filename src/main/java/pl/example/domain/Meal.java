@@ -13,13 +13,12 @@ public class Meal {
     Integer mealId;
     String name;
 
-    String category;
+    Category category;
 
     String description;
 
     BigDecimal price;
 
     Restaurant restaurant;
-
     Set<OrderItem> orderItems;
 }

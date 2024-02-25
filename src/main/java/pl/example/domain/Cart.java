@@ -9,9 +9,10 @@ import java.util.Set;
 @Value
 @Builder
 @EqualsAndHashCode(of = "cartId")
-@ToString(of = {"cartId", "totalPrice", "orderItems"})
+@ToString(of = {"cartId", "totalQuantity","totalPrice", "orderItems"})
 public class Cart {
      Integer cartId;
+     Integer totalQuantity;
      BigDecimal totalPrice;
      Set<OrderItem> orderItems;
 

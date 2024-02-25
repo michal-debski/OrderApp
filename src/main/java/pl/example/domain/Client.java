@@ -2,8 +2,10 @@ package pl.example.domain;
 
 import lombok.*;
 
+import java.util.Set;
+
 @With
-@Value
+@Data
 @Builder
 @EqualsAndHashCode(of = "email")
 @ToString(of = {"clientId", "name", "surname", "email"})
@@ -13,7 +15,7 @@ public class Client {
     String surname;
     String phone;
     String email;
-    Address address;
 
-    Cart cart;
+    Set<Cart> carts;
+    Set<Order> orders;
 }

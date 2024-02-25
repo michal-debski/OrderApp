@@ -1,14 +1,13 @@
 package pl.example.domain;
 
 import lombok.*;
-import pl.example.infrastructure.database.entity.RestaurantEntity;
 
 import java.util.Set;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "email")
-@ToString(of = {"restaurantOwnerId", "name", "surname", "restaurants"})
+@EqualsAndHashCode(of = "restaurantOwnerId")
+@ToString(of = {"restaurantOwnerId", "name", "surname"})
 public class RestaurantOwner {
 
      Integer restaurantOwnerId;
@@ -16,5 +15,5 @@ public class RestaurantOwner {
      String surname;
      String email;
 
-     Set<RestaurantEntity> restaurants;
+     Set<Restaurant> restaurants;
 }
