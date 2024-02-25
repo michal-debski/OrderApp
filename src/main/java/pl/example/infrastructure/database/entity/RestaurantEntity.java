@@ -7,6 +7,8 @@ import java.util.Set;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = "restaurantId")
+@ToString(of = {"restaurantId", "name"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,16 +24,13 @@ public class RestaurantEntity {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "restaurant_street",
-            joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name = "street_id")
-    )
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<StreetEntity> streets;
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "restaurant_owner_id")
     private RestaurantOwnerEntity restaurantOwner;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private Set<OrderEntity> orders;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<MealEntity> meals;
 }

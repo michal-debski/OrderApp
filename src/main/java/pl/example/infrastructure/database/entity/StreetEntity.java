@@ -5,6 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = "streetId")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,4 +20,7 @@ public class StreetEntity {
 
     @Column(name = "name")
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private RestaurantEntity restaurant;
 }

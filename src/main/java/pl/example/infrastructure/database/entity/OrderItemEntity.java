@@ -3,10 +3,9 @@ package pl.example.infrastructure.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
+@EqualsAndHashCode(of = "orderItemId")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,18 +22,14 @@ public class OrderItemEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
-
-    @Column(name = "price")
-    private BigDecimal price;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "meal_id")
+    private MealEntity meal;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     private CartEntity cart;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "meal_id")
-    private MealEntity meal;
 
 
 }

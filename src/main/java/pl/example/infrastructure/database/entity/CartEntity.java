@@ -8,6 +8,8 @@ import java.util.Set;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of ="cartId")
+@ToString(of = {"cartId", "totalQuantity","totalPrice","client", "orderItems"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,9 +20,14 @@ public class CartEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
     private Integer cartId;
-    @Column
+    @Column(name = "total_quantity")
+    private Integer totalQuantity;
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private ClientEntity client;
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "cart")
     private Set<OrderItemEntity> orderItems;
 }

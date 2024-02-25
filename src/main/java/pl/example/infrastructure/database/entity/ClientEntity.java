@@ -4,9 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
+import java.util.Set;
+
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = "clientId")
+@ToString(of = {"clientId","name", "surname", "email"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,11 +32,10 @@ public class ClientEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id")
-    private AddressEntity address;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private CartEntity cart;
 
-   }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
+    private Set<CartEntity> carts;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
+    private Set<OrderEntity> orders;
+
+}

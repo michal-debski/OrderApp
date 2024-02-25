@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Getter
 @Setter
+@EqualsAndHashCode(of = "mealId")
+@ToString(of = {"mealId", "name", "category", "description", "price", "restaurant"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,8 +24,9 @@ public class MealEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "category")
-    private String category;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
 
     @Column(name = "description")
     private String description;
@@ -35,7 +37,8 @@ public class MealEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "meal")
-    private Set<OrderItemEntity> orderItems;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "meal")
+    private OrderDetailEntity orderDetails;
+
 
 }
