@@ -2,12 +2,12 @@ package pl.example.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.example.infrastructure.database.entity.ClientEntity;
+import pl.example.infrastructure.database.entity.OrderEntity;
 
 import java.util.Optional;
 
 @Repository
-public interface ClientJpaRepository extends JpaRepository<ClientEntity,Integer> {
+public interface OrderJpaRepository extends JpaRepository<OrderEntity, Integer> {
 
-Optional<ClientEntity> findByEmail(String email);
+    Optional<OrderEntity> findByOrderNumber(String orderNumber);
 }
