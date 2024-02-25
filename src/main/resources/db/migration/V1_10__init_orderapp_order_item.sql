@@ -1,6 +1,6 @@
 CREATE TABLE ORDER_ITEM
 (
-    ORDER_ITEM_ID       SERIAL       NOT NULL,
+    ORDER_ITEM_ID       INT       NOT NULL,
     QUANTITY            INT          NOT NULL,
     PRICE               NUMERIC(5,2) NOT NULL,
     MEAL_ID             INT  NOT NULL,
