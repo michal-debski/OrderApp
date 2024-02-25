@@ -64,7 +64,11 @@ public class SecurityConfiguration {
                                 .requestMatchers("/restaurantOwner/**")
                                 .hasAnyAuthority("RESTAURANT_OWNER", "ADMIN")
                                 .requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")
+
                 )
+                .authorizeHttpRequests((auth-> auth.requestMatchers("/register").permitAll()
+                        .anyRequest()
+                        .authenticated()))
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")
