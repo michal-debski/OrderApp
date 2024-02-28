@@ -25,16 +25,10 @@ public class CategoryRepository implements CategoryDAO {
     }
 
     @Override
-    public Category save(Category category) {
-        CategoryEntity toSave = categoryEntityMapper.mapToEntity(category);
-        CategoryEntity saved = categoryJpaRepository.save(toSave);
-        return categoryEntityMapper.mapFromEntity(saved);
-    }
-
-    @Override
-    public Optional<Category> findByName(String name) {
-        return categoryJpaRepository.findByName(name)
+    public Optional<Category> findById(Integer id) {
+        return categoryJpaRepository.findById(id)
                 .map(categoryEntityMapper::mapFromEntity);
     }
+
 
 }

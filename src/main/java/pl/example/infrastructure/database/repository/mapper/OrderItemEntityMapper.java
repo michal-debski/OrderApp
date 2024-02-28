@@ -9,8 +9,9 @@ import pl.example.infrastructure.database.entity.OrderItemEntity;
 public interface OrderItemEntityMapper {
 
     @Mapping(target = "cart", ignore = true)
+    @Mapping(target = "meal", ignore = true)
     OrderItem mapFromEntity(OrderItemEntity entity);
 
-    @Mapping(target = "meal", ignore = true)
+
     OrderItemEntity mapToEntity(OrderItem orderItem);
 }

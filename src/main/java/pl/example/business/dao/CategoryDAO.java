@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface CategoryDAO {
 
     List<Category> findAll();
-    Category save(Category category);
-    Optional<Category> findByName(String name);
+
+    Optional<Category> findById(Integer Id);
+
 
 }

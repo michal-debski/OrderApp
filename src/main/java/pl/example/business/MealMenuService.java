@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.example.business.dao.CategoryDAO;
 import pl.example.business.dao.MealDAO;
 import pl.example.domain.Category;
 import pl.example.domain.Meal;
+import pl.example.domain.Restaurant;
 import pl.example.domain.exception.NotFoundException;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -18,12 +21,14 @@ public class MealMenuService {
 
     private final MealDAO mealDAO;
 
+    private final CategoryDAO categoryDAO;
+    private final CategoryService categoryService;
 
     @Transactional
-    public List<Meal> findMealByCategory(Category category) {
-        List<Meal> meal = mealDAO.findByCategory(category);
+    public Set<Meal> findMealByCategory(Integer categoryId) {
+        Set<Meal> meal = mealDAO.findByCategory(categoryId);
         if (meal.isEmpty()) {
-            throw new NotFoundException("Could not find meal by meal category: [%s]".formatted(category));
+            throw new NotFoundException("Could not find meal by meal category id: [%s]".formatted(categoryId));
         }
         return meal;
     }
@@ -36,17 +41,19 @@ public class MealMenuService {
     }
 
     @Transactional
-    public List<Meal> findAllBySelectedRestaurant(String name) {
-        List<Meal> mealsForSelectedRestaurant = mealDAO.findAllBySelectedRestaurant(name);
+    public List<Meal> findAllBySelectedRestaurant(Integer id) {
+        List<Meal> mealsForSelectedRestaurant = mealDAO.findAllBySelectedRestaurant(id);
         if (mealsForSelectedRestaurant.size() == 0) {
-            throw new NotFoundException("Could not find meal for selected Restaurant [%s]".formatted(name));
+            throw new NotFoundException("Could not find meal for selected Restaurant [%s]".formatted(id));
         }
         return mealsForSelectedRestaurant;
     }
 
-    @Transactional
-    public Meal save(Meal meal) {
-        return mealDAO.save(buildMeal(meal));
+
+    public void makeMealForRestaurant(Integer restaurantId, Meal meal) {
+
+           mealDAO.save(meal);
+
     }
 
     @Transactional
@@ -54,14 +61,6 @@ public class MealMenuService {
         mealDAO.deleteById(id);
     }
 
-    private Meal buildMeal(Meal meal) {
-        return Meal.builder()
-                .name(meal.getName())
-                .description(meal.getDescription())
-                .category(meal.getCategory())
-                .price(meal.getPrice())
-                .restaurant(meal.getRestaurant())
-                .build();
-    }
+
 
 }

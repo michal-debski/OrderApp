@@ -1,6 +1,6 @@
 CREATE TABLE ORDER_DETAIL
 (
-  order_detail_id INT        NOT NULL,
+  order_detail_id SERIAL        NOT NULL,
   total_quantity  INT           NOT NULL,
   total_price      NUMERIC(4,2)  NOT NULL,
   meal_id         INT           NOT NULL,

@@ -22,6 +22,8 @@ public class ClientRepository implements ClientDAO {
     private final OrderJpaRepository orderJpaRepository;
     private final ClientEntityMapper clientEntityMapper;
     private final OrderEntityMapper orderEntityMapper;
+
+
     @Override
     public Optional<Client> findByEmail(String email) {
         return clientJpaRepository.findByEmail(email)

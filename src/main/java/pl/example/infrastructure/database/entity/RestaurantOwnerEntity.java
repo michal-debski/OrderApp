@@ -9,6 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of="restaurantOwnerId")
+@ToString(of = {"restaurantOwnerId", "name", "surname","email"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,6 +30,6 @@ public class RestaurantOwnerEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurantOwner")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurantOwner")
     private Set<RestaurantEntity> restaurants;
 }

@@ -1,20 +1,20 @@
 package pl.example.business.dao;
 
-import pl.example.domain.Category;
 import pl.example.domain.Meal;
 
 import java.util.List;
+import java.util.Set;
 
 public interface MealDAO {
 
-    List<Meal> findByCategory(Category category);
+    Set<Meal> findByCategory(Integer categoryId);
 
     List<Meal> findAll();
 
-    Meal save (Meal meal);
+    Meal save(Meal meal);
 
     void deleteById(Integer id);
 
-    List<Meal> findAllBySelectedRestaurant(String name);
+    List<Meal> findAllBySelectedRestaurant(Integer id);
 
 }

@@ -1,6 +1,6 @@
 CREATE TABLE MEAL
 (
-    MEAL_ID             INT       NOT NULL,
+    MEAL_ID             SERIAL       NOT NULL,
     NAME                VARCHAR(255) NOT NULL,
     CATEGORY_ID         INT          NOT NULL,
     DESCRIPTION         TEXT         NOT NULL,

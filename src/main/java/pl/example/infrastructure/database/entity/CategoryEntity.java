@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "categoryId")
-@ToString(of = {"categoryId", "name", "meal"})
+@ToString(of = {"categoryId", "name", "meals"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,8 +23,8 @@ public class CategoryEntity {
 
     @Column(name ="name")
     private String name;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
-    private Set<MealEntity> meal;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    private Set<MealEntity> meals;
 
 
 }

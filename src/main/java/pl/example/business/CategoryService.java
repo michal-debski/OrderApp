@@ -21,23 +21,12 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category findCategory(String name) {
-        Optional<Category> category = categoryDAO.findByName(name);
+    public Category findById(Integer id) {
+        Optional<Category> category = categoryDAO.findById(id);
         if (category.isEmpty()) {
-            throw new NotFoundException("Could not find category by name: [%s]".formatted(name));
+            throw new NotFoundException("Could not find category by id: [%s]".formatted(id));
         }
         return category.get();
     }
 
-    @Transactional
-    public Category saveCategory(Category category) {
-        return categoryDAO.save(buildCategory(category));
-    }
-
-    private static Category buildCategory(Category category) {
-        return Category.builder()
-                .name(category.getName())
-                .meal(category.getMeal())
-                .build();
-    }
 }

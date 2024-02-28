@@ -14,16 +14,10 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ClientEntityMapper {
-       @Mapping(source = "orders", target = "orders", qualifiedByName = "mapOrders")
+    @Mapping(target = "orders", ignore = true)
+    @Mapping(target = "carts", ignore = true)
     Client mapFromEntity(ClientEntity entity);
-    @Named("mapOrders")
-    @SuppressWarnings("unused")
-    default Set<Order> mapOrders(Set<OrderEntity> orderEntities) {
-        return orderEntities.stream().map(this::mapFromEntity).collect(Collectors.toSet());
-    }
 
     ClientEntity mapToEntity(Client client);
 
-    @Mapping(target = "client", ignore = true)
-    Order mapFromEntity(OrderEntity entity);
 }

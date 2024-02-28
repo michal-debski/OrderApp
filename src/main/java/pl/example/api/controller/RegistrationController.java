@@ -28,7 +28,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("registrationRequest") RegistrationRequest request,
+    public String registerClient(@Valid @ModelAttribute("registrationRequest") RegistrationRequest request,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {

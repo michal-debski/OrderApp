@@ -5,7 +5,7 @@ import lombok.*;
 import java.util.Set;
 
 @With
-@Data
+@Value
 @Builder
 @EqualsAndHashCode(of = "email")
 @ToString(of = {"clientId", "name", "surname", "email"})

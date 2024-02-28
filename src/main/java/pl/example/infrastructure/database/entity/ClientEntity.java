@@ -32,7 +32,6 @@ public class ClientEntity {
     @Column(name = "email")
     private String email;
 
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
     private Set<CartEntity> carts;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")

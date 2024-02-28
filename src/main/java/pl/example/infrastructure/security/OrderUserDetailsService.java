@@ -28,6 +28,7 @@ public class OrderUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
     }
+
     private List<GrantedAuthority> getUserAuthority(Set<RoleEntity> userRoles) {
         return userRoles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole()))

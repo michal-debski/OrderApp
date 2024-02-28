@@ -14,6 +14,8 @@ import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository
 import pl.example.infrastructure.database.repository.mapper.MealEntityMapper;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -27,10 +29,9 @@ public class MealRepository implements MealDAO {
 
 
     @Override
-    public List<Meal> findByCategory(Category category) {
-        CategoryEntity categoryEntity = categoryJpaRepository.findByName(category.getName()).get();
-        return mealJpaRepository.findByCategory(categoryEntity).map(mealEntityMapper::mapFromEntity).stream().toList();
-
+    public Set<Meal> findByCategory(Integer categoryId) {
+        return mealJpaRepository.findByCategory(categoryId).stream()
+                .map(mealEntityMapper::mapFromEntity).collect(Collectors.toSet());
     }
 
 
@@ -55,9 +56,9 @@ public class MealRepository implements MealDAO {
     }
 
     @Override
-    public List<Meal> findAllBySelectedRestaurant(String name) {
-        RestaurantEntity restaurantEntity = restaurantJpaRepository.findByName(name).get();
-        return mealJpaRepository.findAllBySelectedRestaurant(name)
+    public List<Meal> findAllBySelectedRestaurant(Integer id) {
+        RestaurantEntity restaurantEntity = restaurantJpaRepository.findById(id).get();
+        return mealJpaRepository.findAllBySelectedRestaurant(id)
                 .stream().map(mealEntityMapper::mapFromEntity).toList();
     }
 

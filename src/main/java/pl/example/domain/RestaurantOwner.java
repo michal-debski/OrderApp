@@ -4,16 +4,16 @@ import lombok.*;
 
 import java.util.Set;
 @With
-@Value
+@Data
 @Builder
 @EqualsAndHashCode(of = "restaurantOwnerId")
 @ToString(of = {"restaurantOwnerId", "name", "surname"})
 public class RestaurantOwner {
 
-     Integer restaurantOwnerId;
-     String name;
-     String surname;
-     String email;
+      Integer restaurantOwnerId;
+      String name;
+      String surname;
+      String email;
 
-     Set<Restaurant> restaurants;
+      Set<Restaurant> restaurants;
 }

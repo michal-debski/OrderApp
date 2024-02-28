@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StreetDTO {
-    private Integer streetId;
-
     private String name;
-    private RestaurantDTO restaurant;
+
 }

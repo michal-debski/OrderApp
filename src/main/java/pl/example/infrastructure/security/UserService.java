@@ -2,6 +2,7 @@ package pl.example.infrastructure.security;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.example.infrastructure.database.entity.ClientEntity;
 
 @Service
 public class UserService {
@@ -16,10 +17,10 @@ public class UserService {
 
     @Transactional
     public void registerUser(RegistrationRequest request) {
-        UserEntity newUser = new UserEntity();
-        newUser.setUsername(request.getUsername());
-        newUser.setPassword(request.getPassword());
-        newUser.setRoles(newUser.getRoles());
-        userRepository.save(newUser);
+        UserEntity user = new UserEntity();
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword());
+        user.setRoles(user.getRoles());
+        userRepository.save(user);
     }
 }

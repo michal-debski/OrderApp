@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en-GB">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+          crossorigin="anonymous">
+    <title>Order app</title>
+</head>
+<body>
+<div class="container">
+    <div class="page-header" id="banner">
+
+        <h2>Set details of your meal</h2>
+        <form action="#" th:object='${meal}' th:action="@{'/restaurantOwner/' + ${restaurantId} + '/addMeal'}" method="post">
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="name">Meal name:</label>
+                        <input type="text" id="name" name="name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="category.categoryId">Category:</label>
+                        <select name="category.categoryId" id="category.categoryId">
+                            <option value="">Select category...</option>
+                            <option th:each="category : ${categories}" th:value="${category.categoryId}"
+                                    th:text="${category.name}"></option>
+                        </select></div>
+                </div>
+            </div>
+
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="description">Opis dania:</label>
+                        <textarea id="description" name="description"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="price">Cena:</label>
+                        <input type="text" id="price" name="price"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <input type="submit" value="Confirm" class="btn btn-success">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <a th:href="@{/restaurantOwner}" class="btn btn-info" role="button">Go back to the restaurant page</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+<!--<form action='#' th:action="@{/adding-restaurant}" method='POST' th:object="${restaurantDTO}">-->
+<!--    <div class="col-md-6">-->
+<!--        <h3>Please fill these form to add your restaurant!</h3>-->
+<!--        <br>-->
+<!--        <p>Please provide restaurant info:</p>-->
+<!--        <div class="row mt-3">-->
+<!--            <div class="col-md-3">-->
+<!--                <label for="name">Restaurant name:</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <input type="text" id="name" th:field="*{name}">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-3">-->
+<!--            <div class="col-md-3">-->
+<!--                <label for="streets">Streets where we can deliver:</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <input type="text" id="streets" th:field="streets">-->
+<!--            </div>-->
+
+<!--            <div class="col-md-3">-->
+<!--                <select class="form-control" name="example" id="example">-->
+<!--                    <option value="0">ALL</option>-->
+<!--                    <option th:each="street : ${streets}"-->
+<!--                            th:value="${street.name}"-->
+<!--                            th:text="${street.name}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        </div>-->
+
+
+<!--    <br>-->
+
+<!--    <button type="submit" class="btn btn-info">Submit</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

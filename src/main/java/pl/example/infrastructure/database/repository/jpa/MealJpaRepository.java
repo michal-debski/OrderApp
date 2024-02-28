@@ -9,15 +9,22 @@ import pl.example.infrastructure.database.entity.MealEntity;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface MealJpaRepository extends JpaRepository<MealEntity, Integer> {
 
-    Optional<MealEntity> findByCategory(CategoryEntity category);
+    @Query("""
+            SELECT meal FROM MealEntity meal 
+            INNER JOIN FETCH meal.category category
+            WHERE category.id = :categoryId
+            """)
+    Set<MealEntity> findByCategory(@Param("categoryId") Integer categoryId);
 
     @Query("""
             SELECT meal FROM MealEntity meal 
-            WHERE meal.restaurant.name = :restaurantName
+            INNER JOIN FETCH meal.restaurant rest
+            WHERE rest.id = :restaurantId
             """)
-    List<MealEntity> findAllBySelectedRestaurant(@Param("restaurantName") String restaurantName);
+    List<MealEntity> findAllBySelectedRestaurant(@Param("restaurantId") Integer restaurantId);
 }

@@ -55,20 +55,22 @@ public class SecurityConfiguration {
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/login", "/error", "/images/oh_no.png")
+                        auth -> auth.requestMatchers("/login", "/error", "/images/images.jpg")
                                 .permitAll()
-                                .requestMatchers("/admin/**")
-                                .hasAuthority("ADMIN")
                                 .requestMatchers("/client/**")
-                                .hasAnyAuthority("CLIENT", "ADMIN")
-                                .requestMatchers("/restaurantOwner/**")
-                                .hasAnyAuthority("RESTAURANT_OWNER", "ADMIN")
-                                .requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")
+                                .hasAuthority("CLIENT"))
+                .authorizeHttpRequests(
+                                        auth -> auth
+                                                .requestMatchers("/restaurantOwner/**")
+                                                .hasAuthority("RESTAURANT_OWNER")
+
+
 
                 )
                 .authorizeHttpRequests((auth-> auth.requestMatchers("/register").permitAll()
                         .anyRequest()
                         .authenticated()))
+                //.formLogin(a->a.loginPage("/login").defaultSuccessUrl("/restaurant"))
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")

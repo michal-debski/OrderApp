@@ -7,7 +7,7 @@ import pl.example.infrastructure.database.entity.ClientEntity;
 import java.util.Optional;
 
 @Repository
-public interface ClientJpaRepository extends JpaRepository<ClientEntity,Integer> {
+public interface ClientJpaRepository extends JpaRepository<ClientEntity, Integer> {
 
-Optional<ClientEntity> findByEmail(String email);
+    Optional<ClientEntity> findByEmail(String email);
 }

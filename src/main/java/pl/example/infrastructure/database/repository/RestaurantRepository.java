@@ -10,6 +10,8 @@ import pl.example.infrastructure.database.repository.mapper.RestaurantEntityMapp
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -19,10 +21,22 @@ public class RestaurantRepository implements RestaurantDAO {
     private final RestaurantEntityMapper restaurantEntityMapper;
 
     @Override
+    public List<Restaurant> findByRestaurantOwnerId(Integer id) {
+        return restaurantJpaRepository.findByRestaurantOwnerId(id).stream()
+                .map(restaurantEntityMapper::mapFromEntity).collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<Restaurant> findByName(String name) {
         return restaurantJpaRepository.findByName(name)
                 .map(restaurantEntityMapper::mapFromEntity);
     }
+    @Override
+    public Optional<Restaurant> findById(Integer id) {
+        return restaurantJpaRepository.findById(id)
+                .map(restaurantEntityMapper::mapFromEntity);
+    }
+
 
 
     @Override
@@ -40,16 +54,9 @@ public class RestaurantRepository implements RestaurantDAO {
     }
 
     @Override
-    public void deleteRestaurant(Restaurant restaurant) {
-        RestaurantEntity toRemove = restaurantEntityMapper.mapToEntity(restaurant);
-        restaurantJpaRepository.delete(toRemove);
+    public void deleteRestaurant(Integer restaurantId) {
+        restaurantJpaRepository.delete(restaurantJpaRepository.getReferenceById(restaurantId));
     }
-
-//    @Override
-//    public List<Restaurant> findByStreet(String street) {
-//        return restaurantJpaRepository.findByStreet(street).stream()
-//                .map(restaurantEntityMapper::mapFromEntity).toList();
-//    }
 
 
 }
