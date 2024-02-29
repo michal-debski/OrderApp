@@ -6,6 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "streetId")
+@ToString(of = {"streetId", "name"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class StreetEntity {
 
     @Column(name = "name")
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
 }

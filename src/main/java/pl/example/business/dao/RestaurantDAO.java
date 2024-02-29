@@ -15,11 +15,10 @@ public interface RestaurantDAO {
 
     List<Restaurant> findAll();
 
-    Restaurant saveRestaurant(Restaurant restaurant);
+    void saveRestaurant(Restaurant restaurant);
 
     void deleteRestaurant(Integer restaurantId);
 
-//    List<Restaurant> findByStreet(String street);
 
 
 }

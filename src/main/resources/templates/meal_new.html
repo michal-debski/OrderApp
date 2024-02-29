@@ -13,7 +13,8 @@
     <div class="page-header" id="banner">
 
         <h2>Set details of your meal</h2>
-        <form action="#" th:object='${meal}' th:action="@{'/restaurantOwner/' + ${restaurantId} + '/addMeal'}" method="post">
+
+        <form action="#" th:object='${meal}' th:action="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/restaurant/'+ ${restaurantId} + '/addMeal'}" method="post">
             <div class="row mt-3">
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -63,52 +64,10 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col-md-4">
-            <a th:href="@{/restaurantOwner}" class="btn btn-info" role="button">Go back to the restaurant page</a>
+            <a th:href="@{'/restaurantOwner/'+${restaurantOwnerId}}" class="btn btn-info" role="button">Go back to the restaurant page</a>
         </div>
     </div>
 </div>
 
 </body>
 </html>
-
-
-<!--<form action='#' th:action="@{/adding-restaurant}" method='POST' th:object="${restaurantDTO}">-->
-<!--    <div class="col-md-6">-->
-<!--        <h3>Please fill these form to add your restaurant!</h3>-->
-<!--        <br>-->
-<!--        <p>Please provide restaurant info:</p>-->
-<!--        <div class="row mt-3">-->
-<!--            <div class="col-md-3">-->
-<!--                <label for="name">Restaurant name:</label>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--                <input type="text" id="name" th:field="*{name}">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="row mt-3">-->
-<!--            <div class="col-md-3">-->
-<!--                <label for="streets">Streets where we can deliver:</label>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--                <input type="text" id="streets" th:field="streets">-->
-<!--            </div>-->
-
-<!--            <div class="col-md-3">-->
-<!--                <select class="form-control" name="example" id="example">-->
-<!--                    <option value="0">ALL</option>-->
-<!--                    <option th:each="street : ${streets}"-->
-<!--                            th:value="${street.name}"-->
-<!--                            th:text="${street.name}">-->
-<!--                    </option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        </div>-->
-
-
-<!--    <br>-->
-
-<!--    <button type="submit" class="btn btn-info">Submit</button>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->

@@ -1,10 +1,10 @@
 package pl.example.infrastructure.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -21,7 +21,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @ComponentScan("pl.example.infrastructure.security")
+@RequiredArgsConstructor
 public class SecurityConfiguration {
+
+    private final UserRepository userRepository;
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -70,7 +73,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((auth-> auth.requestMatchers("/register").permitAll()
                         .anyRequest()
                         .authenticated()))
-                //.formLogin(a->a.loginPage("/login").defaultSuccessUrl("/restaurant"))
+               // .formLogin(a->a.loginPage("/login").defaultSuccessUrl("/"))
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")

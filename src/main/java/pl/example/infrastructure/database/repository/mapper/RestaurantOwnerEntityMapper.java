@@ -8,9 +8,13 @@ import pl.example.infrastructure.database.entity.RestaurantOwnerEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RestaurantOwnerEntityMapper {
-    @Mapping(target = "restaurant.restaurantOwner", ignore = true)
+
+    @Mapping(target = "restaurants", ignore = true)
+
     RestaurantOwner mapFromEntity(RestaurantOwnerEntity restaurantOwnerEntity);
 
     @Mapping(target = "restaurant.restaurantOwner", ignore = true)
     RestaurantOwnerEntity mapToEntity(RestaurantOwner restaurantOwner);
+
+
 }

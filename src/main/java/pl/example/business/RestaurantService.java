@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.RestaurantDAO;
 import pl.example.domain.Restaurant;
 import pl.example.domain.exception.NotFoundException;
-import pl.example.infrastructure.database.entity.RestaurantEntity;
 import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.RestaurantEntityMapper;
 

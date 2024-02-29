@@ -11,7 +11,7 @@ public interface MealDAO {
 
     List<Meal> findAll();
 
-    Meal save(Meal meal);
+    void save(Meal meal);
 
     void deleteById(Integer id);
 

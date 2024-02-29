@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RestaurantOwnerDTO {
+    private Integer restaurantOwnerId;
     private String name;
     private String surname;
     private String email;

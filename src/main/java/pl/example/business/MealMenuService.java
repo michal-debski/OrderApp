@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.CategoryDAO;
 import pl.example.business.dao.MealDAO;
-import pl.example.domain.Category;
 import pl.example.domain.Meal;
-import pl.example.domain.Restaurant;
 import pl.example.domain.exception.NotFoundException;
 
 import java.util.List;
@@ -43,20 +41,18 @@ public class MealMenuService {
     @Transactional
     public List<Meal> findAllBySelectedRestaurant(Integer id) {
         List<Meal> mealsForSelectedRestaurant = mealDAO.findAllBySelectedRestaurant(id);
-        if (mealsForSelectedRestaurant.size() == 0) {
-            throw new NotFoundException("Could not find meal for selected Restaurant [%s]".formatted(id));
-        }
+//        if (mealsForSelectedRestaurant.size() == 0) {
+//            throw new NotFoundException("Could not find meal for selected Restaurant [%s]".formatted(id));
+//        }
         return mealsForSelectedRestaurant;
     }
 
 
-    public void makeMealForRestaurant(Integer restaurantId, Meal meal) {
-
+    public void makeMealForRestaurant(Meal meal) {
            mealDAO.save(meal);
-
     }
 
-    @Transactional
+
     public void delete(Integer id) {
         mealDAO.deleteById(id);
     }

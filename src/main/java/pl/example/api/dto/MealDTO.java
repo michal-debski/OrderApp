@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.example.domain.Category;
 
 import java.math.BigDecimal;
 
@@ -13,6 +12,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MealDTO {
+    private Integer mealId;
+
     private String name;
 
     private CategoryDTO category;

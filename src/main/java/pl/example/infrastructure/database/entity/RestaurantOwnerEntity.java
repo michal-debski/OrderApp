@@ -30,6 +30,6 @@ public class RestaurantOwnerEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurantOwner")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurantOwner")
     private Set<RestaurantEntity> restaurants;
 }

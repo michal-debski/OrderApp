@@ -8,7 +8,6 @@ import pl.example.infrastructure.database.repository.jpa.StreetJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.StreetEntityMapper;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Repository
@@ -28,5 +27,15 @@ public class StreetRepository implements StreetDAO {
     public List<Street> findAllByRestaurantId(Integer id) {
         return streetJpaRepository.findAllByRestaurantId(id).stream()
                 .map(streetEntityMapper::mapFromEntity).collect(Collectors.toList());
+    }
+
+    @Override
+    public void save(Street street) {
+        streetJpaRepository.save(streetEntityMapper.mapToEntity(street));
+    }
+
+    @Override
+    public void deleteById(Integer streetId) {
+        streetJpaRepository.delete(streetJpaRepository.findById(streetId).get());
     }
 }

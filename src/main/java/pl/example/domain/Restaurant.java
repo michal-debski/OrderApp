@@ -2,20 +2,19 @@ package pl.example.domain;
 
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @With
-@Data
+@Value
 @Builder
 @EqualsAndHashCode(of = "restaurantId")
-@ToString(of = {"restaurantId", "name", "streets","meals"})
+@ToString(of = {"restaurantId", "name"})
 public class Restaurant {
 
      Integer restaurantId;
      String name;
-     List<Street> streets;
+     Set<Street> streets;
      RestaurantOwner restaurantOwner;
      Set<Order> orders;
-     List<Meal> meals;
+     Set<Meal> meals;
 }

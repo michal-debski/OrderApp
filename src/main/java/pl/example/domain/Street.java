@@ -6,7 +6,7 @@ import lombok.*;
 @Value
 @Builder
 @EqualsAndHashCode(of = "streetId")
-@ToString(of = {"streetId", "name", "restaurant"})
+@ToString(of = {"streetId", "name"})
 public class Street {
 
     Integer streetId;

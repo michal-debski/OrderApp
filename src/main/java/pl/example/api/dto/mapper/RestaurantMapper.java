@@ -9,9 +9,10 @@ import pl.example.domain.Restaurant;
 @Mapper(componentModel = "spring", unmappedTargetPolicy =  ReportingPolicy.IGNORE)
 public interface RestaurantMapper  {
 
-
+    @Mapping(target = "restaurantOwner", ignore = true)
     RestaurantDTO map(final Restaurant restaurant);
-    @Mapping(target = "streets", ignore = true)
-    @Mapping(target = "meals", ignore = true)
+
+
+    @Mapping(target = "restaurant.streets", ignore = true)
     Restaurant mapFromDto(RestaurantDTO restaurant);
 }

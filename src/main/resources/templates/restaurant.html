@@ -15,18 +15,15 @@
 </div>
 
 <div class="container">
-    <div class="row mt-3">
-        <div class="col-md-4">
+    <div class="row mt-3 text-centre">
+        <div class="col-md-3">
             <a th:href="@{/}" class="btn btn-info" role="button">Go back to the main page</a>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <a th:href="@{'/restaurantOwner/'+ ${restaurantOwnerId} +'/addRestaurant'}" class="btn btn-info"
                role="button">Add new restaurant</a>
         </div>
-        <div class="col-md-4">
-            <a th:href="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/addMeal'}" class="btn btn-info" role="button">Add
-                new meal</a>
-        </div>
+
     </div>
     <br>
     <br>
@@ -54,7 +51,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="street : ${streets}">
+                        <tr th:if="${streetsMap[restaurant.restaurantId].empty}">
+                            <td colspan="1">Empty</td>
+                        </tr>
+                        <tr th:each="street : ${streetsMap[restaurant.restaurantId]}">
                             <td th:text="${street.name}"></td>
                         </tr>
                         </tbody>
@@ -71,8 +71,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="meal : ${meals}">
+                        <tr th:if="${mealsMap[restaurant.restaurantId].empty}">
+                            <td colspan="4">Empty</td>
+                        </tr>
+                        <tr th:each="meal : ${mealsMap[restaurant.restaurantId]}">
                             <td th:if="${meal.category != null}" th:text="${meal.category.name}">Category Name</td>
+                            <td th:unless="${meal.category != null}">No Category</td>
                             <td th:text="${meal.name}"></td>
                             <td th:text="${meal.price}"></td>
                             <td th:text="${meal.description}"></td>
@@ -80,16 +84,35 @@
                         </tbody>
                     </table>
                 </td>
-                <td><a th:href="@{'/restaurant/' + ${restaurant.restaurantId} + '/update'}" class="btn btn-info"
-                       role="button">Update</a></td>
-                <td><a th:href="@{'/restaurant/' + ${restaurant.restaurantId} + '/delete'}" class="btn btn-info"
-                       role="button">Delete</a></td>
+                <td>
+                    <a th:href="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/restaurant/'+ ${restaurant.restaurantId} + '/addMeal'}"
+                       class="btn btn-info" role="button">Add
+                        new meal</a></td>
+                <td>
+                    <a th:href="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/restaurant/'+ ${restaurant.restaurantId} + '/addStreet'}"
+                       class="btn btn-info"
+                       role="button">Add
+                        new street</a></td>
+                <td>
+                    <a th:href="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/restaurant/'+ ${restaurant.restaurantId} + '/deleteStreet'}"
+                       class="btn btn-danger"
+                       role="button">Delete street</a></td>
+
+                <td>
+                    <a th:href="@{'/restaurantOwner/' + ${restaurantOwnerId} +'/restaurant/'+ ${restaurant.restaurantId} + '/deleteMeal'}"
+                       class="btn btn-danger"
+                       role="button">Delete meal</a></td>
+                <td>
+                    <a th:href="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/restaurant/'+ ${restaurant.restaurantId} + '/deleteRestaurant'}"
+                       class="btn btn-danger"
+                       role="button">Delete
+                        Restaurant</a></td>
             </tr>
             </tbody>
         </table>
+        <br>
+        <br>
     </div>
-    <br>
-    <br>
 </div>
 </body>
 </html>

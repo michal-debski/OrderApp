@@ -4,7 +4,7 @@ import lombok.*;
 
 import java.util.Set;
 @With
-@Data
+@Value
 @Builder
 @EqualsAndHashCode(of = "restaurantOwnerId")
 @ToString(of = {"restaurantOwnerId", "name", "surname"})

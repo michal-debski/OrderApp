@@ -10,7 +10,6 @@ import pl.example.infrastructure.database.repository.mapper.RestaurantEntityMapp
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Repository
@@ -47,10 +46,9 @@ public class RestaurantRepository implements RestaurantDAO {
     }
 
     @Override
-    public Restaurant saveRestaurant(Restaurant restaurant) {
-        RestaurantEntity toSave = restaurantEntityMapper.mapToEntity(restaurant);
-        RestaurantEntity saved = restaurantJpaRepository.save(toSave);
-        return restaurantEntityMapper.mapFromEntity(saved);
+    public void saveRestaurant(Restaurant restaurant) {
+       RestaurantEntity restaurantEntity =restaurantEntityMapper.mapToEntity(restaurant);
+        restaurantJpaRepository.save(restaurantEntity);
     }
 
     @Override
