@@ -14,6 +14,5 @@ public interface OrderEntityMapper {
 
     @Mapping(target = "client", ignore = true)
     @Mapping(target = "restaurant", ignore = true)
-    @Mapping(target = "orderDetail", ignore = true)
     Order mapFromEntity(OrderEntity entity);
 }

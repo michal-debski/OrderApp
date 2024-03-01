@@ -3,7 +3,6 @@ package pl.example.api.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +26,9 @@ import java.util.stream.Collectors;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/restaurantOwner")
-@Slf4j
+
 public class RestaurantOwnerController {
 
-
-    static final String ADDING_RESTAURANT = "/add";
 
     private final RestaurantService restaurantService;
     private final MealMenuService mealMenuService;
@@ -47,27 +44,10 @@ public class RestaurantOwnerController {
     @Autowired
     private final RestaurantOwnerMapper restaurantOwnerMapper;
 
-    //    @GetMapping("/{restaurantOwnerId}")
-//    public String restaurantList(
-//            @PathVariable(value = "restaurantOwnerId", required = false) Integer restaurantOwnerId,
-//            Model model) {
-//
-//        var restaurants = restaurantService.findByRestaurantOwnerId(restaurantOwnerId).stream()
-//                .map(restaurantMapper::map).toList();
-//        var meals = mealMenuService.findAllBySelectedRestaurant(restaurantService.findByRestaurantOwnerId(
-//                restaurantOwnerId).listIterator().next().getRestaurantId()).stream().map(mealMapper::map).toList();
-//        var streets = streetService
-//                .findAllByRestaurantId(restaurantService.findByRestaurantOwnerId(
-//                        restaurantOwnerId).listIterator().next().getRestaurantId()).stream()
-//                .map(streetMapper::map).toList();
-//        model.addAttribute("restaurants", restaurants);
-//        model.addAttribute("meals", meals);
-//        model.addAttribute("streets", streets);
-//
-//        return "restaurant";
-//    }
     @GetMapping("/{restaurantOwnerId}")
-    public String restaurantList(@PathVariable(value = "restaurantOwnerId", required = false) String restaurantOwnerId, Model model) {
+    public String restaurantList(
+            @PathVariable(value = "restaurantOwnerId", required = false) String restaurantOwnerId,
+            Model model) {
         var restaurants = restaurantService.findByRestaurantOwnerId(Integer.valueOf(restaurantOwnerId)).stream()
                 .map(restaurantMapper::map)
                 .collect(Collectors.toList());

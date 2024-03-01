@@ -8,7 +8,6 @@ DELIVERY_DATE TIMESTAMP WITH TIME ZONE NOT NULL,
 ORDER_DATE TIMESTAMP WITH TIME ZONE NOT NULL,
 CLIENT_ID INT NOT NULL,
 RESTAURANT_ID INT NOT NULL,
-ORDER_DETAIL_ID INT NOT NULL,
 
 PRIMARY KEY (ORDER_ID),
     UNIQUE (ORDER_NUMBER),
@@ -17,8 +16,6 @@ PRIMARY KEY (ORDER_ID),
             REFERENCES client (client_id),
     CONSTRAINT fk_order_restaurant
         FOREIGN KEY (restaurant_id)
-            REFERENCES restaurant (restaurant_id),
-    CONSTRAINT fk_order_order_detail
-        FOREIGN KEY (order_detail_id)
-            REFERENCES order_detail (order_detail_id)
+            REFERENCES restaurant (restaurant_id)
+
 );

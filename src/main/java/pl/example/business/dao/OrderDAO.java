@@ -3,6 +3,7 @@ package pl.example.business.dao;
 import pl.example.domain.Order;
 import pl.example.infrastructure.database.entity.OrderEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface OrderDAO {
@@ -12,4 +13,7 @@ public interface OrderDAO {
     void deleteOrder(OrderEntity entity);
 
     Optional<Order> findByOrderNumber(String orderNumber);
+
+    List<Order> findByClientId(Integer id);
+
 }

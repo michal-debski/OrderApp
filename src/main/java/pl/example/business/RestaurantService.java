@@ -48,14 +48,6 @@ public class RestaurantService {
         }
         return restaurant.get();
     }
-//    @Transactional
-//    public List<Restaurant> findByStreet(String street){
-//        List<Restaurant> restaurant = restaurantDAO.findByStreet(street);
-//        if(restaurant.size() == 0){
-//            throw new NotFoundException("Could not find restaurant by street: [%s]".formatted(street));
-//        }
-//        return restaurant;
-//    }
 
 
     public void saveRestaurant(Restaurant restaurant) {
@@ -71,7 +63,10 @@ public class RestaurantService {
     public List<Restaurant> findByRestaurantOwnerId(Integer id) {
         return restaurantDAO.findByRestaurantOwnerId(id);
     }
-
+    @Transactional
+    public List<Restaurant> findAllByStreetName(String name){
+        return restaurantDAO.findAllByStreet(name);
+    }
 
 }
 

@@ -6,8 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.OrderDAO;
 import pl.example.domain.Order;
 import pl.example.infrastructure.database.entity.OrderEntity;
+import pl.example.infrastructure.database.repository.mapper.OrderEntityMapper;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -16,6 +18,7 @@ import java.util.Random;
 public class OrderService {
 
     private final OrderDAO orderDAO;
+    private final OrderEntityMapper orderEntityMapper;
 
 
     @Transactional
@@ -63,5 +66,10 @@ public class OrderService {
     @SuppressWarnings("SameParameterValue")
     private int randomChar(char min, char max) {
         return (char) new Random().nextInt(max - min) + min;
+    }
+
+    @Transactional
+    public List<Order> findByClientId(Integer clientId) {
+        return orderDAO.findByClientId(clientId);
     }
 }

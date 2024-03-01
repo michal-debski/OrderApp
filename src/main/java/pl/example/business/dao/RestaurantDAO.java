@@ -19,6 +19,7 @@ public interface RestaurantDAO {
 
     void deleteRestaurant(Integer restaurantId);
 
+    List<Restaurant> findAllByStreet(String name);
 
 
 }

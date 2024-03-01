@@ -15,7 +15,5 @@ public class Client {
     String surname;
     String phone;
     String email;
-
-    Set<Cart> carts;
     Set<Order> orders;
 }

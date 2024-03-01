@@ -14,6 +14,5 @@ public class RestaurantOwner {
       String name;
       String surname;
       String email;
-
       Set<Restaurant> restaurants;
 }

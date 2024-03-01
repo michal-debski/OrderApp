@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.example.domain.Restaurant;
 import pl.example.infrastructure.database.entity.RestaurantEntity;
 
 import java.util.List;
@@ -21,7 +20,13 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity,
             """)
     Set<RestaurantEntity> findByRestaurantOwnerId(final @Param("id") Integer id);
     Optional<RestaurantEntity> findByName(String name);
-//    List<RestaurantEntity> findByStreet(String street);
+
+    @Query("""
+            SELECT rest FROM RestaurantEntity rest
+            INNER JOIN FETCH rest.streets str
+            WHERE str.name=:name
+            """)
+    List<RestaurantEntity> findAllByStreet(@Param("name") String name);
 
 
 }

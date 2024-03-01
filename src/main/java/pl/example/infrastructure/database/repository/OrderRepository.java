@@ -8,6 +8,7 @@ import pl.example.infrastructure.database.entity.OrderEntity;
 import pl.example.infrastructure.database.repository.jpa.OrderJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.OrderEntityMapper;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -33,5 +34,13 @@ public class OrderRepository implements OrderDAO {
     public Optional<Order> findByOrderNumber(String orderNumber) {
         return orderJpaRepository.findByOrderNumber(orderNumber)
                 .map(orderEntityMapper::mapFromEntity);
+    }
+
+    @Override
+    public List<Order> findByClientId(Integer id) {
+        return orderJpaRepository.findByClientId(id)
+                .stream()
+                .map(orderEntityMapper::mapFromEntity)
+                .toList();
     }
 }

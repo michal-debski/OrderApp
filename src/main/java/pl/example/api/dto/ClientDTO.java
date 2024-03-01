@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StreetDTO {
-
-    private Integer streetId;
+public class ClientDTO {
+    private Integer clientId;
     private String name;
-    private RestaurantDTO restaurant;
-
-
+    private String surname;
+    private String phone;
+    private String email;
 }

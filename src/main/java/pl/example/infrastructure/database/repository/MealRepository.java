@@ -6,7 +6,6 @@ import pl.example.business.dao.MealDAO;
 import pl.example.domain.Meal;
 import pl.example.infrastructure.database.entity.MealEntity;
 import pl.example.infrastructure.database.entity.RestaurantEntity;
-import pl.example.infrastructure.database.repository.jpa.CategoryJpaRepository;
 import pl.example.infrastructure.database.repository.jpa.MealJpaRepository;
 import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.MealEntityMapper;
@@ -22,7 +21,6 @@ public class MealRepository implements MealDAO {
 
     private final MealJpaRepository mealJpaRepository;
     private final MealEntityMapper mealEntityMapper;
-    private final CategoryJpaRepository categoryJpaRepository;
     private final RestaurantJpaRepository restaurantJpaRepository;
 
 

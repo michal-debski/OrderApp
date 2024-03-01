@@ -56,5 +56,11 @@ public class RestaurantRepository implements RestaurantDAO {
         restaurantJpaRepository.delete(restaurantJpaRepository.getReferenceById(restaurantId));
     }
 
+    @Override
+    public List<Restaurant> findAllByStreet(String name) {
+        return restaurantJpaRepository.findAllByStreet(name).stream()
+                .map(restaurantEntityMapper::mapFromEntity).toList();
+    }
+
 
 }

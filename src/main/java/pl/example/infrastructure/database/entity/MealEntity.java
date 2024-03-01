@@ -37,8 +37,5 @@ public class MealEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "meal")
-    private OrderDetailEntity orderDetails;
-
 
 }

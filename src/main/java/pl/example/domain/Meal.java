@@ -20,5 +20,5 @@ public class Meal {
     BigDecimal price;
 
     Restaurant restaurant;
-    OrderDetail orderDetail;
+
 }
