@@ -1,8 +1,19 @@
 # OrderApp
 
-## Why was this application created ?
+## Why was this application created and which frameworks/libraries I used for this project?
 The application was developed for the purpose of passing the "Zajavka" bootcamp project.
-
+To designed this application I have used: 
+- Java 17,
+- HTML to prepare views,
+- Gradle
+- Lombok,
+- Spring boot,
+- Spring Data JPA,
+- Spring Web MVC,
+- Tomcat,
+- Thymeleaf,
+- Spring security (basics),
+- PostgreSQL
 ## Targets
 ### Who is supplied in this application?
 It assumes service to two types of people: the client and the restaurant owner.
