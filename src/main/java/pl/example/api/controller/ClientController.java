@@ -148,11 +148,15 @@ public class ClientController {
             @ModelAttribute("orderDTO") OrderDTO orderDTO,
             @RequestParam("mealIds") List<String> selectedMeals,
             @RequestParam("quantity") Integer quantity,
-            @ModelAttribute("orderItemDTO") OrderItemDTO orderItemDTO,
             ModelMap model
     ) {
         Client client = clientService.findById(Integer.valueOf(clientId));
+        ClientDTO clientDTO = clientMapper.mapToDTO(client);
         orderNumber = orderDTO.getOrderNumber();
+        Restaurant restaurant = restaurantService.findRestaurantById(Integer.valueOf(restaurantId));
+        RestaurantDTO restaurantDTO = restaurantMapper.map(restaurant);
+
+//        orderNumber = orderDTO.getOrderNumber();
         Order order = orderService.findByOrderNumber(orderNumber).orElseThrow();
         OrderDTO dto = orderMapper.mapToDTO(order);
 
@@ -169,47 +173,30 @@ public class ClientController {
                     .quantity(quantity)
                     .order(dto)
                     .build();
-
             orderItems.add(orderItemDTOFromClient);
-
         }
         for (OrderItemDTO orderItem : orderItems) {
             OrderItem orderToSave = orderItemMapper.map(orderItem);
             orderItemService.save(orderToSave);
+
         }
 
-        model.addAttribute("clientId", client.getClientId());
-        model.addAttribute("clientName", client.getName());
-        model.addAttribute("orderNumber", orderNumber);
-        return "order_done";
-    }
-
-    @PutMapping("/{clientId}/addOrder/{restaurantId}/menu/{orderNumber}")
-    @Transactional
-    public String updateOrder(
-            @PathVariable String clientId,
-            @PathVariable String restaurantId,
-            @PathVariable(required = false) String orderNumber,
-            ModelMap model
-    ) {
-
-        Client client = clientService.findById(Integer.valueOf(clientId));
-
-        Order order = orderService.findByOrderNumber(orderNumber).orElseThrow();
-        OrderDTO dto = orderMapper.mapToDTO(order);
-        dto.setOrderDate(OffsetDateTime.now());
-        dto.setTotalPrice(orderJpaRepository.getTotalOrderPrice(order.getOrderId()));
+        BigDecimal totalPrice = orderJpaRepository.getTotalOrderPrice(order.getOrderId());
         dto.setStatus("Preparing by chef");
+        dto.setTotalPrice(totalPrice);
+        dto.setClient(clientDTO);
+        dto.setRestaurant(restaurantDTO);
+        Order orderTemp = orderMapper.map(dto);
+        orderService.save(orderTemp);
 
-        Order toSave = orderMapper.map(dto);
 
-        orderService.save(toSave);
-
-
-        model.addAttribute("clientId", client.getName());
+        model.addAttribute("clientId", clientId);
+        model.addAttribute("restaurantId", restaurantId);
+        model.addAttribute("clientName", clientService.findById(Integer.valueOf(clientId)).getName());
         model.addAttribute("orderNumber", orderNumber);
         return "order_done";
     }
+
 
     @GetMapping("/{clientId}/order/{orderNumber}/orderDetails")
     public String showOrderDetails(
