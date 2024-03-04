@@ -48,6 +48,11 @@ public class OrderRepository implements OrderDAO {
         return orderJpaRepository.findByRestaurantId(id).stream()
                 .map(orderEntityMapper::mapFromEntity).toList();
     }
+    @Override
+    public Optional<Order> findById(Integer orderId) {
+        return orderJpaRepository.findById(orderId)
+                .map(orderEntityMapper::mapFromEntity);
+    }
 
 
 }

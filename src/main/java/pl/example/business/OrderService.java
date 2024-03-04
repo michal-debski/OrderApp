@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.OrderDAO;
 import pl.example.domain.Order;
+import pl.example.domain.OrderItem;
+import pl.example.infrastructure.database.repository.jpa.OrderJpaRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +17,7 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderDAO orderDAO;
+    private final OrderJpaRepository orderJpaRepository;
 
 
     @Transactional
@@ -41,5 +45,18 @@ public class OrderService {
     public List<Order> findByClientId(Integer clientId) {
         return orderDAO.findByClientId(clientId);
     }
+    @Transactional
+    public void updateOrder(Integer orderId) {
+        Order order = orderDAO.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("Order not found."));
 
+        BigDecimal totalPrice = calculateTotalPrice(order.withOrderId(orderId));
+        Order withTotalPrice = order.withTotalPrice(totalPrice);
+
+        orderDAO.saveOrder(withTotalPrice);
+    }
+
+    private BigDecimal calculateTotalPrice(Order order) {
+       return orderJpaRepository.getTotalOrderPrice(order.getOrderId());
+    }
 }

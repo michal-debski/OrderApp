@@ -24,6 +24,9 @@
           th:action="@{'/client/' + ${clientId} + '/addOrder/'+ ${restaurantId} + '/menu/' + ${orderNumber}}"
           method="POST">
         <input type="hidden" th:name="order.orderNumber" th:value="${order.orderNumber}">
+        <input type="hidden" th:name="order.restaurantId" th:value="${restaurantId}">
+        <input type="hidden" th:name="order.clientId" th:value="${clientId}">
+
         <table class="table">
             <thead class="table-dark">
             <tr>
@@ -44,11 +47,11 @@
                     <input type="number" min="0" value="1" name="quantity" style="width: 50px;">
                     <input type="checkbox" name="mealIds" th:value="${meal.mealId}">
                 </td>
-
             </tr>
             </tbody>
         </table>
         <input type="submit" value="Order!" class="btn btn-success">
+
     </form>
 </div>
 </body>

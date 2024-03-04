@@ -17,5 +17,5 @@ public interface OrderDAO {
 
     List<Order> findByRestaurantId(Integer id);
 
-
+    Optional<Order> findById(Integer orderId);
 }
