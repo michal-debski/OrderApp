@@ -6,62 +6,57 @@
           rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
-    <title>Aplikacja Zamówień</title>
+    <title>Order app</title>
 </head>
 
 <body>
 <div class="container">
     <br>
-    <h1>Aplikacja Zamówień!</h1>
+    <h1>Order app!</h1>
 </div>
 
 <div class="container">
     <div class="row mt-3">
         <div class="col-md-4">
-            <a th:href="@{/}" class="btn btn-info" role="button">Powrót do strony głównej</a>
+            <a th:href="@{'/client/' + ${clientId}}" class="btn btn-info" role="button">Powrót do strony głównej</a>
         </div>
     </div>
     <br>
 
     <h5>Wybierz danie do zamówienia:</h5>
-    <table class="table">
-        <thead class="table-dark">
-        <tr>
-            <th>Nazwa</th>
-            <th>Kategoria</th>
-            <th>Opis</th>
-            <th>Cena</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="meal : ${mealDTOs}">
-            <td th:text="${meal.name}"></td>
-            <td th:text="${meal.category.name}"></td>
-            <td th:text="${meal.description}"></td>
-            <td th:text="${meal.price}"></td>
-            <td>
-                <input type="number" min="1" value="1" name="quantity" style="width: 50px;">
-            </td>
-            <td>
-                <form action="#"
-                      th:action="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/restaurant/' +${restaurantId} + '/deleteMeal/' + ${meal.mealId}}"
-                      th:method="post">
-                    <button type="submit" class="btn btn-info">Dodaj</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <button type="submit" class="btn btn-primary"
-            onclick="return confirm('Czy na pewno chcesz dodać to danie do koszyka?');">
-        Zamów
-    </button>
+    <form action="/{clientId}/addOrder/{restaurantId}/menu/order" method="post">
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Opis</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="meal : ${mealDTOs}">
+                <td th:text="${meal.name}"></td>
+                <td th:text="${meal.category.name}"></td>
+                <td th:text="${meal.description}"></td>
+                <td th:text="${meal.price}"></td>
+                <td>
+                    <input type="number" min="1" value="1" name="quantity" style="width: 50px;">
+                </td>
+                <td>
+                    <input type="checkbox" name="selectedMeals" value="${meal.mealId}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Czy na pewno chcesz dodać te dania do koszyka?');">
+            Zamów
+        </button>
+    </form>
 </div>
-
 <br>
 <br>
-
-
 </body>
 </html>

@@ -12,6 +12,7 @@
 <div class="container">
     <div class="container">
         <h2>Available restaurants are in below list for <span th:text="${street}"></span> street!</h2>
+        <input type="hidden" name="orderNumber" value="${orderNumber}">
         <table class="table">
             <thead>
             <tr>
@@ -21,13 +22,12 @@
             <tbody>
             <tr th:each="restaurant : ${restaurants}">
                 <td th:text="${restaurant.name}"></td>
-                <td><a th:href="@{'/client/' + ${clientId} +'/addOrder/' + ${restaurant.restaurantId}+'/menu'}"
+                <td><a th:href="@{'/client/' + ${clientId} +'/addOrder/' + ${restaurant.restaurantId}+'/menu/' + ${orderNumber}}"
                        class="btn btn-info" role="button">Display menu</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-
 </div>
 </body>
 </html>

@@ -13,9 +13,12 @@ public class RestaurantOwnerRepository implements RestaurantOwnerDAO {
 
     private final RestaurantOwnerJpaRepository restaurantOwnerJpaRepository;
     private final RestaurantOwnerEntityMapper restaurantOwnerEntityMapper;
+
     @Override
     public RestaurantOwner findById(Integer id) {
         return restaurantOwnerJpaRepository.findById(id)
                 .map(restaurantOwnerEntityMapper::mapFromEntity).get();
     }
+
+
 }

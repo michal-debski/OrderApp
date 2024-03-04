@@ -13,7 +13,6 @@
     <br>
     <h1>Order app</h1>
 </div>
-</div>
 <br>
 <br>
 <div class="container">
@@ -21,28 +20,36 @@
     <p>Look at our menu, choose something for you!</p>
     <br>
     <br>
-    <table class="table">
-        <thead class="table-dark">
-        <tr>
-            <th>Category</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="meal : ${meals}">
-            <td th:if="${meal.category != null}" th:text="${meal.category.name}">Category Name</td>
-            <td th:unless="${meal.category != null}">No Category</td>
-            <td th:text="${meal.name}"></td>
-            <td th:text="${meal.price}"></td>
-            <td th:text="${meal.description}"></td>
-            <td><a
-               class="btn btn-info" role="button">Zamów</a></td>
-        </tr>
+    <form action="#" th:object='${orderItem}'
+          th:action="@{'/client/' + ${clientId} + '/addOrder/'+ ${restaurantId} + '/menu/' + ${orderNumber}}"
+          method="POST">
+        <input type="hidden" th:name="order.orderNumber" th:value="${order.orderNumber}">
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="meal : ${meals}">
+                <td th:if="${meal.category != null}" th:text="${meal.category.name}">Category Name</td>
+                <td th:unless="${meal.category != null}">No Category</td>
+                <td th:text="${meal.name}"></td>
+                <td th:text="${meal.price}"></td>
+                <td th:text="${meal.description}"></td>
+                <td>
+                    <input type="number" min="0" value="1" name="quantity" style="width: 50px;">
+                    <input type="checkbox" name="mealIds" th:value="${meal.mealId}">
+                </td>
 
-        </tbody>
-    </table>
+            </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Order!" class="btn btn-success">
+    </form>
 </div>
 </body>
 </html>

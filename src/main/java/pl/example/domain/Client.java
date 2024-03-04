@@ -15,5 +15,6 @@ public class Client {
     String surname;
     String phone;
     String email;
+
     Set<Order> orders;
 }

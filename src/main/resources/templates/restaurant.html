@@ -23,13 +23,15 @@
             <a th:href="@{'/restaurantOwner/'+ ${restaurantOwnerId} +'/addRestaurant'}" class="btn btn-info"
                role="button">Add new restaurant</a>
         </div>
+        <div class="col-md-3">
 
+        </div>
     </div>
     <br>
     <br>
     <div class="container">
         <h2>Hi Restaurant Owner!</h2>
-        <p>Look at you restaurants, edit them or add new!</p>
+        <p>Look at your restaurants, edit them or add new!</p>
         <br>
         <br>
         <table class="table">
@@ -93,6 +95,10 @@
                        class="btn btn-info"
                        role="button">Add
                         new street</a></td>
+                <td>
+                    <a th:href="@{'/restaurantOwner/'+ ${restaurantOwnerId} + '/showOrders/'+ ${restaurantId}}"
+                       class="btn btn-info"
+                       role="button">Show orders</a></td>
                 <td>
                     <a th:href="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/restaurant/'+ ${restaurant.restaurantId} + '/deleteStreet'}"
                        class="btn btn-danger"

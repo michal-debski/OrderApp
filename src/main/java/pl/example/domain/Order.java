@@ -4,19 +4,20 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Set;
 
 @With
 @Value
 @Builder
 @EqualsAndHashCode(of = "orderId")
-@ToString(of = {"orderId", "orderNumber", "totalPrice", "status", "deliveryDate", "orderDate"})
+@ToString(of = {"orderId", "orderNumber", "totalPrice", "status", "orderDate"})
 public class Order {
     Integer orderId;
     String orderNumber;
     BigDecimal totalPrice;
     String status;
-    OffsetDateTime deliveryDate;
     OffsetDateTime orderDate;
     Client client;
     Restaurant restaurant;
+    Set<OrderItem> orderItems;
 }

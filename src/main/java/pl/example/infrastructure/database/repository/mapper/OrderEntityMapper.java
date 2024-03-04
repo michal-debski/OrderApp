@@ -9,10 +9,13 @@ import pl.example.infrastructure.database.entity.OrderEntity;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrderEntityMapper {
 
-
+    @Mapping(target = "client.orders", ignore = true)
+    @Mapping(target = "restaurant.orders", ignore = true)
+    @Mapping(target = "orderItems.orders",ignore = true)
     OrderEntity mapToEntity(Order order);
 
     @Mapping(target = "client", ignore = true)
     @Mapping(target = "restaurant", ignore = true)
+    @Mapping(target = "orderItems", ignore = true)
     Order mapFromEntity(OrderEntity entity);
 }

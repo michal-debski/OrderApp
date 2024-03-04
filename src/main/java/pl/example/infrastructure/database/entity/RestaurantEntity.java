@@ -29,7 +29,7 @@ public class RestaurantEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "restaurant_owner_id")
     private RestaurantOwnerEntity restaurantOwner;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     private Set<OrderEntity> orders;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<MealEntity> meals;

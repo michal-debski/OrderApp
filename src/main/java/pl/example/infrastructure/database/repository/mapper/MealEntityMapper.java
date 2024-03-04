@@ -9,12 +9,15 @@ import pl.example.infrastructure.database.entity.MealEntity;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MealEntityMapper {
 
-    @Mapping(target = "category.meals", ignore = true)
-    @Mapping(target = "restaurant", ignore = true)
-    Meal mapFromEntity(MealEntity entity);
 
     @Mapping(target = "category.meals", ignore = true)
+    @Mapping(target = "orderItems.meals", ignore=true)
+
     MealEntity mapToEntity(Meal meal);
+    @Mapping(target = "category.meals", ignore = true)
+    @Mapping(target = "restaurant", ignore = true)
+    @Mapping(target = "orderItems", ignore = true)
+    Meal mapFromEntity(MealEntity entity);
 
 
 }

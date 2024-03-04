@@ -3,6 +3,7 @@ package pl.example.business.dao;
 import pl.example.domain.Meal;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface MealDAO {
@@ -16,5 +17,7 @@ public interface MealDAO {
     void deleteById(Integer id);
 
     List<Meal> findAllBySelectedRestaurant(Integer id);
+
+    Optional<Meal> findById(Integer mealId);
 
 }

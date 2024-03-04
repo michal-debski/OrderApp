@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CategoryDTO {
 
-    Integer categoryId;
+   private Integer categoryId;
 
-    String name;
+    private String name;
 }

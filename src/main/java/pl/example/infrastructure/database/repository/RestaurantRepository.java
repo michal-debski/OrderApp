@@ -19,6 +19,7 @@ public class RestaurantRepository implements RestaurantDAO {
     private final RestaurantJpaRepository restaurantJpaRepository;
     private final RestaurantEntityMapper restaurantEntityMapper;
 
+
     @Override
     public List<Restaurant> findByRestaurantOwnerId(Integer id) {
         return restaurantJpaRepository.findByRestaurantOwnerId(id).stream()
@@ -30,13 +31,12 @@ public class RestaurantRepository implements RestaurantDAO {
         return restaurantJpaRepository.findByName(name)
                 .map(restaurantEntityMapper::mapFromEntity);
     }
+
     @Override
     public Optional<Restaurant> findById(Integer id) {
         return restaurantJpaRepository.findById(id)
                 .map(restaurantEntityMapper::mapFromEntity);
     }
-
-
 
     @Override
     public List<Restaurant> findAll() {
@@ -47,13 +47,13 @@ public class RestaurantRepository implements RestaurantDAO {
 
     @Override
     public void saveRestaurant(Restaurant restaurant) {
-       RestaurantEntity restaurantEntity =restaurantEntityMapper.mapToEntity(restaurant);
+        RestaurantEntity restaurantEntity = restaurantEntityMapper.mapToEntity(restaurant);
         restaurantJpaRepository.save(restaurantEntity);
     }
 
     @Override
     public void deleteRestaurant(Integer restaurantId) {
-        restaurantJpaRepository.delete(restaurantJpaRepository.getReferenceById(restaurantId));
+        restaurantJpaRepository.delete(restaurantJpaRepository.getById(restaurantId));
     }
 
     @Override

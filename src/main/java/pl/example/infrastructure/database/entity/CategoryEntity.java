@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "categoryId")
-@ToString(of = {"categoryId", "name", "meals"})
+@ToString(of = {"categoryId", "name"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

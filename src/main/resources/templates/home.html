@@ -15,10 +15,10 @@
     <h1>Order App!</h1>
     <div class="row mt-3">
         <div class="col-md-4">
-            <a th:href="@{/client}" class="btn btn-info" role="button">Client Portal</a>
+            <a th:href="@{'/client/' + ${clientId}}" class="btn btn-info" role="button">Client Portal</a>
         </div>
         <div class="col-md-4">
-            <a th:href="@{/restaurantOwner}" class="btn btn-info" role="button">Restaurant Owner Portal</a>
+            <a th:href="@{'/restaurantOwner/' + ${restaurantOwnerId}}" class="btn btn-info" role="button">Restaurant Owner Portal</a>
         </div>
     </div>
 </div>

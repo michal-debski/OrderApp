@@ -5,12 +5,12 @@ import org.springframework.stereotype.Repository;
 import pl.example.business.dao.MealDAO;
 import pl.example.domain.Meal;
 import pl.example.infrastructure.database.entity.MealEntity;
-import pl.example.infrastructure.database.entity.RestaurantEntity;
 import pl.example.infrastructure.database.repository.jpa.MealJpaRepository;
 import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.MealEntityMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,10 +54,17 @@ public class MealRepository implements MealDAO {
 
     @Override
     public List<Meal> findAllBySelectedRestaurant(Integer id) {
-        RestaurantEntity restaurantEntity = restaurantJpaRepository.findById(id).get();
         return mealJpaRepository.findAllBySelectedRestaurant(id)
                 .stream().map(mealEntityMapper::mapFromEntity).toList();
     }
+
+    @Override
+    public Optional<Meal> findById(Integer mealId) {
+        return mealJpaRepository.findById(mealId)
+                .map(mealEntityMapper::mapFromEntity);
+    }
+
+
 
 
 }

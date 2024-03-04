@@ -6,11 +6,10 @@ values
 ('Alice', 'Smith', '987-654-321', 'alice.smith@example.com'),
 ('Bob', 'Johnson', '555-555-555', 'bob.johnson@example.com');
 
-
-insert into restaurant_owner( name, surname, email)
+insert into restaurant_owner(name, surname, email)
 values
 ('Stefan', 'Stefanowicz','stefan@miastowa.com'),
-('Agata', 'Agrafka', 'agata@victi.com'),
+('Agata', 'Agrafka', 'agata@victi.com' ),
 ('Tomasz', 'Tomaszewski', 'tomasz@tomani.com');
 
 

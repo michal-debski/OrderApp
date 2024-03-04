@@ -13,6 +13,7 @@ public interface RestaurantMapper  {
     RestaurantDTO map(final Restaurant restaurant);
 
 
+    @Mapping(target = "restaurant.orders", ignore = true)
     @Mapping(target = "restaurant.streets", ignore = true)
     Restaurant mapFromDto(RestaurantDTO restaurant);
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -37,5 +38,8 @@ public class MealEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "meal")
+    private Set<OrderItemEntity> orderItems;
 
 }

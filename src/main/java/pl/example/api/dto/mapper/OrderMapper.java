@@ -8,8 +8,10 @@ import pl.example.domain.Order;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 
 public interface OrderMapper {
-    OrderDTO mapToDTO(Order client);
 
 
-    Order map(OrderDTO clientDTO);
+    OrderDTO mapToDTO(Order order);
+
+
+    Order map(OrderDTO orderDTO);
 }

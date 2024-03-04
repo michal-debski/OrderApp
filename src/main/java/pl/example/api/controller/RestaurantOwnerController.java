@@ -11,10 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.example.api.dto.*;
-import pl.example.api.dto.mapper.MealMapper;
-import pl.example.api.dto.mapper.RestaurantMapper;
-import pl.example.api.dto.mapper.RestaurantOwnerMapper;
-import pl.example.api.dto.mapper.StreetMapper;
+import pl.example.api.dto.mapper.*;
 import pl.example.business.*;
 import pl.example.domain.*;
 
@@ -28,13 +25,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/restaurantOwner")
 
 public class RestaurantOwnerController {
-
-
     private final RestaurantService restaurantService;
     private final MealMenuService mealMenuService;
     private final StreetService streetService;
     private final CategoryService categoryService;
+    private final OrderService orderService;
+
     private final RestaurantOwnerService restaurantOwnerService;
+    @Autowired
+    private final OrderMapper orderMapper;
     @Autowired
     private final RestaurantMapper restaurantMapper;
     @Autowired
@@ -110,7 +109,6 @@ public class RestaurantOwnerController {
                 .build();
         Meal mealToEntity = mealMapper.map(dto);
 
-        //mealRepository.save(mealToEntity);
         mealMenuService.makeMealForRestaurant(mealToEntity);
         model.addAttribute("name", mealDTO.getName());
         model.addAttribute("category", categoryDTO.getCategoryId());
@@ -224,9 +222,6 @@ public class RestaurantOwnerController {
     public String addRestaurantForm(@PathVariable Integer restaurantOwnerId,
                                     @ModelAttribute RestaurantDTO restaurantDTO,
                                     Model model) {
-        // RestaurantOwnerDTO restaurantOwner = restaurantOwnerMapper.map(restaurantOwnerService.findById(restaurantOwnerId));
-
-        //model.addAttribute("restaurantOwner", restaurantOwner);
         model.addAttribute("restaurant", restaurantDTO);
 
         return "restaurant_new";
@@ -252,5 +247,82 @@ public class RestaurantOwnerController {
         return "redirect:/restaurantOwner/%s".formatted(restaurantOwnerId);
     }
 
+//    @GetMapping("/{restaurantOwnerId}/showOrders/{restaurantId}")
+//    public String showOrderList(
+//            @PathVariable("restaurantId") String restaurantId,
+//            @PathVariable(value = "restaurantOwnerId", required = false) String restaurantOwnerId,
+//            Model model
+//    ) {
+//        var restaurants = restaurantService.findByRestaurantOwnerId(Integer.valueOf(restaurantOwnerId)).stream()
+//                .map(restaurantMapper::map)
+//                .collect(Collectors.toList());
+//
+//        Map<Integer, List<OrderDTO>> ordersMap = new HashMap<>();
+//
+//        for (RestaurantDTO restaurant : restaurants) {
+//            Integer idd = restaurant.getRestaurantId();
+//            var orders = orderService.findByRestaurantId(Integer.valueOf(restaurantId)).stream()
+//                    .map(orderMapper::mapToDTO)
+//                    .toList();
+//            ordersMap.put(Integer.valueOf(restaurantId), orders);
+//
+//        }
+//
+//        model.addAttribute("restaurants", restaurants);
+//        model.addAttribute("ordersMap", ordersMap);
+//
+//        return "restaurant_orders";
+//    }
+//    @PutMapping
+//    public String updateOrderStatus(
+//
+//    ){
+//        Order order = orderService.findByOrderNumber(orderNumber).orElseThrow();
+//        OrderDTO dto = orderMapper.mapToDTO(order);
+//
+//        dto.setStatus("Preparing by chef");
+//        dto.setOrderDate(OffsetDateTime.now());
+//        Order orderToSave = orderMapper.map(dto);
+//        orderService.save(orderToSave);
+//        return "redirect:/client/{clientId}";
 
+//        return "redirect:/orderDetails" ;
+//    }
+
+    @GetMapping("/{restaurantOwnerId}/showOrders/{restaurantId}")
+    public ModelAndView clientHomePage(
+            @PathVariable(value = "restaurantId") String restaurantId,
+            @PathVariable(value = "restaurantOwnerId") String restaurantOwnerId
+    ) {
+        restaurantService.findRestaurantById(Integer.valueOf(restaurantId));
+        Map<String, ?> model = preparedInputData(Integer.valueOf(restaurantId));
+
+        return new ModelAndView("restaurant_orders", model);
+
+    }
+
+
+    private Map<String, ?> preparedInputData(Integer id) {
+        var orders = orderService.findByRestaurantId(id).stream().map(orderMapper::mapToDTO)
+                .toList();
+        return Map.of("ordersDTOs", orders, "restaurantId", id);
+    }
+
+    @GetMapping("/{restaurantOwnerId}/order/{orderNumber}/orderDetails")
+    public String showOrderDetails(
+            @PathVariable("restaurantOwnerId") String restaurantOwnerId,
+            @PathVariable("orderNumber") String orderNumber,
+            @ModelAttribute("orderDTO") OrderDTO orderDTO,
+            Model model) {
+
+        orderNumber = orderDTO.getOrderNumber();
+        Order order = orderService.findByOrderNumber(orderNumber).orElseThrow();
+        OrderDTO dto = orderMapper.mapToDTO(order);
+
+
+        model.addAttribute("order", dto);
+
+
+        return "order_details";
+    }
 }

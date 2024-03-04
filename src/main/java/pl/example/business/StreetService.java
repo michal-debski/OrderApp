@@ -14,6 +14,7 @@ import java.util.List;
 public class StreetService {
 
     private final StreetDAO streetDAO;
+    @Transactional
     public List<Street> findAll() {
         List<Street> streets = streetDAO.findAll();
         log.info("Available restaurants: [{}]", streets.size());
@@ -22,17 +23,15 @@ public class StreetService {
     @Transactional
     public List<Street> findAllByRestaurantId(Integer id) {
         List<Street> streetsForSelectedRestaurant = streetDAO.findAllByRestaurantId(id);
-//        if (streetsForSelectedRestaurant.size() == 0) {
-//            throw new NotFoundException("Could not find streets for selected Restaurant [%s]".formatted(id));
-//        }
+
         return streetsForSelectedRestaurant;
     }
-
+    @Transactional
     public void save(Street street) {
 
         streetDAO.save(street);
     }
-
+    @Transactional
     public void deleteById(Integer streetId) {
         streetDAO.deleteById(streetId);
     }

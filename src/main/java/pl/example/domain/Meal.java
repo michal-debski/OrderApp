@@ -3,6 +3,7 @@ package pl.example.domain;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @With
 @Value
@@ -20,5 +21,6 @@ public class Meal {
     BigDecimal price;
 
     Restaurant restaurant;
+    Set<OrderItem> orderItems;
 
 }

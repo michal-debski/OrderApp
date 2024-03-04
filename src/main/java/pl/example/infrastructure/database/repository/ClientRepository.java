@@ -51,4 +51,10 @@ public class ClientRepository implements ClientDAO {
         ClientEntity saved = clientJpaRepository.save(toSave);
         return clientEntityMapper.mapFromEntity(saved);
     }
+
+    @Override
+    public Optional<Client> findById(Integer clientId) {
+        return clientJpaRepository.findById(clientId)
+                .map(clientEntityMapper::mapFromEntity);
+    }
 }

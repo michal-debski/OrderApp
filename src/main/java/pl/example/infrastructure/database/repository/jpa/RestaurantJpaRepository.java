@@ -15,7 +15,7 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity,
 
     @Query("""
             SELECT rest FROM RestaurantEntity rest
-            LEFT JOIN FETCH rest.restaurantOwner own
+            INNER JOIN FETCH rest.restaurantOwner own
             WHERE own.id=:id
             """)
     Set<RestaurantEntity> findByRestaurantOwnerId(final @Param("id") Integer id);

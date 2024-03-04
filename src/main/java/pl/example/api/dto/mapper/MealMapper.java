@@ -10,6 +10,7 @@ import pl.example.domain.Meal;
 public interface MealMapper {
 
     @Mapping(source="category", target = "category")
+
     MealDTO map(Meal meal);
     @Mapping(source="category", target = "category")
 

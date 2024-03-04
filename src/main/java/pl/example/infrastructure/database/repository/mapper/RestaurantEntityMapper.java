@@ -13,10 +13,12 @@ public interface RestaurantEntityMapper {
     @Mapping(target = "restaurantOwner", ignore = true)
     @Mapping(target = "streets", ignore = true)
     @Mapping(target = "meals", ignore = true)
+    @Mapping(target ="orders", ignore = true)
     Restaurant mapFromEntity(RestaurantEntity entity);
 
 
     @Mapping(target = "meals", ignore = true)
+    @Mapping(target = "orders", ignore = true)
     RestaurantEntity mapToEntity(Restaurant restaurant);
 
 }

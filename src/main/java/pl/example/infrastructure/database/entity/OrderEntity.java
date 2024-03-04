@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,8 +32,6 @@ public class OrderEntity {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "delivery_date")
-    private OffsetDateTime deliveryDate;
 
     @Column(name = "order_date")
     private OffsetDateTime orderDate;
@@ -40,9 +39,10 @@ public class OrderEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private ClientEntity client;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
 
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private Set<OrderItemEntity> orderItems;
 }
