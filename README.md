@@ -15,6 +15,7 @@ To designed this application I have used:
 - Spring security (basics),
 - PostgreSQL
 - Flyway
+
 ## Targets
 ### Who is supplied in this application?
 It assumes service to two types of people: the client and the restaurant owner.

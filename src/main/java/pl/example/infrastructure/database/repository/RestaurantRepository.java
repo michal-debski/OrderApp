@@ -6,6 +6,7 @@ import pl.example.business.dao.RestaurantDAO;
 import pl.example.domain.Restaurant;
 import pl.example.infrastructure.database.entity.RestaurantEntity;
 import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository;
+import pl.example.infrastructure.database.repository.mapper.OrderEntityMapper;
 import pl.example.infrastructure.database.repository.mapper.RestaurantEntityMapper;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public class RestaurantRepository implements RestaurantDAO {
     private final RestaurantJpaRepository restaurantJpaRepository;
     private final RestaurantEntityMapper restaurantEntityMapper;
 
+    private final OrderRepository orderRepository;
+    private final OrderEntityMapper orderEntityMapper;
 
     @Override
     public List<Restaurant> findByRestaurantOwnerId(Integer id) {

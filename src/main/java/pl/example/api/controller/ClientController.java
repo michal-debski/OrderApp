@@ -30,7 +30,7 @@ import java.util.Random;
 public class ClientController {
 
 
-    private RestaurantService restaurantService;
+    private final RestaurantService restaurantService;
     private final OrderService orderService;
     private final ClientService clientService;
 
@@ -96,7 +96,8 @@ public class ClientController {
             @RequestParam String street,
             Model model
     ) {
-        var restaurants = restaurantService.findAllByStreetName(street).stream().map(restaurantMapper::map);
+        var restaurants = restaurantService.findAllByStreetName(street)
+                .stream().map(restaurantMapper::map).toList();
         model.addAttribute("restaurants", restaurants);
         model.addAttribute("clientId", clientId);
         model.addAttribute("street", street);
