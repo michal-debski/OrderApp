@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-import pl.example.domain.exception.NotFoundException;
-import pl.example.domain.exception.ProcessingException;
+import pl.example.api.controller.exception.NotFoundException;
+import pl.example.api.controller.exception.ProcessingException;
 
 import java.util.Optional;
 

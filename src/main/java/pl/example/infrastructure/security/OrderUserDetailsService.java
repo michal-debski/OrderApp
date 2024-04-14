@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,12 +20,15 @@ import java.util.stream.Collectors;
 public class OrderUserDetailsService implements UserDetailsService {
 
 
-    private final UserRepository userRepository;
+    private final UserJpaRepository userRepository;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByUsername(username);
+        if (Objects.isNull(user)) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
         List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
     }

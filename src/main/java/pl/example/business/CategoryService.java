@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.CategoryDAO;
 import pl.example.domain.Category;
-import pl.example.domain.exception.NotFoundException;
+import pl.example.api.controller.exception.NotFoundException;
 
 import java.util.List;
 import java.util.Optional;

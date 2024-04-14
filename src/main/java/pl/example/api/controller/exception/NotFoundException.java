@@ -1,4 +1,4 @@
-package pl.example.domain.exception;
+package pl.example.api.controller.exception;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(final String message) {

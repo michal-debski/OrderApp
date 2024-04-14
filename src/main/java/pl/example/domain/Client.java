@@ -8,7 +8,7 @@ import java.util.Set;
 @Value
 @Builder
 @EqualsAndHashCode(of = "email")
-@ToString(of = {"clientId", "name", "surname", "email"})
+@ToString(of = {"clientId", "name", "phone","surname", "email"})
 public class Client {
     Integer clientId;
     String name;

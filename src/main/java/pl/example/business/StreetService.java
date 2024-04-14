@@ -22,9 +22,8 @@ public class StreetService {
     }
     @Transactional
     public List<Street> findAllByRestaurantId(Integer id) {
-        List<Street> streetsForSelectedRestaurant = streetDAO.findAllByRestaurantId(id);
 
-        return streetsForSelectedRestaurant;
+        return streetDAO.findAllByRestaurantId(id);
     }
     @Transactional
     public void save(Street street) {

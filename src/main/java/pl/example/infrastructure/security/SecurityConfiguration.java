@@ -11,7 +11,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,7 +23,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    private final UserRepository userRepository;
+    private final UserJpaRepository userRepository;
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -58,25 +58,18 @@ public class SecurityConfiguration {
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/login", "/error", "/images/images.jpg")
+                        auth -> auth.requestMatchers("/home", "/login", "/error", "/images/images.jpg", "register")
                                 .permitAll()
-                                .requestMatchers("/client/**")
-                                .hasAuthority("CLIENT"))
-                .authorizeHttpRequests(
-                                        auth -> auth
-                                                .requestMatchers("/restaurantOwner/**")
-                                                .hasAuthority("RESTAURANT_OWNER")
-
-
-
-                )
-                .authorizeHttpRequests((auth-> auth.requestMatchers("/register").permitAll()
-                        .anyRequest()
-                        .authenticated()))
-               // .formLogin(a->a.loginPage("/login").defaultSuccessUrl("/"))
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                                .requestMatchers("/client/**").hasAnyAuthority("CLIENT")
+                                .requestMatchers("/restaurantOwner/**").hasAnyAuthority("RESTAURANT_OWNER"))
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                        .defaultSuccessUrl("/home", true))
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/logout")
+                        .logoutSuccessUrl("/login?logout=true")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll()

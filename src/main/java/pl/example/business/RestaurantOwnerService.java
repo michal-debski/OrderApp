@@ -12,9 +12,14 @@ public class RestaurantOwnerService {
 
     private final RestaurantOwnerDAO restaurantOwnerDAO;
 
-    @Transactional
+
     public RestaurantOwner findById(Integer restaurantOwnerId) {
 
         return restaurantOwnerDAO.findById(restaurantOwnerId);
+    }
+
+    @Transactional
+    public RestaurantOwner saveRestaurantOwner(RestaurantOwner restaurantOwner) {
+        return  restaurantOwnerDAO.saveRestaurantOwner(restaurantOwner);
     }
 }

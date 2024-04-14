@@ -7,13 +7,13 @@ import java.util.Set;
 @Value
 @Builder
 @EqualsAndHashCode(of = "restaurantOwnerId")
-@ToString(of = {"restaurantOwnerId", "name", "surname"})
+@ToString(of = {"restaurantOwnerId", "name","surname", "phone", "email"})
 public class RestaurantOwner {
 
       Integer restaurantOwnerId;
       String name;
       String surname;
       String email;
-
+      String phone;
       Set<Restaurant> restaurants;
 }
