@@ -1,6 +1,7 @@
 package pl.example.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import pl.example.business.dao.ClientDAO;
 import pl.example.domain.Client;
@@ -9,8 +10,8 @@ import pl.example.infrastructure.database.repository.jpa.ClientJpaRepository;
 import pl.example.infrastructure.database.repository.jpa.OrderJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.ClientEntityMapper;
 import pl.example.infrastructure.database.repository.mapper.OrderEntityMapper;
+import pl.example.infrastructure.security.UserJpaRepository;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -19,9 +20,8 @@ public class ClientRepository implements ClientDAO {
 
     private final ClientJpaRepository clientJpaRepository;
 
-    private final OrderJpaRepository orderJpaRepository;
     private final ClientEntityMapper clientEntityMapper;
-    private final OrderEntityMapper orderEntityMapper;
+    private final UserJpaRepository userJpaRepository;
 
 
     @Override
@@ -30,20 +30,6 @@ public class ClientRepository implements ClientDAO {
                 .map(clientEntityMapper::mapFromEntity);
     }
 
-    @Override
-    public void issueOrder(Client client) {
-        ClientEntity clientToSave = clientEntityMapper.mapToEntity(client);
-        ClientEntity clientSaved = clientJpaRepository.saveAndFlush(clientToSave);
-
-        client.getOrders().stream()
-                .filter(order-> Objects.isNull(order.getOrderId()))
-                .map(orderEntityMapper::mapToEntity)
-                .forEach(orderEntity -> {
-                    orderEntity.setClient(clientSaved);
-                    orderJpaRepository.saveAndFlush(orderEntity);
-                });
-
-    }
 
     @Override
     public Client saveClient(Client client) {
@@ -56,5 +42,17 @@ public class ClientRepository implements ClientDAO {
     public Optional<Client> findById(Integer clientId) {
         return clientJpaRepository.findById(clientId)
                 .map(clientEntityMapper::mapFromEntity);
+    }
+
+    @Override
+    public Client findLoggedClient() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        var loggedEmail = userJpaRepository.findByUsername(username).getEmail();
+        return clientJpaRepository.findByEmail(loggedEmail)
+                .map(clientEntityMapper::mapFromEntity)
+                .orElseThrow(() -> new SecurityException(
+                        "Error during looking for user with email: [%s] and username: [%s]"
+                                .formatted(loggedEmail, username)
+                ));
     }
 }

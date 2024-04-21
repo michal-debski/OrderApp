@@ -11,12 +11,10 @@ public interface MealEntityMapper {
 
 
     @Mapping(target = "category.meals", ignore = true)
-    @Mapping(target = "orderItems.meals", ignore=true)
-
+    @Mapping(target = "restaurant", ignore = true)
     MealEntity mapToEntity(Meal meal);
     @Mapping(target = "category.meals", ignore = true)
     @Mapping(target = "restaurant", ignore = true)
-    @Mapping(target = "orderItems", ignore = true)
     Meal mapFromEntity(MealEntity entity);
 
 

@@ -21,12 +21,10 @@
     <br>
     <br>
     <form action="#" th:object='${orderItem}'
-          th:action="@{'/client/' + ${clientId} + '/addOrder/'+ ${restaurantId} + '/menu/' + ${orderNumber}}"
+          th:action="@{'/client' + '/addOrder/'+ ${restaurantId} + '/menu' }"
           method="POST">
-        <input type="hidden" th:name="order.orderNumber" th:value="${order.orderNumber}">
+<!--        <input type="hidden" th:name="order.orderNumber" th:value="${order.orderNumber}">-->
         <input type="hidden" th:name="order.restaurantId" th:value="${restaurantId}">
-        <input type="hidden" th:name="order.clientId" th:value="${clientId}">
-
         <table class="table">
             <thead class="table-dark">
             <tr>

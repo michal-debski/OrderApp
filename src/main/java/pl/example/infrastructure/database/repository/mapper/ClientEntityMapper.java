@@ -8,9 +8,9 @@ import pl.example.infrastructure.database.entity.ClientEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ClientEntityMapper {
-   @Mapping(target = "orders", ignore = true)
+
     Client mapFromEntity(ClientEntity entity);
-   @Mapping(target = "orders.client", ignore = true)
+  
     ClientEntity mapToEntity(Client client);
 
 }

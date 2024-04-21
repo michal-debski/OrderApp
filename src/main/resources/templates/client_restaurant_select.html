@@ -11,7 +11,7 @@
 <body>
 <div class="container">
     <h1>Firstly find restaurant!</h1>
-    <form action="#" th:object="${street}" th:action="@{'/client/' + ${clientId} +'/addOrder' +'/restaurants'}" method="post">
+    <form action="#" th:object="${street}" th:action="@{'/client' + '/addOrder' + '/{street}'+'/restaurants'}" method="post">
         <div class="container mt-5">
             <h2>Restaurant List</h2>
             <div class="form-group">

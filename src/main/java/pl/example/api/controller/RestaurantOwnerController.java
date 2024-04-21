@@ -10,13 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.example.api.dto.*;
 import pl.example.api.dto.mapper.*;
 import pl.example.business.*;
 import pl.example.domain.*;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +43,6 @@ public class RestaurantOwnerController {
     @Autowired
     private final RestaurantOwnerMapper restaurantOwnerMapper;
 
-    @Autowired
-    private final ClientMapper clientMapper;
 
     @GetMapping("/{restaurantOwnerId}")
     public String restaurantList(
@@ -242,7 +238,6 @@ public class RestaurantOwnerController {
         RestaurantOwnerDTO restaurantOwnerDTO = restaurantOwnerMapper.mapToDTO(restaurantOwner);
         RestaurantDTO dto = RestaurantDTO.builder()
                 .name(restaurantDTO.getName())
-                .restaurantOwner(restaurantOwnerDTO)
                 .build();
 
         Restaurant restaurant = restaurantMapper.mapFromDto(dto);

@@ -7,20 +7,36 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
     <title>Order app</title>
+
+    <style>
+        p {
+        color: black;
+        font-size: 16px;
+        }
+        h1 {
+        color: black;
+        font-size: 30px
+        justify-content:center;
+        }
+        form-group{
+        justify-content: center;
+        display: flex;
+        }
+    </style>
 </head>
-<body>
+<body th:style="'background-image: url('+@{/images/background.jpg}+');'">
 <div class="container">
     <br>
-    <h1>Order app</h1>
+    <h1>Client homepage</h1>
 </div>
 
 <div class="container">
     <div class="row mt-3 text-centre">
         <div class="col-md-3">
-            <a th:href="@{/}" class="btn btn-info" role="button">Go back to the main page</a>
+            <a th:href="@{/home}" class="btn btn-info" role="button">Go back to the main page</a>
         </div>
         <div class="col-md-3">
-            <a th:href="@{'/client/'+ ${clientId} +'/addOrder'}" class="btn btn-info"
+            <a th:href="@{'/client'+ '/addOrder'}" class="btn btn-info"
                role="button">Select restaurant for new order</a>
         </div>
         <div class="container">
@@ -39,15 +55,15 @@
                 <tr th:each="order : ${ordersDTOs}">
                     <td th:text="${order.orderNumber}"></td>
                     <td th:text="${order.totalPrice}"></td>
-                    <td>
-                        <a th:href="@{'/client/' + ${clientId} +'/order/'+ ${order.orderNumber} + '/orderDetails'}"
-                           class="btn btn-info"
-                           role="button">Order details</a></td>
-                    <td><form action="#" th:action="@{'/client/' + ${clientId} +'/order/'+ ${order.orderNumber} + '/cancelOrder'}" th:method="delete">
-                        <input type="hidden" name="_method" value="delete"/>
-                        <button type="submit" class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </td>
+<!--                    <td>-->
+<!--                        <a th:href="@{'/client' + '/order/'+ ${order.orderNumber} + '/orderDetails'}"-->
+<!--                           class="btn btn-info"-->
+<!--                           role="button">Order details</a></td>-->
+<!--                    <td><form action="#" th:action="@{'/client/' + ${clientId} +'/order/'+ ${order.orderNumber} + '/cancelOrder'}" th:method="delete">-->
+<!--                        <input type="hidden" name="_method" value="delete"/>-->
+<!--                        <button type="submit" class="btn btn-danger">Cancel Order</button>-->
+<!--                        </form>-->
+<!--                    </td>-->
                 </tr>
                 <tr>
                 </tr>

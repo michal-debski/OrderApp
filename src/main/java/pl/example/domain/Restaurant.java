@@ -2,8 +2,6 @@ package pl.example.domain;
 
 import lombok.*;
 
-import java.util.Set;
-
 @With
 @Value
 @Builder
@@ -13,8 +11,7 @@ public class Restaurant {
 
      Integer restaurantId;
      String name;
-     Set<Street> streets;
+
      RestaurantOwner restaurantOwner;
-     Set<Order> orders;
-     Set<Meal> meals;
+
 }

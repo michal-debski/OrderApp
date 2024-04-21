@@ -32,7 +32,7 @@ public class ClientEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
     private Set<OrderEntity> orders;
 
 }

@@ -9,8 +9,10 @@ import java.util.Set;
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "orderId")
-@ToString(of = {"orderId", "orderNumber", "totalPrice", "status", "orderDate"})
+@Data
+@Getter
+//@EqualsAndHashCode(of = "orderId")
+//@ToString(of = {"orderId", "orderNumber", "totalPrice", "status", "orderDate"})
 public class Order {
     Integer orderId;
     String orderNumber;

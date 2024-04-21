@@ -58,7 +58,7 @@ public class SecurityConfiguration {
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/home", "/login", "/error", "/images/images.jpg", "register")
+                        auth -> auth.requestMatchers("/home", "/login", "/error", "/images/background.jpg", "register")
                                 .permitAll()
                                 .requestMatchers("/client/**").hasAnyAuthority("CLIENT")
                                 .requestMatchers("/restaurantOwner/**").hasAnyAuthority("RESTAURANT_OWNER"))
@@ -78,7 +78,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(value = "spring.security.disabled", havingValue = "false")
+    @ConditionalOnProperty(value = "spring.security.enabled", havingValue = "false")
     SecurityFilterChain securityDisabled(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)

@@ -9,9 +9,9 @@ public interface ClientDAO {
 
     Optional<Client> findByEmail(String email);
 
-    void issueOrder(Client client);
-
     Client saveClient(Client client);
 
     Optional<Client> findById(Integer clientId);
+
+    Client findLoggedClient();
 }
