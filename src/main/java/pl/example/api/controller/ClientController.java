@@ -4,44 +4,29 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
-import pl.example.api.dto.*;
-import pl.example.api.dto.mapper.*;
-import pl.example.business.*;
+import pl.example.api.dto.OrderDTO;
+import pl.example.api.dto.mapper.OrderMapper;
+import pl.example.business.ClientService;
+import pl.example.business.OrderService;
 import pl.example.domain.Order;
-import pl.example.domain.OrderItem;
-import pl.example.domain.Restaurant;
 import pl.example.infrastructure.database.repository.jpa.OrderItemJpaRepository;
-import pl.example.infrastructure.database.repository.jpa.OrderJpaRepository;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
 
 public class ClientController {
-
-
-    private final RestaurantService restaurantService;
     private final OrderService orderService;
     private final ClientService clientService;
 
     private final OrderMapper orderMapper;
 
-    private final RestaurantMapper restaurantMapper;
-
-    private final ClientMapper clientMapper;
-
-    private final MealMenuService mealMenuService;
-
-    private final MealMapper mealMapper;
-
-    private final OrderItemMapper orderItemMapper;
-    private final OrderItemService orderItemService;
-
-    private final OrderJpaRepository orderJpaRepository;
     private final OrderItemJpaRepository orderItemJpaRepository;
 
 
@@ -77,78 +62,6 @@ public class ClientController {
         return "order_cancel";
     }
 
-    @GetMapping("/client/addOrder")
-    public String showForm() {
-        return "client_restaurant_select";
-    }
-
-    @PostMapping("/client/addOrder/{street}/restaurants")
-    public String showRestaurantsByStreet(
-            @RequestParam String street,
-            Model model
-    ) {
-        var restaurants = restaurantService.findAllByStreetName(street)
-                .stream().map(restaurantMapper::map).toList();
-        model.addAttribute("restaurants", restaurants);
-        return "client_found_restaurant";
-
-    }
-
-    @GetMapping("/client/addOrder/{restaurantId}/menu")
-    @Transactional
-    public String showMenuForCreatedOrder(
-            @PathVariable String restaurantId,
-            Model model
-    ) {
-        var meals = mealMenuService.findAllBySelectedRestaurant(Integer.valueOf(restaurantId)).stream()
-                .map(mealMapper::map)
-                .toList();
-
-
-        model.addAttribute("restaurantId", restaurantId);
-        model.addAttribute("meals", meals);
-        //model.addAttribute("order", completedOrder);
-        // model.addAttribute("orderNumber", completedOrder.getOrderNumber());
-        return "client_found_restaurant_menu";
-
-
-    }
-
-    @PostMapping("client/addOrder/{restaurantId}/menu")
-    @Transactional
-    public String placeOrder(
-            @PathVariable String restaurantId,
-            //    @ModelAttribute String orderNumber,
-            @RequestParam("mealIds") List<String> selectedMeals,
-            @RequestParam("quantity") Integer quantity,
-            @ModelAttribute OrderItemsDTO orderItems,
-            Model model
-    ) {
-        ClientDTO clientDTO = clientMapper.mapToDTO(clientService.findLoggedClient());
-
-        Restaurant restaurant = restaurantService.findRestaurantById(Integer.valueOf(restaurantId));
-        RestaurantDTO restaurantDTO = restaurantMapper.map(restaurant);
-
-        String restaurantName = restaurant.getName();
-        List<OrderItemDTO> orderItemsDTOList = orderItems.getOrderItems();
-        Set<OrderItem> orderItemsForOrder = getMenuItemOrders(orderItemsDTOList);
-        Order completedOrder = orderService.buildOrder(orderItemsForOrder, restaurantName);
-
-        Order finalOrderWithCalculatedPrice = completedOrder.withTotalPrice(orderService.getTotalOrderPrice(completedOrder.getOrderId()));
-        orderItemService.save(selectedMeals,
-                quantity,
-                finalOrderWithCalculatedPrice);
-
-        //   orderNumber = completedOrder.getOrderNumber();
-
-
-        model.addAttribute("restaurantId", restaurantId);
-
-        //    model.addAttribute("orderNumber", orderNumber);
-        return "order_done";
-    }
-
-
     @GetMapping("/client/order/{orderNumber}/orderDetails")
     public String showOrderDetails(
             @PathVariable("orderNumber") String orderNumber,
@@ -163,16 +76,6 @@ public class ClientController {
 
 
         return "order_details";
-    }
-
-
-    private Set<OrderItem> getMenuItemOrders(List<OrderItemDTO> menuItemOrderDTOList) {
-        if (Objects.nonNull(menuItemOrderDTOList)) {
-            return menuItemOrderDTOList.stream()
-                    .filter(a -> a.getQuantity() > 0)
-                    .map(orderItemMapper::map)
-                    .collect(Collectors.toSet());
-        } else return Collections.emptySet();
     }
 
 

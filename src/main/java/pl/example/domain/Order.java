@@ -6,11 +6,13 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
-@With
-@Value
+
+
 @Builder
 @Data
 @Getter
+@Setter
+
 //@EqualsAndHashCode(of = "orderId")
 //@ToString(of = {"orderId", "orderNumber", "totalPrice", "status", "orderDate"})
 public class Order {

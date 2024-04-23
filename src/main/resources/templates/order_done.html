@@ -17,14 +17,11 @@
 
 <div class="container">
     <h2>You order a meal!</h2>
-    <p>Congratulations:
-        <b>
-            <span th:if="${clientName}" th:text="${clientName}">NAME</span>
-        </b>
+
         Thank you for your trust! Your order number is:
-<!--        <b>-->
-<!--            <span th:if="${orderDTO.orderNumber}" th:text="${orderDTO.orderNumber}">ORDER NUMBER</span>-->
-<!--        </b>-->
+        <b>
+            <span th:if="${orderDTO.orderNumber}" th:text="${orderDTO.orderNumber}">ORDER NUMBER</span>
+        </b>
     </p>
 </div>
 

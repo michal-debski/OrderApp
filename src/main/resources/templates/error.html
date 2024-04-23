@@ -8,9 +8,24 @@
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossorigin="anonymous">
     <title>Error Page!</title>
-</head>
 
-<body>
+    <style>
+        p {
+        color: black;
+        font-size: 16px;
+        }
+        h1 {
+        color: black;
+        font-size: 30px
+        justify-content:center;
+        }
+        form-group{
+        justify-content: center;
+        display: flex;
+        }
+    </style>
+</head>
+<body th:style="'background-image: url('+@{/images/background.jpg}+'); opacity: 0.9'">
     <div class="container">
         <h1>Sorry mate, seems that You can't use this webapp properly!</h1>
         <b><span th:if="${errorMessage}" th:text="${errorMessage}">Error</span></b>
@@ -19,7 +34,7 @@
         <br>
         <br>
         <p>
-            <a th:href="@{/}" class="btn btn-info" role="button">Back to the main page</a>
+            <a th:href="@{/home}" class="btn btn-info" role="button">Back to the main page</a>
         </p>
     </div>
 </body>

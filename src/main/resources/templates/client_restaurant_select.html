@@ -7,8 +7,25 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
     <title>Order app</title>
+
+    <style>
+        p {
+        color: black;
+        font-size: 16px;
+        }
+        h1 {
+        color: black;
+        font-size: 30px
+        justify-content:center;
+        }
+        form-group{
+        justify-content: center;
+        display: flex;
+        }
+    </style>
 </head>
-<body>
+
+<body th:style="'background-image: url('+@{/images/background.jpg}+'); opacity: 0.9'">
 <div class="container">
     <h1>Firstly find restaurant!</h1>
     <form action="#" th:object="${street}" th:action="@{'/client' + '/addOrder' + '/{street}'+'/restaurants'}" method="post">

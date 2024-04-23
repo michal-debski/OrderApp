@@ -6,14 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.OrderDAO;
 import pl.example.domain.Client;
 import pl.example.domain.Order;
-import pl.example.domain.OrderItem;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -23,14 +21,16 @@ public class OrderService {
 
     private final ClientService clientService;
 
+    private final RestaurantService restaurantService;
+
     @Transactional
     public void deleteOrder(Order order) {
         orderDAO.deleteOrder(order);
     }
 
     @Transactional
-    public Order save(Order order, String name, Set<OrderItem> orderItems) {
-        return orderDAO.saveOrder(order, name, orderItems);
+    public Order save(Order order) {
+        return orderDAO.saveOrder(order);
     }
 
 
@@ -64,22 +64,16 @@ public class OrderService {
 //        orderDAO.saveOrder(withTotalPrice);
 //    }
     @Transactional
-    public Order buildOrder(Set<OrderItem> orderItems, String name) {
-        Order orderPlaced = buildOrder(orderItems);
-        Order order = orderDAO.saveOrder(orderPlaced, name, orderItems);
-        return order;
-    }
-
-    private Order buildOrder(Set<OrderItem> orderItems) {
+    public Order buildOrder(Integer restaurantId) {
         OffsetDateTime dateOfOrder = OffsetDateTime.now();
-        return Order.builder()
+        Order orderPlaced = Order.builder()
                 .orderNumber(generateOrderNumber())
                 .status("Preparing by chef")
                 .orderDate(dateOfOrder)
                 .client(clientService.findLoggedClient())
-                .orderItems(orderItems)
-                .totalPrice(calculateTotalPrice(orderItems))
+                .restaurant(restaurantService.findRestaurantById(restaurantId))
                 .build();
+        return orderDAO.saveOrder(orderPlaced);
     }
 
     private String generateOrderNumber() {
@@ -105,16 +99,5 @@ public class OrderService {
     @SuppressWarnings("SameParameterValue")
     private int randomChar(char min, char max) {
         return (char) new Random().nextInt(max - min) + min;
-    }
-
-    private BigDecimal calculateTotalPrice(Set<OrderItem> orderItems) {
-        return orderItems.stream()
-                .map(this::calculateOrderValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    private BigDecimal calculateOrderValue(OrderItem orderItem) {
-        orderItem.getMeal().getPrice();
-        return orderItem.getMeal().getPrice().multiply(new BigDecimal(orderItem.getQuantity()));
     }
 }
