@@ -9,64 +9,160 @@
     <title>Order app</title>
 
     <style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Trebuchet MS' , 'Lucida Sans Unicode', 'Lucida Grande',
+        'Lucida Sans', Arial, sans-serif
+    }
         p {
         color: black;
         font-size: 16px;
         }
         h1 {
         color: black;
-        font-size: 30px
+        font-size: 20px
         justify-content:center;
         }
         form-group{
         justify-content: center;
         display: flex;
         }
+        nav {
+        height:80px;
+        background: #fdcc04;
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        padding: 0rem calc((100w-1300px)/2);
+        }
+        .logo {
+        color: #000
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-style: italic;
+        padding: 0 2rem;
+        }
+        nav a {
+        text-decoration: none;
+        color: #000;
+        padding: 0 1.5rem;
+        }
+
+        .hero{
+        background: #fdcc04;
+        }
+
+        .hero-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 95vh;
+        padding: 3rem calc((100vw - 1300px)/2);
+
+        }
+        .column-left {
+
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        color: #000;
+        padding: 0rem 2rem;
+        }
+        .column-left h1 {
+        margin-bottom: 1rem;
+        font-size: 3rem;
+        }
+        .column-left p {
+        margin-bottom: 2rem;
+        font-size:1.5rem;
+        line-height: 1.5;
+        }
+        button {
+        padding: 1rem 3rem;
+        font-size: 1rem;
+        border:none;
+        color: #fdcc04;
+        background:#000;
+        cursor: pointer;
+        }
+        button: hover{
+        background: #fff;
+        color: #000;
+        }
+
+        .column-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0rem 2 rem;
+        }
+        .hero-image{
+        width: 50%;
+        height: 50%;
+        }
+
     </style>
 </head>
-<body th:style="'background-image: url('+@{/images/background.jpg}+'); opacity: 0.9'">
-<div class="container">
-    <br>
-    <h1>Order app</h1>
-</div>
-<br>
-<br>
-<div class="container">
-    <h2>Hi Client!</h2>
-    <p>Look at our menu, choose something for you!</p>
-    <br>
-    <br>
-    <form action="#" th:object='${orderDTO}'
-          th:action="@{'/client' + '/addOrder/'+ ${restaurantId} + '/menu' }"
-          method="POST">
-       <input type="hidden" th:name="orderNumber" th:value="${orderDTO.orderNumber}">
-        <input type="hidden" th:name="orderDTO.restaurantId" th:value="${restaurantId}">
-        <table class="table">
-            <thead class="table-dark">
-            <tr>
-                <th>Category</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="meal : ${meals}">
-                <td th:if="${meal.category != null}" th:text="${meal.category.name}">Category Name</td>
-                <td th:unless="${meal.category != null}">No Category</td>
-                <td th:text="${meal.name}"></td>
-                <td th:text="${meal.price}"></td>
-                <td th:text="${meal.description}"></td>
-                <td>
-                    <input type="number" min="0" value="1" name="quantity" style="width: 50px;">
-                    <input type="checkbox" name="meals" th:value="${meal.mealId}">
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <input type="submit" value="Order!" class="btn btn-success">
+<body>
+<nav>
+    <div class="logo">ORDER APP</div>
+    <div class="nav-items"></div>
+    <div class="row mt-3 text-centre">
+        <div class="col-md-3">
+            <a th:href="@{/home}">Home</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{'/client'+ '/addOrder'}">Restaurants</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{'/client'+ '/orders'}">Orders</a>
+        </div>
+    </div>
+</nav>
+<section class="hero">
+    <div class="hero-container">
+        <div class="column-left">
 
-    </form>
-</div>
+            <p>Look at our menu, choose something for you!</p>
+
+            <form action="#" th:object='${orderDTO}'
+                  th:action="@{'/client' + '/addOrder/'+ ${restaurantId} + '/menu' }"
+                  method="POST">
+                <input type="hidden" th:name="orderNumber" th:value="${orderDTO.orderNumber}">
+                <input type="hidden" th:name="orderDTO.restaurantId" th:value="${restaurantId}">
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Category</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="meal : ${meals}">
+                        <td th:if="${meal.category != null}" th:text="${meal.category.name}">Category Name</td>
+                        <td th:unless="${meal.category != null}">No Category</td>
+                        <td th:text="${meal.name}"></td>
+                        <td th:text="${meal.price}"></td>
+                        <td th:text="${meal.description}"></td>
+                        <td>
+                            <input type="number" min="0" value="1" name="quantity" style="width: 50px;">
+                            <input type="checkbox" name="meals" th:value="${meal.mealId}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="Order!" class="btn btn-success">
+
+            </form>
+            <div class="column-right">
+                <img th:src="@{/images/background.jpg}" alt="illustration" class = "hero-image">
+            </div>
+        </div>
+    </div>
+
+</section>
 </body>
 </html>

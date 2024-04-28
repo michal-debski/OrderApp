@@ -7,15 +7,30 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
     <title>Order app</title>
+    <style>
+        p {
+        color: black;
+        font-size: 16px;
+        }
+        h1 {
+        color: black;
+        font-size: 30px
+        justify-content:center;
+        }
+        form-group{
+        justify-content: center;
+        display: flex;
+        }
+    </style>
 </head>
-<body>
-<div class="container">
-    <br>
-    <h1>Order app</h1>
-</div>
-<div class="container mt-5">
+<body  th:style="'background-image: url('+@{/images/background.jpg}+'); opacity: 0.9'">
+<div class="container mt-5"></div>
+<div style="text-align: center;">
     <h1>Order Details</h1>
-    <table class="table">
+
+        <table class="table" style="width:auto; display:inline-block;">
+            <thead class="table-dark">
+
         <tbody>
         <tr>
             <th>Order Number:</th>
@@ -36,7 +51,11 @@
 
         </tbody>
     </table>
+    <div class="col-md-3">
+        <a th:href="@{/client/orders}" class="btn btn-info" role="button">Go back to orders</a>
+    </div>
 </div>
+
 </body>
 
 </html>

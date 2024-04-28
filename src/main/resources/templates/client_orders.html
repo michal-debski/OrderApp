@@ -103,7 +103,7 @@
         }
     </style>
 </head>
-<<body>
+<body>
 <nav>
     <div class="logo">ORDER APP</div>
     <div class="nav-items"></div>
@@ -122,27 +122,38 @@
 <section class="hero">
     <div class = "hero-container">
         <div class = "column-left">
-        <h1>Available restaurants are in below list for <span th:text="${street}"></span> street!</h1>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Restaurant Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="restaurant : ${restaurants}">
-                <td th:text="${restaurant.name}"></td>
-                <td><a th:href="@{'/client' +'/addOrder/' + ${restaurant.restaurantId}+'/menu'}"
-                       class="btn btn-info" role="button">Display menu</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-        <div class="column-right">
-            <img th:src="@{/images/background.jpg}" alt="illustration" class = "hero-image">
+            <h1> Look at your orders!</h1>
+            <p>You can look at details or cancel it</p>
+            <table class="table" style="width:auto;">
+                <thead class="table-dark">
+                <tr>
+                    <th>Order Number</th>
+                    <th>Total price</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${ordersDTOs}">
+                    <td th:text="${order.orderNumber}"></td>
+                    <td th:text="${order.totalPrice}"></td>
+                    <td>
+                        <a th:href="@{'/client' + '/order/'+ ${order.orderNumber} + '/orderDetails'}"
+                           class="btn btn-info"
+                           role="button">Order details</a>
+                        <form action="#" th:action="@{'/client' + '/order/'+${order.orderNumber} + '/cancelOrder'}"
+                              th:method="delete">
+                            <button type="submit" class="btn btn-danger">Cancel Order</button>
+                        </form></td>
+                </tr>
+                <tr>
+                </tr>
+                </tbody>
+            </table>
         </div>
-</div>
-
+        <div class="column-right">
+            <img src='/images/background.jpg' alt="illustration" class = "hero-image">
+        </div>
+    </div>
 </section>
 </body>
 </html>

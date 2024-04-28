@@ -1,7 +1,6 @@
 package pl.example.infrastructure.database.repository.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import pl.example.domain.Meal;
 import pl.example.infrastructure.database.entity.MealEntity;
@@ -10,11 +9,10 @@ import pl.example.infrastructure.database.entity.MealEntity;
 public interface MealEntityMapper {
 
 
-    @Mapping(target = "category.meals", ignore = true)
-    @Mapping(target = "restaurant", ignore = true)
+
     MealEntity mapToEntity(Meal meal);
-    @Mapping(target = "category.meals", ignore = true)
-    @Mapping(target = "restaurant", ignore = true)
+
+
     Meal mapFromEntity(MealEntity entity);
 
 

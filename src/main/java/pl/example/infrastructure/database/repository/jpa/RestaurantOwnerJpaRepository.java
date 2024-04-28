@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface RestaurantOwnerJpaRepository extends JpaRepository<RestaurantOwnerEntity, Integer> {
     Optional<RestaurantOwnerEntity> findById(Integer id);
 
+    Optional<RestaurantOwnerEntity> findByEmail(String email);
 
 }

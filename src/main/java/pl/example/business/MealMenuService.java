@@ -30,10 +30,16 @@ public class MealMenuService {
         return mealsForSelectedRestaurant;
     }
 
-
-    public void makeMealForRestaurant(Meal meal) {
-        mealDAO.save(meal);
-    }
+//    @Transactional
+//    public Meal makeMealForRestaurant(Meal meal) {
+//        Meal mealToAdd = Meal.builder()
+//                .name(meal.getName())
+//                .restaurant(meal.)
+//                .price()
+//                .description()
+//                .build();
+//        return mealDAO.save(mealToAdd);
+//    }
 
     @Transactional
     public void delete(Integer id) {

@@ -22,7 +22,7 @@ public class ClientService {
         return clientDAO.saveClient(client);
 
     }
-    @Transactional
+
     public Client findLoggedClient(){
         return clientDAO.findLoggedClient();
     }

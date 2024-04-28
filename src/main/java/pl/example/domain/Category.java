@@ -2,16 +2,14 @@ package pl.example.domain;
 
 import lombok.*;
 
-import java.util.Set;
-
 @With
 @Value
 @Builder
 @EqualsAndHashCode(of = "categoryId")
-@ToString(of = {"categoryId", "name", "meals"})
+@ToString(of = {"categoryId", "name"})
 public class Category {
     Integer categoryId;
     String name;
-    Set<Meal> meals;
+
 
 }

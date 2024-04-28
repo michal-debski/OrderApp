@@ -20,6 +20,10 @@ public class RestaurantOwnerService {
 
     @Transactional
     public RestaurantOwner saveRestaurantOwner(RestaurantOwner restaurantOwner) {
-        return  restaurantOwnerDAO.saveRestaurantOwner(restaurantOwner);
+        return restaurantOwnerDAO.saveRestaurantOwner(restaurantOwner);
+    }
+
+    public RestaurantOwner findLoggedRestaurantOwner() {
+        return restaurantOwnerDAO.findLoggedRestaurantOwner();
     }
 }

@@ -8,9 +8,24 @@
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossorigin="anonymous">
     <title>Order App</title>
-</head>
 
-<body>
+<style>
+        p {
+        color: black;
+        font-size: 16px;
+        }
+        h1 {
+        color: black;
+        font-size: 30px
+        justify-content:center;
+        }
+        form-group{
+        justify-content: center;
+        display: flex;
+        }
+    </style>
+</head>
+<body  th:style="'background-image: url('+@{/images/background.jpg}+'); opacity: 0.9'">
 <div class="container">
     <h1>Order app!</h1>
 </div>
@@ -22,6 +37,7 @@
         <b>
             <span th:if="${orderDTO.orderNumber}" th:text="${orderDTO.orderNumber}">ORDER NUMBER</span>
         </b>
+
     </p>
 </div>
 

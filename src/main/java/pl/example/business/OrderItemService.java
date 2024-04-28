@@ -3,7 +3,6 @@ package pl.example.business;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.example.api.dto.mapper.MealMapper;
 import pl.example.business.dao.OrderItemDAO;
 import pl.example.domain.Meal;
 import pl.example.domain.Order;
@@ -42,5 +41,13 @@ public class OrderItemService {
 
     }
 
+    @Transactional
+    public void delete(OrderItem orderItemsToDelete) {
+        orderItemDAO.delete(orderItemsToDelete);
+    }
 
+    @Transactional
+    public void deleteOrderItemsByOrderId(Integer orderId) {
+        orderItemDAO.deleteOrderItemsByOrderId(orderId);
+    }
 }

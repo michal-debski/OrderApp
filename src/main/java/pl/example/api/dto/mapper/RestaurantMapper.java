@@ -12,7 +12,7 @@ public interface RestaurantMapper {
     default RestaurantDTO map(Restaurant restaurant) {
         return RestaurantDTO.builder()
                 .restaurantId(restaurant.getRestaurantId())
-                .name(restaurant.getName())
+                .restaurantName(restaurant.getName())
                 .build();
     }
 
@@ -20,7 +20,7 @@ public interface RestaurantMapper {
     default Restaurant mapFromDto(RestaurantDTO restaurant) {
         return Restaurant.builder()
                 .restaurantId(restaurant.getRestaurantId())
-                .name(restaurant.getName())
+                .name(restaurant.getRestaurantName())
                 .build();
     }
 }

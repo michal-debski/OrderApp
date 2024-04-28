@@ -7,9 +7,6 @@ import pl.example.api.dto.OrderDTO;
 import pl.example.api.dto.RestaurantDTO;
 import pl.example.domain.Order;
 
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 
 public interface OrderMapper {
@@ -17,17 +14,18 @@ public interface OrderMapper {
         return OrderDTO.builder()
                 .orderNumber(order.getOrderNumber())
                 .client(ClientDTO.builder()
+                        .clientId(order.getClient().getClientId())
                         .name(order.getClient().getName())
                         .surname(order.getClient().getSurname())
                         .email(order.getClient().getEmail())
                         .phone(order.getClient().getPhone())
                         .build())
-                .status("In progress")
-                .totalPrice(BigDecimal.ZERO)
-                .orderDate(OffsetDateTime.now())
+                .status(order.getStatus())
+                .totalPrice(order.getTotalPrice())
+                .orderDate(order.getOrderDate())
                 .restaurant(RestaurantDTO.builder()
                         .restaurantId(order.getRestaurant().getRestaurantId())
-                        .name(order.getRestaurant().getName())
+                        .restaurantName(order.getRestaurant().getName())
                         .build())
                 .build();
     }

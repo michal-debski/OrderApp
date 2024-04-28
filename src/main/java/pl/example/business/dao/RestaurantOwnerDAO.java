@@ -7,4 +7,5 @@ public interface RestaurantOwnerDAO {
 
     RestaurantOwner saveRestaurantOwner(RestaurantOwner restaurantOwner);
 
+    RestaurantOwner findLoggedRestaurantOwner();
 }

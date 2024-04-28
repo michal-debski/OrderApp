@@ -6,7 +6,6 @@
           rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
-    <title>Order app</title>
 
     <style>
     *{
@@ -62,7 +61,7 @@
 
         }
         .column-left {
-
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
@@ -103,7 +102,7 @@
         }
     </style>
 </head>
-<<body>
+<body>
 <nav>
     <div class="logo">ORDER APP</div>
     <div class="nav-items"></div>
@@ -112,36 +111,25 @@
             <a th:href="@{/home}">Home</a>
         </div>
         <div class="col-md-3">
-            <a th:href="@{'/client'+ '/addOrder'}">Restaurants</a>
+            <a th:href="@{'/restaurantOwner'+ '/restaurants'}">Restaurants</a>
         </div>
         <div class="col-md-3">
-            <a th:href="@{'/client'+ '/orders'}">Orders</a>
+            <a th:href="@{'/restaurantOwner'+ '/orders'}">Orders</a>
         </div>
     </div>
 </nav>
 <section class="hero">
     <div class = "hero-container">
         <div class = "column-left">
-        <h1>Available restaurants are in below list for <span th:text="${street}"></span> street!</h1>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Restaurant Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="restaurant : ${restaurants}">
-                <td th:text="${restaurant.name}"></td>
-                <td><a th:href="@{'/client' +'/addOrder/' + ${restaurant.restaurantId}+'/menu'}"
-                       class="btn btn-info" role="button">Display menu</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            <h1>Create fantastic meals for your restaurants !</h1>
+            <p>Satisfaction Guarantee!
+                You can trust us, we verify clients!</p>
+
+        </div>
         <div class="column-right">
             <img th:src="@{/images/background.jpg}" alt="illustration" class = "hero-image">
         </div>
-</div>
+    </div>
 
 </section>
 </body>

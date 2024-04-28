@@ -103,7 +103,7 @@
         }
     </style>
 </head>
-<<body>
+<body>
 <nav>
     <div class="logo">ORDER APP</div>
     <div class="nav-items"></div>
@@ -112,37 +112,46 @@
             <a th:href="@{/home}">Home</a>
         </div>
         <div class="col-md-3">
-            <a th:href="@{'/client'+ '/addOrder'}">Restaurants</a>
+            <a th:href="@{'/restaurantOwner'+ '/restaurants'}">Restaurants</a>
         </div>
         <div class="col-md-3">
-            <a th:href="@{'/client'+ '/orders'}">Orders</a>
+            <a th:href="@{'/restaurantOwner'+ '/orders'}">Orders</a>
         </div>
     </div>
 </nav>
 <section class="hero">
     <div class = "hero-container">
         <div class = "column-left">
-        <h1>Available restaurants are in below list for <span th:text="${street}"></span> street!</h1>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Restaurant Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="restaurant : ${restaurants}">
-                <td th:text="${restaurant.name}"></td>
-                <td><a th:href="@{'/client' +'/addOrder/' + ${restaurant.restaurantId}+'/menu'}"
-                       class="btn btn-info" role="button">Display menu</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            <h1>Check out your restaurants!</h1>
+            <p>You can add edit your restaurants</p>
+            <table class="table" style="width:auto;">
+                <thead class="table-dark">
+                <tr>
+                    <th>Restaurant Name</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="restaurant : ${restaurantsDTO}">
+                    <td th:text="${restaurant.restaurantName}"></td>
+                    <td>
+                        <a th:href="@{'/restaurantOwner' + '/restaurants/' + ${restaurant.restaurantId} +'/meals'}"
+                           class="btn btn-info"
+                           role="button">Look at meals</a>
+                        <form action="#" th:action="@{'/restaurantOwner' + '/restaurant/'+${restaurant.restaurantName} + '/cancelOrder'}"
+                              th:method="delete">
+                            <button type="submit" class="btn btn-danger">Delete restaurant</button>
+                        </form></td>
+                </tr>
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="column-right">
             <img th:src="@{/images/background.jpg}" alt="illustration" class = "hero-image">
         </div>
-</div>
-
+    </div>
 </section>
 </body>
 </html>

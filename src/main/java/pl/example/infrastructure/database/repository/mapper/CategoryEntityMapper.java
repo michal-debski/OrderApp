@@ -1,7 +1,6 @@
 package pl.example.infrastructure.database.repository.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import pl.example.domain.Category;
 import pl.example.infrastructure.database.entity.CategoryEntity;
@@ -10,10 +9,8 @@ import pl.example.infrastructure.database.entity.CategoryEntity;
 public interface CategoryEntityMapper {
 
 
-    @Mapping(target = "meals", ignore = true)
     Category mapFromEntity(CategoryEntity entity);
 
 
-    @Mapping(target = "meals", ignore = true)
     CategoryEntity mapToEntity(Category category);
 }

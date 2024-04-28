@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class RestaurantDTO {
 
     private Integer restaurantId;
-    private String name;
+    private String restaurantName;
 
 
 }
