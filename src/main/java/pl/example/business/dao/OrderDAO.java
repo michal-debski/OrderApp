@@ -24,4 +24,8 @@ public interface OrderDAO {
     Optional<Order> findById(Integer orderId);
 
     BigDecimal getTotalOrderPrice(Integer id);
+
+    List<Order> findAll();
+
+    void update(Order order);
 }

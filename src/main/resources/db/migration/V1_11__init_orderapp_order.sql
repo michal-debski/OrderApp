@@ -15,4 +15,5 @@ PRIMARY KEY (ORDER_ID),
              CONSTRAINT fk_order_RESTAURANT
                     FOREIGN KEY (RESTAURANT_id)
                         REFERENCES RESTAURANT (RESTAURANT_id)
+
 );

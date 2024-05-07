@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.example.business.dao.RestaurantDAO;
-import pl.example.domain.Restaurant;
 import pl.example.api.controller.exception.NotFoundException;
-import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository;
-import pl.example.infrastructure.database.repository.mapper.RestaurantEntityMapper;
+import pl.example.business.dao.RestaurantDAO;
+import pl.example.domain.Address;
+import pl.example.domain.Restaurant;
+import pl.example.domain.RestaurantOwner;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +21,7 @@ public class RestaurantService {
 
     private final RestaurantDAO restaurantDAO;
 
-    private final RestaurantEntityMapper restaurantEntityMapper;
 
-
-    private final RestaurantJpaRepository restaurantJpaRepository;
     public List<Restaurant> findAll() {
         List<Restaurant> restaurants = restaurantDAO.findAll();
         log.info("Available restaurants: [{}]", restaurants.size());
@@ -40,7 +37,6 @@ public class RestaurantService {
         return restaurant.get();
     }
 
-    @Transactional
     public Restaurant findByName(String name) {
         Optional<Restaurant> restaurant = restaurantDAO.findByName(name);
         if (restaurant.isEmpty()) {
@@ -49,24 +45,24 @@ public class RestaurantService {
         return restaurant.get();
     }
 
+    @Transactional
+    public Restaurant saveRestaurant(Restaurant restaurant, RestaurantOwner restaurantOwner, Address address) {
 
-    public void saveRestaurant(Restaurant restaurant) {
-       restaurantDAO.saveRestaurant(restaurant);
+        return restaurantDAO.saveRestaurant(restaurant, restaurantOwner, address);
+    }
+
+    public void deleteRestaurant(Integer restaurantId) {
+        restaurantDAO.deleteRestaurant(restaurantId);
     }
 
 
-//    public void deleteRestaurant(Restaurant restaurant) {
-//        restaurantDAO.deleteRestaurant(buildRestaurant(restaurant));
-//    }
-
-    @Transactional
     public List<Restaurant> findByRestaurantOwnerId(Integer id) {
         return restaurantDAO.findByRestaurantOwnerId(id);
     }
-    @Transactional
-    public List<Restaurant> findAllByStreetName(String name){
-        return restaurantDAO.findAllByStreet(name);
-    }
 
+
+    public List<Restaurant> findAllByStreetName(String street) {
+        return restaurantDAO.findAllByStreetName(street);
+    }
 }
 

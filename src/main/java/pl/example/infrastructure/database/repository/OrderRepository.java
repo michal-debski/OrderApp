@@ -8,10 +8,8 @@ import pl.example.domain.Order;
 import pl.example.infrastructure.database.entity.ClientEntity;
 import pl.example.infrastructure.database.entity.OrderEntity;
 import pl.example.infrastructure.database.repository.jpa.OrderJpaRepository;
-import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.ClientEntityMapper;
 import pl.example.infrastructure.database.repository.mapper.OrderEntityMapper;
-import pl.example.infrastructure.database.repository.mapper.OrderItemMapperEntity;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -68,6 +66,18 @@ public class OrderRepository implements OrderDAO {
         return orderJpaRepository.findById(orderId)
                 .map(orderEntityMapper::mapFromEntity);
     }
+
+    @Override
+    public List<Order> findAll() {
+        List<OrderEntity> orderEntityList = orderJpaRepository.findAll();
+        return orderEntityList.stream().map(orderEntityMapper::mapFromEntity).toList();
+    }
+
+    @Override
+    public void update(Order order) {
+        orderJpaRepository.save(orderEntityMapper.mapToEntity(order));
+    }
+
 
     @Override
     public BigDecimal getTotalOrderPrice(Integer id) {

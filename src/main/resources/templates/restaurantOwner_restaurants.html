@@ -9,6 +9,9 @@
     <title>Order app</title>
 
     <style>
+    body {
+        background-color: #fdcc04;
+        }
     *{
         box-sizing: border-box;
         margin: 0;
@@ -56,8 +59,7 @@
 
         .hero-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        height: 95vh;
+
         padding: 3rem calc((100vw - 1300px)/2);
 
         }
@@ -107,9 +109,12 @@
 <nav>
     <div class="logo">ORDER APP</div>
     <div class="nav-items"></div>
-    <div class="row mt-3 text-centre">
+    <div class="row mt-3 text-center">
         <div class="col-md-3">
             <a th:href="@{/home}">Home</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{'/logout'}">Logout</a>
         </div>
         <div class="col-md-3">
             <a th:href="@{'/restaurantOwner'+ '/restaurants'}">Restaurants</a>
@@ -120,36 +125,54 @@
     </div>
 </nav>
 <section class="hero">
-    <div class = "hero-container">
-        <div class = "column-left">
+    <div class="hero-container">
+        <div class="column-left">
             <h1>Check out your restaurants!</h1>
-            <p>You can add edit your restaurants</p>
+            <p>You can add or edit your restaurants</p>
+            <a th:href="@{'/restaurantOwner' + '/restaurants/' + 'addRestaurant'}"
+               class="btn btn-info"
+               role="button">Add new restaurant</a>
+            <br>
             <table class="table" style="width:auto;">
                 <thead class="table-dark">
                 <tr>
                     <th>Restaurant Name</th>
+                    <th>Address</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="restaurant : ${restaurantsDTO}">
                     <td th:text="${restaurant.restaurantName}"></td>
+                    <td th:text="${restaurant.city} + ' ul. ' + ${restaurant.street} + ' ' + ${restaurant.number}"></td>
                     <td>
-                        <a th:href="@{'/restaurantOwner' + '/restaurants/' + ${restaurant.restaurantId} +'/meals'}"
-                           class="btn btn-info"
-                           role="button">Look at meals</a>
-                        <form action="#" th:action="@{'/restaurantOwner' + '/restaurant/'+${restaurant.restaurantName} + '/cancelOrder'}"
-                              th:method="delete">
-                            <button type="submit" class="btn btn-danger">Delete restaurant</button>
-                        </form></td>
+                        <div class="row">
+                            <div class="col">
+                                <a th:href="@{'/restaurantOwner' + '/restaurants/' + ${restaurant.restaurantId} +'/meals'}"
+                                   class="btn btn-info btn-sm btn-auto-width"
+                                   role="button">Look at meals</a>
+                            </div>
+                                <div class="col">
+                                    <a th:href="@{'/restaurantOwner' + '/restaurants/' + ${restaurant.restaurantId} +'/streets'}"
+                                       class="btn btn-info btn-sm btn-auto-width"
+                                       role="button">Add delivery streets</a>
+                                </div>
+                            <div class="col">
+                                <form action="#"
+                                      th:action="@{'/restaurantOwner/restaurants/'+ ${restaurant.restaurantId} +'/deleteRestaurant'}"
+                                      th:method="delete">
+                                    <button type="submit" class="btn btn-danger btn-sm btn-auto-width">Delete
+                                        restaurant
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="column-right">
-            <img th:src="@{/images/background.jpg}" alt="illustration" class = "hero-image">
         </div>
     </div>
 </section>

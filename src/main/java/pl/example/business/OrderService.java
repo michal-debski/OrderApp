@@ -100,4 +100,13 @@ public class OrderService {
     private int randomChar(char min, char max) {
         return (char) new Random().nextInt(max - min) + min;
     }
+
+    public List<Order> findAll() {
+        return orderDAO.findAll();
+    }
+
+    @Transactional
+    public void update(Order order) {
+        orderDAO.update(order);
+    }
 }

@@ -1,15 +1,11 @@
 package pl.example.business.dao;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.example.domain.Street;
-
-import java.util.List;
 
 public interface StreetDAO {
 
-    List<Street> findAll();
-    List<Street> findAllByRestaurantId(Integer id);
-
-    void save(Street street);
-
-    void deleteById(Integer streetId);
+    Page<Street> findAll(Pageable pageable);
+    Street findById(Integer streetId);
 }

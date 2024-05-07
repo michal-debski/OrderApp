@@ -1,15 +1,19 @@
 package pl.example.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Value;
+import lombok.With;
 
 @With
 @Value
 @Builder
-@EqualsAndHashCode(of = "orderItemId")
-@ToString(of = {"orderItemId", "quantity"})
+@Data
+
 public class OrderItem {
     Integer orderItemId;
     Integer quantity;
     Meal meal;
     Order order;
+
 }

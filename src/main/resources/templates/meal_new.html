@@ -6,66 +6,183 @@
           rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
-    <title>Order app</title>
+
+    <style>
+    body {
+        background-color: #fdcc04;
+    }
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Trebuchet MS' , 'Lucida Sans Unicode', 'Lucida Grande',
+        'Lucida Sans', Arial, sans-serif
+    }
+        p {
+        color: black;
+        font-size: 16px;
+        }
+        h1 {
+        color: black;
+        font-size: 20px
+        justify-content:center;
+        }
+        form-group{
+        justify-content: center;
+        display: flex;
+        }
+        nav {
+        height:80px;
+        background: #fdcc04;
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        padding: 0rem calc((100w-1300px)/2);
+        }
+        .logo {
+        color: #000
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-style: italic;
+        padding: 0 2rem;
+        }
+        nav a {
+        text-decoration: none;
+        color: #000;
+        padding: 0 1.5rem;
+        }
+
+        .hero{
+        background: #fdcc04;
+        }
+
+        .hero-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 95vh;
+        padding: 3rem calc((100vw - 1300px)/2);
+
+        }
+        .column-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        color: #000;
+        padding: 0rem 2rem;
+        }
+        .column-left h1 {
+        margin-bottom: 1rem;
+        font-size: 3rem;
+        }
+        .column-left p {
+        margin-bottom: 2rem;
+        font-size:1.5rem;
+        line-height: 1.5;
+        }
+        button {
+        padding: 1rem 3rem;
+        font-size: 1rem;
+        border:none;
+        color: #fdcc04;
+        background:#000;
+        cursor: pointer;
+        }
+        button: hover{
+        background: #fff;
+        color: #000;
+        }
+
+        .column-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0rem 2 rem;
+        }
+        .hero-image{
+        width: 50%;
+        height: 50%;
+        }
+
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="page-header" id="banner">
-
-        <h2>Set details of your meal</h2>
-
-        <form action="#" th:object='${meal}' th:action="@{'/restaurantOwner/' + ${restaurantOwnerId} + '/restaurant/'+ ${restaurantId} + '/addMeal'}" method="post">
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="name">Meal name:</label>
-                        <input type="text" id="name" name="name"/>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="category.categoryId">Category:</label>
-                        <select name="category.categoryId" id="category.categoryId">
-                            <option value="">Select category...</option>
-                            <option th:each="category : ${categories}" th:value="${category.categoryId}"
-                                    th:text="${category.name}"></option>
-                        </select></div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="description">Opis dania:</label>
-                        <textarea id="description" name="description"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="price">Cena:</label>
-                        <input type="text" id="price" name="price"/>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <input type="submit" value="Confirm" class="btn btn-success">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-md-4">
-            <a th:href="@{'/restaurantOwner/'+${restaurantOwnerId}}" class="btn btn-info" role="button">Go back to the restaurant page</a>
+<nav>
+    <div class="logo">ORDER APP</div>
+    <div class="nav-items"></div>
+    <div class="row mt-3 text-centre">
+        <div class="col-md-3">
+            <a th:href="@{/home}">Home</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{'/logout'}">Logout</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{'/client'+ '/addOrder'}">Restaurants</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{'/client'+ '/orders'}">Orders</a>
         </div>
     </div>
-</div>
+</nav>
+<section class="hero">
+    <div class="hero-container">
+        <div class="column-left">
+            <h1>Here you can add new meal for your restaurant</h1>
+            <h2>Set details of your meal</h2>
 
+            <form action="#" th:object='${meal}'
+                  th:action="@{'/restaurantOwner' + '/restaurants/'+ ${restaurantId} + '/addMeal'}" method="post">
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="name">Meal name:</label>
+                            <input type="text" id="name" name="name"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="category.categoryId">Category:</label>
+                            <select name="category.categoryId" id="category.categoryId">
+                                <option value="">Select category...</option>
+                                <option th:each="category : ${categories}" th:value="${category.categoryId}"
+                                        th:text="${category.name}"></option>
+                            </select></div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="description">Opis dania:</label>
+                            <textarea id="description" name="description"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="price">Cena:</label>
+                            <input type="text" id="price" name="price"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div>
+                        <input type="submit" value="Confirm" class="btn btn-success btn-sm btn-auto-width">
+                    </div>
+                    <div class="row mt-3">
+                        <div>
+                            <a th:href="@{'/restaurantOwner/' + 'restaurants'}" class="btn btn-info btn-sm btn-auto-width"
+                               role="button">Go back to the restaurant page</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 </body>
 </html>

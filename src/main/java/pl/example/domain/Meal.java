@@ -4,9 +4,11 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
-@With
-@Value
 @Builder
+@With
+@Data
+@Getter
+@Setter
 @EqualsAndHashCode(of = "mealId")
 @ToString(of = {"mealId", "name", "category", "description", "price"})
 public class Meal {

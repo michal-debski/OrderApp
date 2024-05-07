@@ -19,14 +19,13 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity,
             WHERE own.id=:id
             """)
     Set<RestaurantEntity> findByRestaurantOwnerId(final @Param("id") Integer id);
-    Optional<RestaurantEntity> findByName(String name);
+    Optional<RestaurantEntity> findByRestaurantName(String name);
 
     @Query("""
-            SELECT rest FROM RestaurantEntity rest
-            INNER JOIN FETCH rest.streets str
-            WHERE str.name=:name
-            """)
-    List<RestaurantEntity> findAllByStreet(@Param("name") String name);
-
-
+        SELECT rs.restaurant FROM RestaurantStreetEntity rs
+        JOIN rs.restaurant r
+        JOIN rs.street s
+        WHERE s.name = :street
+        """)
+    List<RestaurantEntity> findAllByStreetName(final @Param("street") String street);
 }

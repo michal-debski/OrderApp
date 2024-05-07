@@ -33,12 +33,14 @@
 <div class="container">
     <h2>You order a meal!</h2>
 
-        Thank you for your trust! Your order number is:
+        Thank you for your trust
+    <b>
+        <span th:if="${clientDTO.name}" th:text="${clientDTO.name}">CLIENT NAME</span>
+    </b>
+    ! Your order number is:
         <b>
             <span th:if="${orderDTO.orderNumber}" th:text="${orderDTO.orderNumber}">ORDER NUMBER</span>
         </b>
-
-    </p>
 </div>
 
 <div class="container">

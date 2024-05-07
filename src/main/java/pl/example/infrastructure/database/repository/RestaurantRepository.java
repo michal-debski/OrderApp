@@ -3,11 +3,16 @@ package pl.example.infrastructure.database.repository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.example.business.dao.RestaurantDAO;
+import pl.example.domain.Address;
 import pl.example.domain.Restaurant;
+import pl.example.domain.RestaurantOwner;
+import pl.example.infrastructure.database.entity.AddressEntity;
 import pl.example.infrastructure.database.entity.RestaurantEntity;
+import pl.example.infrastructure.database.entity.RestaurantOwnerEntity;
 import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository;
-import pl.example.infrastructure.database.repository.mapper.OrderEntityMapper;
+import pl.example.infrastructure.database.repository.mapper.AddressEntityMapper;
 import pl.example.infrastructure.database.repository.mapper.RestaurantEntityMapper;
+import pl.example.infrastructure.database.repository.mapper.RestaurantOwnerEntityMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +25,8 @@ public class RestaurantRepository implements RestaurantDAO {
     private final RestaurantJpaRepository restaurantJpaRepository;
     private final RestaurantEntityMapper restaurantEntityMapper;
 
-    private final OrderRepository orderRepository;
-    private final OrderEntityMapper orderEntityMapper;
+    private final AddressEntityMapper addressEntityMapper;
+    private final RestaurantOwnerEntityMapper restaurantOwnerEntityMapper;
 
     @Override
     public List<Restaurant> findByRestaurantOwnerId(Integer id) {
@@ -31,7 +36,7 @@ public class RestaurantRepository implements RestaurantDAO {
 
     @Override
     public Optional<Restaurant> findByName(String name) {
-        return restaurantJpaRepository.findByName(name)
+        return restaurantJpaRepository.findByRestaurantName(name)
                 .map(restaurantEntityMapper::mapFromEntity);
     }
 
@@ -49,9 +54,15 @@ public class RestaurantRepository implements RestaurantDAO {
     }
 
     @Override
-    public void saveRestaurant(Restaurant restaurant) {
+    public Restaurant saveRestaurant(Restaurant restaurant, RestaurantOwner restaurantOwner, Address address) {
+
+        AddressEntity addressEntity = addressEntityMapper.mapToEntity(address);
         RestaurantEntity restaurantEntity = restaurantEntityMapper.mapToEntity(restaurant);
-        restaurantJpaRepository.save(restaurantEntity);
+        RestaurantOwnerEntity restaurantOwnerEntity = restaurantOwnerEntityMapper.mapToEntity(restaurantOwner);
+        restaurantEntity.setRestaurantOwner(restaurantOwnerEntity);
+        restaurantEntity.setAddress(addressEntity);
+        RestaurantEntity restaurantSaved = restaurantJpaRepository.save(restaurantEntity);
+        return restaurantEntityMapper.mapFromEntity(restaurantSaved);
     }
 
     @Override
@@ -60,9 +71,10 @@ public class RestaurantRepository implements RestaurantDAO {
     }
 
     @Override
-    public List<Restaurant> findAllByStreet(String name) {
-        return restaurantJpaRepository.findAllByStreet(name).stream()
-                .map(restaurantEntityMapper::mapFromEntity).toList();
+    public List<Restaurant> findAllByStreetName(String street) {
+        return restaurantJpaRepository.findAllByStreetName(street)
+                .stream().map(restaurantEntityMapper::mapFromEntity)
+                .toList();
     }
 
 

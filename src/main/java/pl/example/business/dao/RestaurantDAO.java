@@ -1,6 +1,8 @@
 package pl.example.business.dao;
 
+import pl.example.domain.Address;
 import pl.example.domain.Restaurant;
+import pl.example.domain.RestaurantOwner;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,11 +17,10 @@ public interface RestaurantDAO {
 
     List<Restaurant> findAll();
 
-    void saveRestaurant(Restaurant restaurant);
+    Restaurant saveRestaurant(Restaurant restaurant,  RestaurantOwner restaurantOwner, Address address);
 
     void deleteRestaurant(Integer restaurantId);
 
-    List<Restaurant> findAllByStreet(String name);
 
-
+    List<Restaurant> findAllByStreetName(String street);
 }

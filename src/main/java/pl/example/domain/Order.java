@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Set;
 
 
 @Builder
@@ -22,4 +23,5 @@ public class Order {
     Client client;
     Restaurant restaurant;
 
+    Set<OrderItem> orderItems;
 }

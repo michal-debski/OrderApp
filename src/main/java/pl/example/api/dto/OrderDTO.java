@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.example.domain.OrderItem;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.util.Set;
 
 @Data
 @Builder
@@ -17,8 +18,10 @@ public class OrderDTO {
     private String orderNumber;
     private BigDecimal totalPrice;
     private String status;
-    private OffsetDateTime orderDate;
+    private String orderDate;
     private ClientDTO client;
     private RestaurantDTO restaurant;
+    private Set<OrderItem> orderItems;
+
 
 }

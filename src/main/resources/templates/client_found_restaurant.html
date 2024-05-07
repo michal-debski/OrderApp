@@ -103,13 +103,16 @@
         }
     </style>
 </head>
-<<body>
+<body>
 <nav>
     <div class="logo">ORDER APP</div>
     <div class="nav-items"></div>
     <div class="row mt-3 text-centre">
         <div class="col-md-3">
             <a th:href="@{/home}">Home</a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{'/logout'}">Logout</a>
         </div>
         <div class="col-md-3">
             <a th:href="@{'/client'+ '/addOrder'}">Restaurants</a>
@@ -131,7 +134,7 @@
             </thead>
             <tbody>
             <tr th:each="restaurant : ${restaurants}">
-                <td th:text="${restaurant.name}"></td>
+                <td th:text="${restaurant.restaurantName}"></td>
                 <td><a th:href="@{'/client' +'/addOrder/' + ${restaurant.restaurantId}+'/menu'}"
                        class="btn btn-info" role="button">Display menu</a></td>
             </tr>

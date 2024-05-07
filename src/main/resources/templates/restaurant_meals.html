@@ -8,6 +8,9 @@
           crossorigin="anonymous">
 
     <style>
+    body {
+        background-color: #fdcc04;
+        }
     *{
         box-sizing: border-box;
         margin: 0;
@@ -17,11 +20,11 @@
     }
         p {
         color: black;
-        font-size: 16px;
+        font-size: 8px;
         }
         h1 {
         color: black;
-        font-size: 20px
+        font-size: 15px
         justify-content:center;
         }
         form-group{
@@ -51,15 +54,16 @@
 
         .hero{
         background: #fdcc04;
-        }
 
+        }
         .hero-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+<!--        grid-template-columns: 1fr 1r;-->
         height: 95vh;
-        padding: 3rem calc((100vw - 1300px)/2);
-
+<!--        padding: 3rem calc((100vw - 1300px)/2);-->
         }
+
+
         .column-left {
         display: flex;
         flex-direction: column;
@@ -100,6 +104,9 @@
         width: 50%;
         height: 50%;
         }
+
+
+
     </style>
 </head>
 <body>
@@ -111,6 +118,9 @@
             <a th:href="@{/home}">Home</a>
         </div>
         <div class="col-md-3">
+            <a th:href="@{'/logout'}">Logout</a>
+        </div>
+        <div class="col-md-3">
             <a th:href="@{'/restaurantOwner'+ '/restaurants'}">Restaurants</a>
         </div>
         <div class="col-md-3">
@@ -119,13 +129,14 @@
     </div>
 </nav>
 <section class="hero">
-    <div class = "hero-container">
-        <div class = "column-left">
+    <div class="hero-container">
+        <div class="column-left">
             <h1>Check out meals for this restaurant!</h1>
             <p>You can add new meals for restaurant or delete it!</p>
             <a th:href="@{'/restaurantOwner' + '/restaurants/' + ${restaurantId} + '/addMeal'}"
                class="btn btn-info"
                role="button">Add new meal</a>
+            <br>
             <table class="table">
                 <thead class="table-dark">
                 <tr>
@@ -143,19 +154,28 @@
                     <td th:text="${meal.price}"></td>
                     <td th:text="${meal.description}"></td>
                     <td>
-                        <a th:href="@{'/restaurantOwner' + '/restaurants/' + ${restaurantId} + ${meal.mealId} +'/update'}"
-                           class="btn btn-info"
-                           role="button">Edit meal</a>
-                        <a><form action="#" th:action="@{'/restaurantOwner' + '/restaurants/' + ${restaurantId} + ${meal.mealId} +'/cancel'}"
-                              th:method="delete">
-                            <button type="submit" class="btn btn-danger">Delete meal</button>
-                        </form></a></td>
+                        <div class="row">
+                            <div class="col">
+                                <a th:href="@{'/restaurantOwner' + '/restaurants/' + ${restaurantId} + '/' +${meal.mealId} +'/update'}"
+                                   class="btn btn-info btn-sm btn-auto-width"
+                                   role="button">Edit meal</a>
+                            </div>
+                            <div class="col">
+                                <a>
+                                    <form action="#"
+                                          th:action="@{'/restaurantOwner' + '/restaurants/' + ${restaurantId} + '/'+ ${meal.mealId} +'/cancelMeal'}"
+                                          th:method="delete">
+                                        <button type="submit" class="btn btn-danger btn-sm btn-auto-width">Delete meal
+                                        </button>
+                                    </form>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="column-right">
-            <img th:src="@{/images/background.jpg}" alt="illustration" class = "hero-image">
         </div>
     </div>
 

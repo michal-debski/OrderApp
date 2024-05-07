@@ -1,6 +1,8 @@
 package pl.example.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Value;
+import lombok.With;
 
 @With
 @Value
@@ -9,8 +11,7 @@ public class Street {
 
     Integer streetId;
 
-     String name;
+    String name;
 
-     Restaurant restaurant;
 
 }

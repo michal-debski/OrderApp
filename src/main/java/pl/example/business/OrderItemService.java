@@ -50,4 +50,8 @@ public class OrderItemService {
     public void deleteOrderItemsByOrderId(Integer orderId) {
         orderItemDAO.deleteOrderItemsByOrderId(orderId);
     }
+
+    public OrderItem findByOrderId(Integer id) {
+        return orderItemDAO.findByOrderId(id);
+    }
 }

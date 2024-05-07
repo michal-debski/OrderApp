@@ -45,4 +45,5 @@ public class OrderEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private Set<OrderItemEntity> orderItems;
+
 }
