@@ -39,8 +39,9 @@ It assumes service to two types of people: the client and the restaurant owner.
 
 ### What are my plans for the future ?
 1. Add an ability to cancel order by client in given time,
-2. Add REST API and SwaggerUI as well,
-3. Add rest of tests for services and controllers.
+2. Add REST API and SwaggerUI,
+3. Add rest of tests for services and controllers,
+4. Add Docker files.
 
 ## ERD Diagram
 Below the ERD Diagram was shown:
