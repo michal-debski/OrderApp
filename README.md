@@ -44,4 +44,4 @@ It assumes service to two types of people: the client and the restaurant owner.
 
 ## ERD Diagram
 Below the ERD Diagram was shown:
-![](\src\main\resources\Diagram%20ERD.png)
+![alt text](.\src\main\resources\Diagram%20ERD.png)
