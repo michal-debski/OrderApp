@@ -38,7 +38,7 @@ public class MealMenuService {
         return mealDAO.save(meal, restaurant);
     }
 
-    @Transactional
+    //@Transactional
     public void delete(Integer id) {
         mealDAO.deleteById(id);
     }

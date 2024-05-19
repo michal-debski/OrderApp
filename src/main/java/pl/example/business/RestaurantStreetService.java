@@ -20,8 +20,7 @@ import java.util.List;
 public class RestaurantStreetService {
 
     private final RestaurantStreetDAO restaurantStreetDAO;
-    private final RestaurantEntityMapper restaurantEntityMapper;
-    private final StreetEntityMapper streetEntityMapper;
+
     private final StreetService streetService;
 
     public List<RestaurantStreet> findAll() {
@@ -62,8 +61,4 @@ public class RestaurantStreetService {
 
     }
 
-    @Transactional
-    public void deleteById(Integer streetId) {
-        restaurantStreetDAO.deleteById(streetId);
-    }
 }

@@ -39,7 +39,7 @@ public class MealEntity {
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "meal")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "meal", cascade = CascadeType.ALL)
     private Set<OrderItemEntity> orderItems;
 
 }

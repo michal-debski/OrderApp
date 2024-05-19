@@ -13,6 +13,6 @@ public interface OrderItemJpaRepository extends JpaRepository<OrderItemEntity, I
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM OrderItemEntity oi WHERE oi.order.id = :orderId")
+    @Query("DELETE FROM OrderItemEntity oi WHERE oi.order.orderId = :orderId")
     void deleteOrderItemsByOrderId(@Param("orderId") Integer orderId);
 }

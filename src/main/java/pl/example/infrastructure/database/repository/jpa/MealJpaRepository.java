@@ -13,14 +13,14 @@ import java.util.Set;
 public interface MealJpaRepository extends JpaRepository<MealEntity, Integer> {
 
     @Query("""
-            SELECT meal FROM MealEntity meal 
+            SELECT meal FROM MealEntity meal
             INNER JOIN FETCH meal.category category
             WHERE category.id = :categoryId
             """)
     Set<MealEntity> findByCategory(@Param("categoryId") Integer categoryId);
 
     @Query("""
-            SELECT meal FROM MealEntity meal 
+            SELECT meal FROM MealEntity meal
             INNER JOIN FETCH meal.restaurant rest
             WHERE rest.id = :restaurantId
             """)

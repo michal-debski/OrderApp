@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.OrderDAO;
-import pl.example.domain.Client;
 import pl.example.domain.Order;
 
 import java.math.BigDecimal;
@@ -39,19 +38,11 @@ public class OrderService {
     }
 
 
-    public List<Order> findByRestaurantId(Integer id) {
-        return orderDAO.findByRestaurantId(id);
-    }
-
-
     @Transactional
     public List<Order> findByClientId(Integer clientId) {
         return orderDAO.findByClientId(clientId);
     }
 
-    public List<Order> findByClient(Client client) {
-        return orderDAO.findByClient(client);
-    }
 
     //    @Transactional
 //    public void updateOrder(Integer orderId) {

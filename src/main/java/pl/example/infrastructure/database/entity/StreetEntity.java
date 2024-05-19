@@ -2,6 +2,10 @@ package pl.example.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,5 +25,7 @@ public class StreetEntity {
 
     @Column(name = "name")
     private String name;
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "street")
+    @Fetch(value= FetchMode.JOIN)
+    private Set<RestaurantStreetEntity> restaurantStreets;
 }

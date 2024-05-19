@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.example.infrastructure.database.entity.ClientEntity;
 import pl.example.infrastructure.database.entity.OrderEntity;
 
 import java.math.BigDecimal;
@@ -24,15 +23,6 @@ public interface OrderJpaRepository extends JpaRepository<OrderEntity, Integer> 
             WHERE cli.id = :id
             """)
     List<OrderEntity> findByClientId(@Param("id") Integer id);
-
-    List<OrderEntity> findByClient(ClientEntity clientEntity);
-
-    @Query("""
-            SELECT ord FROM OrderEntity ord
-            INNER JOIN FETCH ord.restaurant rest
-            WHERE rest.id = :id
-            """)
-    List<OrderEntity> findByRestaurantId(@Param("id") Integer id);
 
     @Query(
             """

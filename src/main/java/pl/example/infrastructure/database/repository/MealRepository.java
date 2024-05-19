@@ -10,7 +10,6 @@ import pl.example.infrastructure.database.entity.MealEntity;
 import pl.example.infrastructure.database.entity.RestaurantEntity;
 import pl.example.infrastructure.database.repository.jpa.MealJpaRepository;
 import pl.example.infrastructure.database.repository.jpa.RestaurantJpaRepository;
-import pl.example.infrastructure.database.repository.mapper.CategoryEntityMapper;
 import pl.example.infrastructure.database.repository.mapper.MealEntityMapper;
 
 import java.math.BigDecimal;
@@ -27,7 +26,6 @@ public class MealRepository implements MealDAO {
     private final MealJpaRepository mealJpaRepository;
     private final MealEntityMapper mealEntityMapper;
     private final RestaurantJpaRepository restaurantJpaRepository;
-    private final CategoryEntityMapper categoryEntityMapper;
 
 
     @Override
@@ -73,11 +71,11 @@ public class MealRepository implements MealDAO {
 
     @Override
     public void update(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant) {
-            meal.setName(name);
-            meal.setDescription(description);
-            meal.setPrice(price);
-            meal.setRestaurant(restaurant);
-            mealJpaRepository.save(mealEntityMapper.mapToEntity(meal));
+        meal.setName(name);
+        meal.setDescription(description);
+        meal.setPrice(price);
+        meal.setRestaurant(restaurant);
+        mealJpaRepository.save(mealEntityMapper.mapToEntity(meal));
     }
 
     private RestaurantEntity getRestaurantEntityByName(Restaurant restaurant) {
@@ -85,8 +83,6 @@ public class MealRepository implements MealDAO {
                 .orElseThrow(() -> new EntityNotFoundException("Could not find restaurant with name: [%s]"
                         .formatted(restaurant.getRestaurantName())));
     }
-
-
 
 
 }

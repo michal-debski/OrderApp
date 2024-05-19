@@ -5,6 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@With
 @EqualsAndHashCode(of = "restaurantStreetId")
 @ToString(of = {"restaurantStreetId", "street", "restaurant"})
 @Builder

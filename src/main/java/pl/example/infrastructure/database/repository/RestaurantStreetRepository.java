@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.example.business.dao.RestaurantStreetDAO;
 import pl.example.domain.RestaurantStreet;
 import pl.example.infrastructure.database.repository.jpa.RestaurantStreetJpaRepository;
-import pl.example.infrastructure.database.repository.jpa.StreetJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.RestaurantStreetEntityMapper;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class RestaurantStreetRepository implements RestaurantStreetDAO {
 
-    private final StreetJpaRepository streetJpaRepository;
+
     private final RestaurantStreetJpaRepository restaurantStreetJpaRepository;
     private final RestaurantStreetEntityMapper restaurantStreetEntityMapper;
 
@@ -34,15 +33,13 @@ public class RestaurantStreetRepository implements RestaurantStreetDAO {
     }
 
     @Override
-    public void save(RestaurantStreet restaurantStreet) {
+    public RestaurantStreet save(RestaurantStreet restaurantStreet) {
 
-        restaurantStreetJpaRepository.save(restaurantStreetEntityMapper.mapToEntity(restaurantStreet));
+        return restaurantStreetEntityMapper.mapFromEntity(restaurantStreetJpaRepository
+                .save(restaurantStreetEntityMapper.mapToEntity(restaurantStreet)));
 
 
     }
 
-    @Override
-    public void deleteById(Integer streetId) {
-        restaurantStreetJpaRepository.delete(restaurantStreetJpaRepository.findById(streetId).get());
-    }
+
 }

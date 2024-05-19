@@ -67,7 +67,7 @@ public class RestaurantRepository implements RestaurantDAO {
 
     @Override
     public void deleteRestaurant(Integer restaurantId) {
-        restaurantJpaRepository.delete(restaurantJpaRepository.getById(restaurantId));
+        restaurantJpaRepository.delete(restaurantJpaRepository.findById(restaurantId).get());
     }
 
     @Override

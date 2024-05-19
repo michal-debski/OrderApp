@@ -10,7 +10,6 @@ public interface RestaurantStreetDAO {
 
     List<RestaurantStreet> findAllByRestaurantId(Integer id);
 
-    void save(RestaurantStreet restaurantStreet);
+    RestaurantStreet save(RestaurantStreet restaurantStreet);
 
-    void deleteById(Integer streetId);
 }

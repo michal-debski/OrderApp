@@ -30,7 +30,7 @@ public class  RestaurantEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<RestaurantStreetEntity> restaurantStreets;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_owner_id")
     private RestaurantOwnerEntity restaurantOwner;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")

@@ -21,15 +21,16 @@
         justify-content: center;
         display: flex;
         }
+
     </style>
 </head>
-<body  th:style="'background-image: url('+@{/images/background.jpg}+'); opacity: 0.9'">
+<body th:style="'background-image: url('+@{/images/background.jpg}+'); opacity: 0.9'">
 <div class="container mt-5"></div>
 <div style="text-align: center;">
     <h1>Order Details</h1>
 
-        <table class="table" style="width:auto; display:inline-block;">
-            <thead class="table-dark">
+    <table class="table" style="width:auto; display:inline-block;">
+        <thead class="table-dark">
 
         <tbody>
         <tr>
@@ -47,6 +48,17 @@
         <tr>
             <th>Order Date:</th>
             <td th:text="${order.orderDate}"></td>
+        </tr>
+        <tr>
+            <th>List of meals</th>
+
+            <td>
+                <ul>
+                    <li th:each="orderItem : ${order.orderItems}">
+                        <span th:text="${orderItem.quantity} + ' x ' + ${orderItem.meal.name}"></span>
+                    </li>
+                </ul>
+            </td>
         </tr>
 
         </tbody>

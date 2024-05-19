@@ -9,6 +9,9 @@
     <title>Order app</title>
 
     <style>
+      body {
+        background-color: #fdcc04;
+        }
     *{
         box-sizing: border-box;
         margin: 0;
@@ -56,9 +59,9 @@
 
         .hero-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+<!--        grid-template-columns: 1fr 1fr;-->
         height: 95vh;
-        padding: 3rem calc((100vw - 1300px)/2);
+<!--        padding: 3rem calc((100vw - 1300px)/2);-->
 
         }
         .column-left {
@@ -130,6 +133,7 @@
             <thead>
             <tr>
                 <th>Restaurant Name</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -141,9 +145,7 @@
             </tbody>
         </table>
     </div>
-        <div class="column-right">
-            <img th:src="@{/images/background.jpg}" alt="illustration" class = "hero-image">
-        </div>
+
 </div>
 
 </section>
