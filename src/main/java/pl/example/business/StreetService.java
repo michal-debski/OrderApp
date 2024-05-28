@@ -1,5 +1,6 @@
 package pl.example.business;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,11 @@ public class StreetService {
     }
 
     public Street findById(Integer id) {
-        return streetDAO.findById(id);
+        return streetDAO.findById(id)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("Street with id: [%s] is not present in database"
+                                .formatted(id)
+                        )
+                );
     }
 }

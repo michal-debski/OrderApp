@@ -43,17 +43,6 @@ public class OrderService {
         return orderDAO.findByClientId(clientId);
     }
 
-
-    //    @Transactional
-//    public void updateOrder(Integer orderId) {
-//        Order order = orderDAO.findById(orderId)
-//                .orElseThrow(() -> new IllegalArgumentException("Order not found."));
-//
-//        BigDecimal totalPrice = calculateTotalPrice(order.withOrderId(orderId));
-//        Order withTotalPrice = order.withTotalPrice(totalPrice);
-//
-//        orderDAO.saveOrder(withTotalPrice);
-//    }
     @Transactional
     public Order buildOrder(Integer restaurantId) {
         OffsetDateTime dateOfOrder = OffsetDateTime.now();

@@ -16,7 +16,6 @@ import pl.example.infrastructure.database.repository.mapper.RestaurantOwnerEntit
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -31,14 +30,9 @@ public class RestaurantRepository implements RestaurantDAO {
     @Override
     public List<Restaurant> findByRestaurantOwnerId(Integer id) {
         return restaurantJpaRepository.findByRestaurantOwnerId(id).stream()
-                .map(restaurantEntityMapper::mapFromEntity).collect(Collectors.toList());
+                .map(restaurantEntityMapper::mapFromEntity).toList();
     }
 
-    @Override
-    public Optional<Restaurant> findByName(String name) {
-        return restaurantJpaRepository.findByRestaurantName(name)
-                .map(restaurantEntityMapper::mapFromEntity);
-    }
 
     @Override
     public Optional<Restaurant> findById(Integer id) {

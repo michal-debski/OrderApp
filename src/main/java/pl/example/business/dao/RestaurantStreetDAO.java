@@ -8,8 +8,6 @@ public interface RestaurantStreetDAO {
 
     List<RestaurantStreet> findAll();
 
-    List<RestaurantStreet> findAllByRestaurantId(Integer id);
-
     RestaurantStreet save(RestaurantStreet restaurantStreet);
 
 }

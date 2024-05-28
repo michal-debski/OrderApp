@@ -9,6 +9,8 @@ import pl.example.domain.Street;
 import pl.example.infrastructure.database.repository.jpa.StreetJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.StreetEntityMapper;
 
+import java.util.Optional;
+
 @Repository
 @AllArgsConstructor
 public class StreetRepository implements StreetDAO {
@@ -24,8 +26,8 @@ public class StreetRepository implements StreetDAO {
     }
 
     @Override
-    public Street findById(Integer streetId) {
+    public Optional<Street> findById(Integer streetId) {
         return streetJpaRepository.findById(streetId)
-                .map(streetEntityMapper::mapFromEntity).orElseThrow();
+                .map(streetEntityMapper::mapFromEntity);
     }
 }

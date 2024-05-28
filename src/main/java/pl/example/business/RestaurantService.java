@@ -37,14 +37,6 @@ public class RestaurantService {
         return restaurant.get();
     }
 
-    public Restaurant findByName(String name) {
-        Optional<Restaurant> restaurant = restaurantDAO.findByName(name);
-        if (restaurant.isEmpty()) {
-            throw new NotFoundException("Could not find restaurant by name: [%s]".formatted(name));
-        }
-        return restaurant.get();
-    }
-
     @Transactional
     public Restaurant saveRestaurant(Restaurant restaurant, RestaurantOwner restaurantOwner, Address address) {
 

@@ -1,9 +1,6 @@
 package pl.example.domain;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -14,6 +11,7 @@ import java.util.Set;
 @Data
 @Getter
 @Setter
+@With
 public class Order {
     Integer orderId;
     String orderNumber;

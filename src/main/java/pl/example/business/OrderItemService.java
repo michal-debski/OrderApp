@@ -42,16 +42,9 @@ public class OrderItemService {
     }
 
     @Transactional
-    public void delete(OrderItem orderItemsToDelete) {
-        orderItemDAO.delete(orderItemsToDelete);
-    }
-
-    @Transactional
     public void deleteOrderItemsByOrderId(Integer orderId) {
         orderItemDAO.deleteOrderItemsByOrderId(orderId);
     }
 
-    public OrderItem findByOrderId(Integer id) {
-        return orderItemDAO.findByOrderId(id);
-    }
+
 }

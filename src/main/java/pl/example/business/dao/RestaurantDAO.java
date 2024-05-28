@@ -11,7 +11,7 @@ public interface RestaurantDAO {
 
     List<Restaurant> findByRestaurantOwnerId(Integer id);
 
-    Optional<Restaurant> findByName(String name);
+
 
     Optional<Restaurant> findById(Integer id);
 

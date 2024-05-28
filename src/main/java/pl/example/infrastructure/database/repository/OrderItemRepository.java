@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.example.business.dao.OrderItemDAO;
 import pl.example.domain.OrderItem;
+import pl.example.infrastructure.database.entity.OrderItemEntity;
 import pl.example.infrastructure.database.repository.jpa.OrderItemJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.OrderItemMapperEntity;
 
@@ -14,19 +15,10 @@ public class OrderItemRepository implements OrderItemDAO {
     private final OrderItemMapperEntity orderItemMapperEntity;
 
     @Override
-    public void save(OrderItem orderItem) {
-        orderItemJpaRepository.save(orderItemMapperEntity.mapToEntity(orderItem));
-    }
-
-    @Override
-    public void delete(OrderItem orderItem) {
-        orderItemJpaRepository.delete(orderItemMapperEntity.mapToEntity(orderItem));
-
-    }
-
-    @Override
-    public OrderItem findByOrderId(Integer id) {
-        return orderItemJpaRepository.findById(id).map(orderItemMapperEntity::mapFromEntity).orElseThrow();
+    public OrderItem save(OrderItem orderItem) {
+        OrderItemEntity orderEntity = orderItemMapperEntity.mapToEntity(orderItem);
+        OrderItemEntity save = orderItemJpaRepository.save(orderEntity);
+        return orderItemMapperEntity.mapFromEntity(save);
     }
 
     @Override

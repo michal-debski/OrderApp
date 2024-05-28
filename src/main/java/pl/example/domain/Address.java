@@ -5,6 +5,7 @@ import lombok.*;
 @With
 @Value
 @Builder
+@Setter
 @EqualsAndHashCode
 @ToString
 public class Address {
