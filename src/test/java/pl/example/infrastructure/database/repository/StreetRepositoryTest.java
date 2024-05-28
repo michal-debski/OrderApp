@@ -65,7 +65,7 @@ class StreetRepositoryTest {
         when(streetJpaRepository.findById(1)).thenReturn(Optional.of(streetEntity));
         when(streetEntityMapper.mapFromEntity(streetEntity)).thenReturn(street);
 
-        Street result = streetRepository.findById(1);
+        Street result = streetRepository.findById(1).orElseThrow();
 
         assertNotNull(result);
         assertEquals(1, result.getStreetId());

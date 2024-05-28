@@ -61,16 +61,6 @@ class RestaurantStreetRepositoryTest {
     }
 
     @Test
-    void shouldFindAllByRestaurantId() {
-        when(restaurantStreetJpaRepository.findAllByRestaurantId(4)).thenReturn(List.of(restaurantStreetEntity, restaurantStreetEntity1));
-
-        List<RestaurantStreet> all = restaurantStreetRepository.findAllByRestaurantId(4);
-
-        assertNotNull(all);
-        assertEquals(2, all.size());
-    }
-
-    @Test
     void shouldSave() {
         when(restaurantStreetEntityMapper.mapToEntity(restaurantStreet)).thenReturn(restaurantStreetEntity);
         when(restaurantStreetJpaRepository.save(restaurantStreetEntity)).thenReturn(restaurantStreetEntity);

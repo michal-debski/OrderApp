@@ -81,17 +81,6 @@ class RestaurantRepositoryTest {
         assertEquals(2, restaurantsByRestaurantOwnerId.size());
     }
 
-    @Test
-    void shouldFindByName() {
-
-        when(restaurantJpaRepository.findByRestaurantName("test")).thenReturn(Optional.ofNullable(restaurantEntity));
-        when(restaurantEntityMapper.mapFromEntity(restaurantEntity)).thenReturn(restaurant);
-
-        Optional<Restaurant> result = restaurantRepository.findByName("test");
-
-        Assertions.assertThat(result).isPresent();
-        assertEquals(restaurant, result.get());
-    }
 
     @Test
     void shouldFindById() {

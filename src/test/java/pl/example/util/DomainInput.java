@@ -142,7 +142,7 @@ public class DomainInput {
                 .build();
     }
 
-    private static Category kindOfCategory() {
+    public static Category kindOfCategory() {
         return Category.builder()
                 .categoryId(1)
                 .name("Main dish")
@@ -185,7 +185,7 @@ public class DomainInput {
                 .build();
     }
 
-    public static OrderItem kindOfOrderItem1(Order order) {
+    public static OrderItem kindOfOrderItem1() {
         return OrderItem.builder()
                 .orderItemId(2)
                 .order(DomainInput.kindOfOrder())
@@ -201,5 +201,14 @@ public class DomainInput {
                 .build();
     }
 
+    public static User kindOfUser() {
+        return User.builder()
+                .name("Jan")
+                .surname("Nowak")
+                .phone("+48 123 123 123")
+                .username("testUser")
+                .email("testUser@example.com")
+                .build();
+    }
 
 }

@@ -41,16 +41,6 @@ class OrderRepositoryTest {
         orderEntity1 = EntityInput.kindOfOrderEntity1();
         order = DomainInput.kindOfOrder();
         order1 = DomainInput.kindOfOrder1();
-//        restaurantEntity1 = EntityInput.kindOfRestaurantEntity1();
-//        restaurantEntity2 = EntityInput.kindOfRestaurantEntity2();
-//        restaurantOwnerEntity = EntityInput.kindOfRestaurantOwnerEntity();
-//        addressEntity = EntityInput.kindOfRestaurantEntity().getAddress();
-//        restaurant = DomainInput.kindOfRestaurant();
-//        restaurant1 = DomainInput.kindOfRestaurant1();
-//        restaurant2 = DomainInput.kindOfRestaurant2();
-//        restaurantOwner = DomainInput.kindOfRestaurantOwner();
-//        address = DomainInput.kindOfRestaurant().getAddress();
-
     }
 
     @Test
