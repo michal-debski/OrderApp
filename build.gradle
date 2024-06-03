@@ -58,6 +58,14 @@ dependencyManagement {
     }
 }
 
+bootJar {
+    archiveFileName = "order_application.${archiveExtension.get()}"
+}
+
+jar {
+    enabled = false
+}
+
 tasks.named('test') {
     useJUnitPlatform()
     testLogging {
