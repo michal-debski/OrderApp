@@ -59,7 +59,6 @@ public class RestaurantOwnerMealController {
             @Valid @ModelAttribute("mealDTO") MealDTO mealDTO,
             Model model
     ) {
-        CategoryDTO categoryDTO = mealDTO.getCategory();
         Restaurant restaurant = restaurantService.findRestaurantById(restaurantId);
 
 

@@ -12,8 +12,8 @@ import javax.sql.DataSource;
 @TestConfiguration
 public class PersistenceContainerTestConfiguration {
 
-    private static final String USERNAME = "test";
-    private static final String PASSWORD = "test";
+    private static final String USERNAME = "postgres";
+    private static final String PASSWORD = "postgres";
     private static final String POSTGRESQL = "postgresql";
     private static final String POSTGRESQL_CONTAINER = "postgres:15.0";
 
