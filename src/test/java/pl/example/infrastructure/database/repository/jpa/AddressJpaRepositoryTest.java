@@ -13,8 +13,8 @@ import pl.example.util.EntityInput;
 import pl.example.util.integration.configuration.PersistenceContainerTestConfiguration;
 
 import static org.junit.jupiter.api.Assertions.*;
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 @DataJpaTest
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @TestPropertySource(locations = "classpath:application-test.yaml")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceContainerTestConfiguration.class)

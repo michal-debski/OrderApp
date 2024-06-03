@@ -10,6 +10,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -21,6 +23,13 @@ import pl.example.api.dto.mapper.UserMapper;
 import pl.example.business.UserService;
 import pl.example.domain.User;
 
+import java.util.Collection;
+import java.util.List;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(controllers = LoginController.class)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -30,13 +39,15 @@ class LoginControllerTest {
 
     @MockBean
     private UserMapper userMapper;
+    @MockBean
+    private Authentication authentication;
     private MockMvc mockMvc;
 
     @Test
     void testShowLoginPage() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/login"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("login"));
+        mockMvc.perform(get("/login"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("login"));
     }
 
     @Test
@@ -46,9 +57,9 @@ class LoginControllerTest {
 
     @Test
     void testShowLoginPageWithRegistration() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/register"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("register"));
+        mockMvc.perform(get("/register"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("register"));
 
     }
 
@@ -64,8 +75,8 @@ class LoginControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                         .flashAttr("userDTO", userDTO))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/login"));
+                .andExpect(status().isOk())
+                .andExpect(view().name("/login"));
 
     }
 
@@ -79,8 +90,8 @@ class LoginControllerTest {
         SecurityContextHolder.setContext(securityContext);
 
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/logout"))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+        mockMvc.perform(get("/logout"))
+                .andExpect(status().is3xxRedirection())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/login?logout"));
 
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
@@ -88,4 +99,28 @@ class LoginControllerTest {
 
     }
 
+
+    @Test
+    void testHomeClientRole() throws Exception {
+        GrantedAuthority authority = new SimpleGrantedAuthority("CLIENT");
+        Collection<? extends GrantedAuthority> authorities = List.of(authority);
+
+        Mockito.doReturn(authorities).when(authentication).getAuthorities();
+
+        mockMvc.perform(get("/home").principal(authentication))
+                .andExpect(status().isOk())
+                .andExpect(view().name("client_homepage"));
+    }
+
+    @Test
+    void testHomeRestaurantOwnerRole() throws Exception {
+        GrantedAuthority authority = new SimpleGrantedAuthority("RESTAURANT_OWNER");
+        Collection<? extends GrantedAuthority> authorities = List.of(authority);
+
+        Mockito.doReturn(authorities).when(authentication).getAuthorities();
+
+        mockMvc.perform(get("/home").principal(authentication))
+                .andExpect(status().isOk())
+                .andExpect(view().name("restaurantOwner_homepage"));
+    }
 }

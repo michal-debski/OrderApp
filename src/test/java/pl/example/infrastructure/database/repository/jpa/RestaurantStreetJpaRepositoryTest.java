@@ -14,13 +14,14 @@ import pl.example.util.integration.configuration.PersistenceContainerTestConfigu
 
 import java.util.List;
 
+import static pl.example.util.EntityInput.kindOfRestaurantEntity;
 import static pl.example.util.EntityInput.kindOfRestaurantStreetEntity;
 
 @DataJpaTest
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 @TestPropertySource(locations = "classpath:application-test.yaml")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceContainerTestConfiguration.class)
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 class RestaurantStreetJpaRepositoryTest {
 
 
@@ -31,9 +32,10 @@ class RestaurantStreetJpaRepositoryTest {
     void shouldSaveAndFindAllByRestaurantId() {
         //given
         RestaurantStreetEntity restaurantStreetEntity = kindOfRestaurantStreetEntity();
-        RestaurantEntity restaurant = restaurantStreetEntity.getRestaurant();
+        RestaurantEntity restaurant = kindOfRestaurantEntity();
         //when
-        restaurantJpaRepository.save(restaurant);
+        RestaurantEntity saved = restaurantJpaRepository.save(restaurant);
+        restaurantStreetEntity.setRestaurant(saved);
         restaurantStreetJpaRepository.save(restaurantStreetEntity);
         List<RestaurantStreetEntity> allByRestaurantId = restaurantStreetJpaRepository.findAllByRestaurantId(
                 restaurantStreetEntity.getRestaurant().getRestaurantId()

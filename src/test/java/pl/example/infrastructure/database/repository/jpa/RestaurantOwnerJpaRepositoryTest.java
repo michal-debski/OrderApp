@@ -14,9 +14,10 @@ import pl.example.util.integration.configuration.PersistenceContainerTestConfigu
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @DataJpaTest
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @TestPropertySource(locations = "classpath:application-test.yaml")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceContainerTestConfiguration.class)
@@ -24,6 +25,7 @@ class RestaurantOwnerJpaRepositoryTest {
 
 
     private RestaurantOwnerJpaRepository restaurantOwnerJpaRepository;
+
     @Test
     void shouldSaveAndFindById() {
 

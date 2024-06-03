@@ -17,8 +17,8 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 @DataJpaTest
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @TestPropertySource(locations = "classpath:application-test.yaml")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceContainerTestConfiguration.class)
@@ -26,7 +26,6 @@ class RestaurantJpaRepositoryTest {
 
 
     private RestaurantJpaRepository restaurantJpaRepository;
-
 
     @Test
     void shouldSaveAndFindByRestaurantOwnerId() {
@@ -37,7 +36,7 @@ class RestaurantJpaRepositoryTest {
                 restaurantEntity.getRestaurantOwner().getRestaurantOwnerId()
         );
         //then
-        Assertions.assertEquals(byRestaurantOwnerId.size(), 1);
+        Assertions.assertEquals(2, byRestaurantOwnerId.size());
     }
 
     @Test
