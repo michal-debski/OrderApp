@@ -13,7 +13,7 @@ public class RestaurantOwnerService {
     private final RestaurantOwnerDAO restaurantOwnerDAO;
 
 
-    public RestaurantOwner findById(Integer restaurantOwnerId) {
+    public RestaurantOwner findRestaurantOwnerById(Integer restaurantOwnerId) {
 
         return restaurantOwnerDAO.findById(restaurantOwnerId);
     }

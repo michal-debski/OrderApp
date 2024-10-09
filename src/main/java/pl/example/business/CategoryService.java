@@ -16,12 +16,12 @@ public class CategoryService {
 
     private final CategoryDAO categoryDAO;
 
-    public List<Category> findAll() {
+    public List<Category> findAllCategories() {
         return categoryDAO.findAll().stream().toList();
     }
 
     @Transactional
-    public Category findById(Integer id) {
+    public Category findCategoryById(Integer id) {
         Optional<Category> category = categoryDAO.findById(id);
         if (category.isEmpty()) {
             throw new NotFoundException("Could not find category by id: [%s]".formatted(id));

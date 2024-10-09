@@ -19,7 +19,7 @@ public class OrderItemService {
 
 
     @Transactional
-    public void save(List<String> selectedMeals, Integer quantity, Order order) {
+    public void saveOrderItem(List<String> selectedMeals, Integer quantity, Order order) {
         List<Integer> mealIds = selectedMeals.stream()
                 .map(Integer::valueOf)
                 .toList();

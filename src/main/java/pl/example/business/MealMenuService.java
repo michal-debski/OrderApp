@@ -20,16 +20,15 @@ public class MealMenuService {
 
     private final MealDAO mealDAO;
 
-    public List<Meal> findAll() {
+    public List<Meal> findAllMeals() {
         List<Meal> meals = mealDAO.findAll();
         log.info("Available meals: [{}]", meals);
         return meals;
     }
 
     public List<Meal> findAllBySelectedRestaurant(Integer id) {
-        List<Meal> mealsForSelectedRestaurant = mealDAO.findAllBySelectedRestaurant(id);
 
-        return mealsForSelectedRestaurant;
+        return mealDAO.findAllBySelectedRestaurant(id);
     }
 
     @Transactional
@@ -38,8 +37,7 @@ public class MealMenuService {
         return mealDAO.save(meal, restaurant);
     }
 
-    //@Transactional
-    public void delete(Integer id) {
+    public void deleteMeal(Integer id) {
         mealDAO.deleteById(id);
     }
 
@@ -48,7 +46,7 @@ public class MealMenuService {
     }
 
     @Transactional
-    public void update(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant) {
+    public void updateMeal(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant) {
         mealDAO.update(meal, name, description, price, restaurant);
     }
 }

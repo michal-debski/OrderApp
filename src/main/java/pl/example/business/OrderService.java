@@ -28,7 +28,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order save(Order order) {
+    public Order saveOrder(Order order) {
         return orderDAO.saveOrder(order);
     }
 
@@ -39,7 +39,7 @@ public class OrderService {
 
 
     @Transactional
-    public List<Order> findByClientId(Integer clientId) {
+    public List<Order> findOrderByClientId(Integer clientId) {
         return orderDAO.findByClientId(clientId);
     }
 
@@ -81,12 +81,12 @@ public class OrderService {
         return (char) new Random().nextInt(max - min) + min;
     }
 
-    public List<Order> findAll() {
+    public List<Order> findAllOrders() {
         return orderDAO.findAll();
     }
 
     @Transactional
-    public void update(Order order) {
+    public void updateOrder(Order order) {
         orderDAO.update(order);
     }
 }

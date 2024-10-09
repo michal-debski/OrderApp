@@ -13,7 +13,7 @@ public class ClientService {
     private final ClientDAO clientDAO;
 
 
-    public Client findById(Integer id) {
+    public Client findClientById(Integer id) {
         return clientDAO.findById(id).orElseThrow();
     }
 

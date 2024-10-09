@@ -8,8 +8,6 @@ import pl.example.business.dao.RestaurantStreetDAO;
 import pl.example.domain.Restaurant;
 import pl.example.domain.RestaurantStreet;
 import pl.example.domain.Street;
-import pl.example.infrastructure.database.repository.mapper.RestaurantEntityMapper;
-import pl.example.infrastructure.database.repository.mapper.StreetEntityMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ public class RestaurantStreetService {
 
     private final StreetService streetService;
 
-    public List<RestaurantStreet> findAll() {
+    public List<RestaurantStreet> findAllRestaurantStreets() {
         List<RestaurantStreet> restaurantStreets = restaurantStreetDAO.findAll();
         log.info("Available streets: [{}]", restaurantStreets.size());
         return restaurantStreets;
@@ -31,7 +29,7 @@ public class RestaurantStreetService {
 
 
     @Transactional
-    public void save(Restaurant restaurant, List<String> streets) {
+    public void saveRestaurantStreets(Restaurant restaurant, List<String> streets) {
 
         List<Integer> streetsId = streets.stream()
                 .map(Integer::valueOf)
@@ -39,7 +37,7 @@ public class RestaurantStreetService {
         List<RestaurantStreet> restaurantStreetsList = new ArrayList<>();
         for (Integer streetId : streetsId) {
 
-            Street street = streetService.findById(streetId);
+            Street street = streetService.findByStreetId(streetId);
             RestaurantStreet restaurantStreet = RestaurantStreet
                     .builder()
                     .street(street)

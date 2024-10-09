@@ -15,11 +15,11 @@ import pl.example.domain.Street;
 public class StreetService {
     private StreetDAO streetDAO;
 
-    public Page<Street> findAll(Pageable pageable) {
+    public Page<Street> findAllStreets(Pageable pageable) {
         return streetDAO.findAll(pageable);
     }
 
-    public Street findById(Integer id) {
+    public Street findByStreetId(Integer id) {
         return streetDAO.findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException("Street with id: [%s] is not present in database"

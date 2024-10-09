@@ -22,7 +22,7 @@ public class RestaurantService {
     private final RestaurantDAO restaurantDAO;
 
 
-    public List<Restaurant> findAll() {
+    public List<Restaurant> findAllRestaurants() {
         List<Restaurant> restaurants = restaurantDAO.findAll();
         log.info("Available restaurants: [{}]", restaurants.size());
         return restaurants;
