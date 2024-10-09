@@ -3,10 +3,7 @@ package pl.example.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.example.api.controller.exception.NotFoundException;
 import pl.example.api.dto.OrderDTO;
 import pl.example.api.dto.mapper.OrderMapper;
@@ -15,25 +12,26 @@ import pl.example.domain.Order;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/restaurantOwner/orders")
 public class RestaurantOwnerOrderController {
 
     private final OrderService orderService;
 
     private final OrderMapper orderMapper;
 
-    @GetMapping("/restaurantOwner/orders")
+    @GetMapping
     public String showOrdersForRestaurant(
             Model model
     ) {
 
-        var ordersDTOs = orderService.findAll().stream()
+        var ordersDTOs = orderService.findAllOrders().stream()
                 .map(orderMapper::mapToDTO);
 
         model.addAttribute("orders", ordersDTOs);
         return "restaurants_orders";
     }
 
-    @GetMapping("/restaurantOwner/orders/{orderNumber}/updateOrder")
+    @GetMapping("/{orderNumber}/updateOrder")
     public String updateMealForm(
             @PathVariable String orderNumber,
             Model model
@@ -49,7 +47,7 @@ public class RestaurantOwnerOrderController {
         return "order_update";
     }
 
-    @PutMapping("/restaurantOwner/orders/{orderNumber}/updateOrder")
+    @PutMapping("/{orderNumber}/updateOrder")
     public String updateOrderStatus(
             @PathVariable String orderNumber,
             @ModelAttribute("order") OrderDTO orderDTO
@@ -59,7 +57,7 @@ public class RestaurantOwnerOrderController {
                         () -> new NotFoundException("Order with order number [%s] does not exist".formatted(orderNumber)
                         ));
         orderByOrderNumber.setStatus(orderDTO.getStatus());
-        orderService.update(orderByOrderNumber);
+        orderService.updateOrder(orderByOrderNumber);
         return String.format("redirect:/restaurantOwner/orders", orderNumber);
 
     }

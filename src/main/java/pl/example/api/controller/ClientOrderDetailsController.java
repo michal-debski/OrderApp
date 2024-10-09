@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.example.api.dto.OrderDTO;
 import pl.example.api.dto.mapper.OrderMapper;
 import pl.example.business.OrderService;
@@ -12,6 +13,7 @@ import pl.example.domain.Order;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/client")
 public class ClientOrderDetailsController {
     private final OrderService orderService;
     private final OrderMapper orderMapper;

@@ -21,6 +21,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/restaurantOwner/restaurants")
 public class RestaurantOwnerMealController {
     private final MealMenuService mealMenuService;
     private final MealMapper mealMapper;
@@ -28,7 +29,7 @@ public class RestaurantOwnerMealController {
     private final CategoryMapper categoryMapper;
     private final RestaurantService restaurantService;
 
-    @GetMapping("/restaurantOwner/restaurants/{restaurantId}/meals")
+    @GetMapping("/{restaurantId}/meals")
     public String showMeals(
             @PathVariable("restaurantId") Integer restaurantId,
             Model model) {
@@ -41,11 +42,11 @@ public class RestaurantOwnerMealController {
         return "restaurant_meals";
     }
 
-    @GetMapping("/restaurantOwner/restaurants/{restaurantId}/addMeal")
+    @GetMapping("/{restaurantId}/addMeal")
     public String addMealForm(@PathVariable Integer restaurantId,
                               @ModelAttribute MealDTO mealDTO,
                               Model model) {
-        List<CategoryDTO> categoryDTOs = categoryService.findAll().stream().map(categoryMapper::map).toList();
+        List<CategoryDTO> categoryDTOs = categoryService.findAllCategories().stream().map(categoryMapper::map).toList();
 
         model.addAttribute("categories", categoryDTOs);
         model.addAttribute("meal", mealDTO);
@@ -53,7 +54,7 @@ public class RestaurantOwnerMealController {
     }
 
 
-    @PostMapping("/restaurantOwner/restaurants/{restaurantId}/addMeal")
+    @PostMapping("/{restaurantId}/addMeal")
     public String addMealToMenu(
             @PathVariable Integer restaurantId,
             @Valid @ModelAttribute("mealDTO") MealDTO mealDTO,
@@ -72,17 +73,17 @@ public class RestaurantOwnerMealController {
         return "redirect:/restaurantOwner/restaurants";
     }
 
-    @DeleteMapping("/restaurantOwner/restaurants/{restaurantId}/{mealId}/cancelMeal")
+    @DeleteMapping("/{restaurantId}/{mealId}/cancelMeal")
     public String deleteMealByRestaurant(
             @PathVariable String restaurantId,
             @PathVariable String mealId
     ) {
 
-        mealMenuService.delete(Integer.valueOf(mealId));
+        mealMenuService.deleteMeal(Integer.valueOf(mealId));
         return String.format("redirect:/restaurantOwner/restaurants/{restaurantId}/meals", restaurantId);
     }
 
-    @GetMapping("/restaurantOwner/restaurants/{restaurantId}/{mealId}/update")
+    @GetMapping("/{restaurantId}/{mealId}/update")
     public String updateMealForm(
             @PathVariable Integer restaurantId,
             @PathVariable Integer mealId,
@@ -97,7 +98,7 @@ public class RestaurantOwnerMealController {
         return "meal_update";
     }
 
-    @PutMapping("/restaurantOwner/restaurants/{restaurantId}/{mealId}/update")
+    @PutMapping("/{restaurantId}/{mealId}/update")
     public String updateMeal(
             @PathVariable Integer restaurantId,
             @PathVariable Integer mealId,
@@ -111,7 +112,7 @@ public class RestaurantOwnerMealController {
         String description = mealDTO.getDescription();
         BigDecimal price = mealDTO.getPrice();
         Restaurant restaurant = restaurantService.findRestaurantById(restaurantId);
-        mealMenuService.update(meal, name, description, price, restaurant);
+        mealMenuService.updateMeal(meal, name, description, price, restaurant);
         return String.format("redirect:/restaurantOwner/restaurants/{restaurantId}/meals", restaurantId);
     }
 }

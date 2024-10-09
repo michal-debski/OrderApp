@@ -19,6 +19,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/client")
 public class ClientOrderController {
     private final RestaurantService restaurantService;
     private final MealMenuService mealMenuService;
@@ -29,12 +30,12 @@ public class ClientOrderController {
 
     private final MealMapper mealMapper;
 
-    @GetMapping("/client/addOrder")
+    @GetMapping("/addOrder")
     public String showForm() {
         return "client_restaurant_select";
     }
 
-    @PostMapping("/client/addOrder/{street}/restaurants")
+    @PostMapping("/addOrder/{street}/restaurants")
     public String showRestaurantsByStreet(
             @RequestParam String street,
             Model model
@@ -46,7 +47,7 @@ public class ClientOrderController {
 
     }
 
-    @GetMapping("/client/addOrder/{restaurantId}/menu")
+    @GetMapping("/addOrder/{restaurantId}/menu")
     public String showMenuForCreatedOrder(
             @PathVariable String restaurantId,
             Model model
@@ -61,7 +62,7 @@ public class ClientOrderController {
         return "client_found_restaurant_menu";
     }
 
-    @PostMapping("/client/addOrder/{restaurantId}/menu")
+    @PostMapping("/addOrder/{restaurantId}/menu")
     public String placeOrder(
             @PathVariable String restaurantId,
             @RequestParam("meals") List<String> selectedMeals,
@@ -71,9 +72,9 @@ public class ClientOrderController {
         Order order = orderService.buildOrder(Integer.valueOf(restaurantId));
         Order orderByOrderNumber = orderService.findByOrderNumber(order.getOrderNumber()).orElseThrow();
         if (!selectedMeals.isEmpty()) {
-            orderItemService.save(selectedMeals, quantity, orderByOrderNumber);
+            orderItemService.saveOrderItem(selectedMeals, quantity, orderByOrderNumber);
             orderByOrderNumber.setTotalPrice(orderService.getTotalOrderPrice(orderByOrderNumber.getOrderId()));
-            Order savedOrder = orderService.save(orderByOrderNumber);
+            Order savedOrder = orderService.saveOrder(orderByOrderNumber);
             OrderDTO orderDTOToShow = orderMapper
                     .mapToDTO(savedOrder);
 
@@ -83,13 +84,13 @@ public class ClientOrderController {
             return "order_done";
         } else {
             orderService.deleteOrder(orderByOrderNumber);
-            throw new NotFoundException("You didn't choose any meals to your orderByOrderNumber");
+            throw new NotFoundException("You didn't choose any meals to your order");
         }
 
 
     }
 
-    @DeleteMapping("/client/order/{orderNumber}/cancelOrder")
+    @DeleteMapping("/order/{orderNumber}/cancelOrder")
     public String deleteOrder(
             @PathVariable String orderNumber
     ) {

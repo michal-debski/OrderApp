@@ -16,13 +16,14 @@ import pl.example.domain.RestaurantOwner;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/restaurantOwner/restaurants")
 public class RestaurantController {
     private final RestaurantService restaurantService;
     private final RestaurantOwnerService restaurantOwnerService;
     private final RestaurantMapper restaurantMapper;
     private final AddressMapper addressMapper;
 
-    @GetMapping("/restaurantOwner/restaurants/addRestaurant")
+    @GetMapping("/addRestaurant")
     public String addRestaurantForm(
             @ModelAttribute RestaurantDTO restaurantDTO,
             @ModelAttribute AddressDTO addressDTO,
@@ -33,7 +34,7 @@ public class RestaurantController {
         return "restaurant_new";
     }
 
-    @PostMapping("/restaurantOwner/restaurants/addRestaurant")
+    @PostMapping("/addRestaurant")
     public String makeRestaurant(
             @ModelAttribute("restaurantDTO") RestaurantDTO restaurantDTO,
             @ModelAttribute("addressDTO") AddressDTO addressDTO,
@@ -48,7 +49,7 @@ public class RestaurantController {
         return "redirect:/restaurantOwner/restaurants";
     }
 
-    @DeleteMapping("/restaurantOwner/restaurants/{restaurantId}/deleteRestaurant")
+    @DeleteMapping("/{restaurantId}/deleteRestaurant")
     public String deleteMealByRestaurant(
             @PathVariable String restaurantId,
             @ModelAttribute RestaurantDTO restaurantDTO,

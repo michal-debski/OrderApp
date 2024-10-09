@@ -36,23 +36,6 @@ public class LoginController {
     public String showLoginPage() {
         return "login";
     }
-//    @PostMapping("/login")
-//    public String processLogin(@ModelAttribute("userDTO") UserDTO userDTO,
-//                               HttpServletRequest request,
-//                               HttpServletResponse response,
-//                               RedirectAttributes redirectAttributes) {
-//        try {
-//            Authentication authentication = authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//            log.info("User {} logged in successfully", userDTO.getUsername());
-//            return "redirect:/home";
-//        } catch (AuthenticationException e) {
-//            log.error("Login failed for user {}", userDTO.getUsername(), e);
-//            redirectAttributes.addFlashAttribute("error", "Invalid username or password");
-//            return "redirect:/login";
-//        }
-//    }
 
     @GetMapping("/home")
     public String home(Authentication authentication) {
@@ -72,25 +55,7 @@ public class LoginController {
         };
     }
 
-    //@GetMapping("/home")
-//public String home(@AuthenticationPrincipal UserDetails userDetails) {
-//    if (userDetails == null) {
-//        throw new SecurityException("Użytkownik nie jest zalogowany");
-//    }
-//
-//    String authorities = userDetails.getAuthorities()
-//            .stream()
-//            .findFirst()
-//            .orElseThrow(() -> new SecurityException("Brak przypisanej roli użytkownika"))
-//            .getAuthority();
-//    log.info("Rola bieżącego użytkownika: " + authorities);
-//
-//    return switch (authorities) {
-//        case "CLIENT" -> "client_homepage";
-//        case "RESTAURANT_OWNER" -> "restaurantOwner_homepage";
-//        default -> throw new SecurityException("Brak prawidłowej roli przypisanej bieżącemu użytkownikowi");
-//    };
-//}
+
     @GetMapping("/register")
     public String showLoginPageWithRegistration(Model model) {
         model.addAttribute("userDTO", new UserDTO());
