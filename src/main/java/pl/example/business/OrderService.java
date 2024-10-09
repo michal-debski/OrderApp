@@ -3,6 +3,7 @@ package pl.example.business;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.example.api.controller.exception.NotFoundException;
 import pl.example.business.dao.OrderDAO;
 import pl.example.domain.Order;
 
@@ -18,16 +19,17 @@ public class OrderService {
 
     private final OrderDAO orderDAO;
 
+    private final OrderItemService orderItemService;
     private final ClientService clientService;
 
     private final RestaurantService restaurantService;
 
-    @Transactional
+
     public void deleteOrder(Order order) {
         orderDAO.deleteOrder(order);
     }
 
-    @Transactional
+
     public Order saveOrder(Order order) {
         return orderDAO.saveOrder(order);
     }
@@ -44,7 +46,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order buildOrder(Integer restaurantId) {
+    public Order buildOrder(Integer restaurantId, List<String> selectedMeals, Integer quantity) {
         OffsetDateTime dateOfOrder = OffsetDateTime.now();
         Order orderPlaced = Order.builder()
                 .orderNumber(generateOrderNumber())
@@ -53,7 +55,16 @@ public class OrderService {
                 .client(clientService.findLoggedClient())
                 .restaurant(restaurantService.findRestaurantById(restaurantId))
                 .build();
-        return orderDAO.saveOrder(orderPlaced);
+        Order savedOrder = orderDAO.saveOrder(orderPlaced);
+        if (!selectedMeals.isEmpty()) {
+            orderItemService.saveOrderItem(selectedMeals, quantity, savedOrder);
+            savedOrder.setTotalPrice(orderDAO.getTotalOrderPrice(savedOrder.getOrderId()));
+            return orderDAO.saveOrder(savedOrder);
+        }
+        else {
+            orderDAO.deleteOrder(orderPlaced);
+            throw new NotFoundException("You didn't choose any meals to your order");
+        }
     }
 
     private String generateOrderNumber() {

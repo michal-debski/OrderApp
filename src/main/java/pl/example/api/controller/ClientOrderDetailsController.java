@@ -18,7 +18,7 @@ public class ClientOrderDetailsController {
     private final OrderService orderService;
     private final OrderMapper orderMapper;
 
-    @GetMapping("/client/order/{orderNumber}/orderDetails")
+    @GetMapping("/order/{orderNumber}/orderDetails")
     public String showOrderDetails(
             @PathVariable("orderNumber") String orderNumber,
             Model model) {

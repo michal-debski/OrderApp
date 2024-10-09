@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.example.api.controller.exception.NotFoundException;
 import pl.example.api.dto.OrderDTO;
 import pl.example.api.dto.mapper.MealMapper;
 import pl.example.api.dto.mapper.OrderMapper;
@@ -69,26 +68,17 @@ public class ClientOrderController {
             @RequestParam("quantity") Integer quantity,
             Model model
     ) {
-        Order order = orderService.buildOrder(Integer.valueOf(restaurantId));
-        Order orderByOrderNumber = orderService.findByOrderNumber(order.getOrderNumber()).orElseThrow();
-        if (!selectedMeals.isEmpty()) {
-            orderItemService.saveOrderItem(selectedMeals, quantity, orderByOrderNumber);
-            orderByOrderNumber.setTotalPrice(orderService.getTotalOrderPrice(orderByOrderNumber.getOrderId()));
-            Order savedOrder = orderService.saveOrder(orderByOrderNumber);
-            OrderDTO orderDTOToShow = orderMapper
-                    .mapToDTO(savedOrder);
+        Order order = orderService.buildOrder(Integer.valueOf(restaurantId), selectedMeals, quantity);
 
-            model.addAttribute("orderDTO", orderDTOToShow);
-            model.addAttribute("orderNumber", orderDTOToShow.getOrderNumber());
-            model.addAttribute("clientDTO", orderDTOToShow.getClient());
-            return "order_done";
-        } else {
-            orderService.deleteOrder(orderByOrderNumber);
-            throw new NotFoundException("You didn't choose any meals to your order");
-        }
+        OrderDTO orderDTOToShow = orderMapper
+                .mapToDTO(order);
 
-
+        model.addAttribute("orderDTO", orderDTOToShow);
+        model.addAttribute("orderNumber", orderDTOToShow.getOrderNumber());
+        model.addAttribute("clientDTO", orderDTOToShow.getClient());
+        return "order_done";
     }
+
 
     @DeleteMapping("/order/{orderNumber}/cancelOrder")
     public String deleteOrder(
