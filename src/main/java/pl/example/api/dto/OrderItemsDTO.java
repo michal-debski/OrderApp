@@ -4,17 +4,10 @@ import lombok.*;
 
 import java.util.List;
 
-@EqualsAndHashCode
 @ToString
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemsDTO {
-
-
-   private List<OrderItemDTO> orderItems;
-
-
-}
+public record OrderItemsDTO (List<OrderItemDTO> orderItems) { }

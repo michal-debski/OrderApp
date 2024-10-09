@@ -5,13 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantOwnerDTO {
-    private Integer restaurantOwnerId;
-    private String name;
-    private String surname;
-    private String email;
+public record RestaurantOwnerDTO (Integer restaurantOwnerId, String name, String surname, String email){
 }

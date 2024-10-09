@@ -7,22 +7,14 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Data
+
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MealDTO {
-    private Integer mealId;
-
-    private String name;
-
-    private CategoryDTO category;
-
-    private String description;
-
-    private BigDecimal price;
-
-    private RestaurantDTO restaurant;
+public record MealDTO(Integer mealId, String name,
+                      CategoryDTO category, String description,
+                      BigDecimal price, RestaurantDTO restaurant) {
 
 
 }

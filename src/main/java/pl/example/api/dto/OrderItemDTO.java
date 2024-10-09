@@ -5,14 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemDTO {
-    private Integer orderItemId;
-    private Integer quantity;
-    private MealDTO meal;
-    private OrderDTO order;
+public record OrderItemDTO (  Integer orderItemId,  Integer quantity, MealDTO meal, OrderDTO order) {
+
 
 }

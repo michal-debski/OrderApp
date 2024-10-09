@@ -11,21 +11,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Data
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-
-    private String username;
-    private String password;
-    private String name;
-    private String surname;
-    @Pattern(regexp = "^[+]\\d{2}\\s\\d{3}\\s\\d{3}\\s\\d{3}$")
-    private String phone;
-    @Email
-    private String email;
-    private String role;
+public record UserDTO ( String username,
+        String password,
+        String name,
+        String surname,
+        @Pattern(regexp = "^[+]\\d{2}\\s\\d{3}\\s\\d{3}\\s\\d{3}$")
+        String phone,
+        @Email
+        String email,
+        String role){
 
     public Map<String, String> asMap() {
         Map<String, String> result = new HashMap<>();

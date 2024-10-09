@@ -5,14 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDTO {
-    private Integer clientId;
-    private String name;
-    private String surname;
-    private String phone;
-    private String email;
+public record ClientDTO(Integer clientId, String name, String surname, String phone, String email) {
+
 }
