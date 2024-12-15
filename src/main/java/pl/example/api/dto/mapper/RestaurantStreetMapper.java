@@ -18,8 +18,8 @@ public interface RestaurantStreetMapper {
 
     default RestaurantStreet map(RestaurantStreetDTO dto) {
         return RestaurantStreet.builder()
-                .restaurant(dto.getRestaurant())
-                .street(dto.getStreet())
+                .restaurant(dto.restaurant())
+                .street(dto.street())
                 .build();
     }
 }

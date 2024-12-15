@@ -27,16 +27,16 @@ public interface RestaurantMapper {
 
     default Restaurant mapFromDto(RestaurantDTO restaurant) {
         return Restaurant.builder()
-                .restaurantId(restaurant.getRestaurantId())
-                .restaurantName(restaurant.getRestaurantName())
-                .phone(restaurant.getPhone())
-                .email(restaurant.getEmail())
+                .restaurantId(restaurant.restaurantId())
+                .restaurantName(restaurant.restaurantName())
+                .phone(restaurant.phone())
+                .email(restaurant.email())
                 .address(Address.builder()
-                        .country(restaurant.getCountry())
-                        .city(restaurant.getCity())
-                        .street(restaurant.getStreet())
-                        .number(restaurant.getNumber()).build())
-                .restaurantStreets(restaurant.getRestaurantStreets())
+                        .country(restaurant.country())
+                        .city(restaurant.city())
+                        .street(restaurant.street())
+                        .number(restaurant.number()).build())
+                .restaurantStreets(restaurant.restaurantStreets())
                 .build();
     }
 }
