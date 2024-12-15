@@ -16,7 +16,7 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity,
     @Query("""
             SELECT rest FROM RestaurantEntity rest
             INNER JOIN FETCH rest.restaurantOwner own
-            WHERE own.id=:id
+            WHERE own.restaurantOwnerId=:id
             """)
     Set<RestaurantEntity> findByRestaurantOwnerId(final @Param("id") Integer id);
     Optional<RestaurantEntity> findByRestaurantName(String name);
@@ -25,7 +25,7 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity,
         SELECT rs.restaurant FROM RestaurantStreetEntity rs
         JOIN rs.restaurant r
         JOIN rs.street s
-        WHERE s.name = :street
+        WHERE LOWER(s.name) LIKE LOWER(CONCAT('%',:street,'%'))
         """)
     List<RestaurantEntity> findAllByStreetName(final @Param("street") String street);
 }
