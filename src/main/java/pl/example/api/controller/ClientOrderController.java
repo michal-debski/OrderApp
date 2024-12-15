@@ -69,13 +69,12 @@ public class ClientOrderController {
             Model model
     ) {
         Order order = orderService.buildOrder(Integer.valueOf(restaurantId), selectedMeals, quantity);
-
         OrderDTO orderDTOToShow = orderMapper
                 .mapToDTO(order);
 
         model.addAttribute("orderDTO", orderDTOToShow);
-        model.addAttribute("orderNumber", orderDTOToShow.getOrderNumber());
-        model.addAttribute("clientDTO", orderDTOToShow.getClient());
+        model.addAttribute("orderNumber", orderDTOToShow.orderNumber());
+        model.addAttribute("clientDTO", orderDTOToShow.client());
         return "order_done";
     }
 

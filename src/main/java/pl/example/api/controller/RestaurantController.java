@@ -45,7 +45,7 @@ public class RestaurantController {
         Restaurant restaurant = restaurantMapper.mapFromDto(restaurantDTO);
         restaurantService.saveRestaurant(restaurant, loggedRestaurantOwner, address);
 
-        model.addAttribute("restaurantName", restaurantDTO.getRestaurantName());
+        model.addAttribute("restaurantName", restaurantDTO.restaurantName());
         return "redirect:/restaurantOwner/restaurants";
     }
 

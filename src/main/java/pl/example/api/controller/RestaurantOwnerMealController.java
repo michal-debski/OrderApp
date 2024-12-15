@@ -19,6 +19,8 @@ import pl.example.domain.Restaurant;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static java.lang.String.format;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/restaurantOwner/restaurants")
@@ -65,10 +67,10 @@ public class RestaurantOwnerMealController {
 
         Meal mealToSave = mealMapper.map(mealDTO);
         mealMenuService.makeMealForRestaurant(mealToSave, restaurant);
-        model.addAttribute("name", mealDTO.getName());
-        model.addAttribute("category", mealDTO.getCategory());
-        model.addAttribute("description", mealDTO.getDescription());
-        model.addAttribute("price", mealDTO.getPrice());
+        model.addAttribute("name", mealDTO.name());
+        model.addAttribute("category", mealDTO.category());
+        model.addAttribute("description", mealDTO.description());
+        model.addAttribute("price", mealDTO.price());
 
         return "redirect:/restaurantOwner/restaurants";
     }
@@ -78,9 +80,8 @@ public class RestaurantOwnerMealController {
             @PathVariable String restaurantId,
             @PathVariable String mealId
     ) {
-
         mealMenuService.deleteMeal(Integer.valueOf(mealId));
-        return String.format("redirect:/restaurantOwner/restaurants/{restaurantId}/meals", restaurantId);
+        return format("redirect:/restaurantOwner/restaurants/{restaurantId}/meals", restaurantId);
     }
 
     @GetMapping("/{restaurantId}/{mealId}/update")
@@ -108,11 +109,11 @@ public class RestaurantOwnerMealController {
                 .orElseThrow(
                         () -> new NotFoundException("Meal with Id: [%s] does not exist in database".formatted(mealId))
                 );
-        String name = mealDTO.getName();
-        String description = mealDTO.getDescription();
-        BigDecimal price = mealDTO.getPrice();
+        String name = mealDTO.name();
+        String description = mealDTO.description();
+        BigDecimal price = mealDTO.price();
         Restaurant restaurant = restaurantService.findRestaurantById(restaurantId);
         mealMenuService.updateMeal(meal, name, description, price, restaurant);
-        return String.format("redirect:/restaurantOwner/restaurants/{restaurantId}/meals", restaurantId);
+        return format("redirect:/restaurantOwner/restaurants/{restaurantId}/meals", restaurantId);
     }
 }

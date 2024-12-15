@@ -56,7 +56,7 @@ public class RestaurantOwnerOrderController {
                 .orElseThrow(
                         () -> new NotFoundException("Order with order number [%s] does not exist".formatted(orderNumber)
                         ));
-        orderByOrderNumber.setStatus(orderDTO.getStatus());
+        orderByOrderNumber.setStatus(orderDTO.status());
         orderService.updateOrder(orderByOrderNumber);
         return String.format("redirect:/restaurantOwner/orders", orderNumber);
 

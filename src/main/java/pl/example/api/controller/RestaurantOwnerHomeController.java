@@ -50,10 +50,10 @@ public class RestaurantOwnerHomeController {
                 ).stream()
                 .map(restaurantMapper::map).toList();
         for (RestaurantDTO restaurant : restaurantsDTO) {
-            Integer restaurantId = restaurant.getRestaurantId();
+            Integer restaurantId = restaurant.restaurantId();
             var meals = mealMenuService.findAllBySelectedRestaurant(restaurantId).stream()
                     .map(mealMapper::map)
-                    .collect(Collectors.toList());
+                    .toList();
             mealsMap.put(restaurantId, meals);
 
         }
