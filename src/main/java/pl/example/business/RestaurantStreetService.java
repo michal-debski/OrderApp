@@ -35,6 +35,20 @@ public class RestaurantStreetService {
                 .map(Integer::valueOf)
                 .toList();
         List<RestaurantStreet> restaurantStreetsList = new ArrayList<>();
+        preparationOfRestaurantStreets(restaurant, streetsId, restaurantStreetsList);
+        log.info("Trying to save all given/prepared restaurant streets");
+        saveAllGivenStreets(restaurantStreetsList);
+    }
+
+    private void saveAllGivenStreets(List<RestaurantStreet> restaurantStreetsList) {
+        for (RestaurantStreet restaurantStreet : restaurantStreetsList) {
+
+            restaurantStreetDAO.save(restaurantStreet);
+
+        }
+    }
+
+    private void preparationOfRestaurantStreets(Restaurant restaurant, List<Integer> streetsId, List<RestaurantStreet> restaurantStreetsList) {
         for (Integer streetId : streetsId) {
 
             Street street = streetService.findByStreetId(streetId);
@@ -46,13 +60,6 @@ public class RestaurantStreetService {
             restaurantStreetsList.add(restaurantStreet);
 
         }
-        for (RestaurantStreet restaurantStreet : restaurantStreetsList) {
-
-            restaurantStreetDAO.save(restaurantStreet);
-
-        }
-
-
     }
 
 }

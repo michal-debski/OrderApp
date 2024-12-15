@@ -15,6 +15,7 @@ public class AddressService {
     private final AddressDAO addressDAO;
     @Transactional
     public Address saveAddress(Address address) {
+        log.info("Saving address {}", address);
         return addressDAO.saveAddress(address);
     }
 }

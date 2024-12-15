@@ -16,10 +16,12 @@ public class StreetService {
     private StreetDAO streetDAO;
 
     public Page<Street> findAllStreets(Pageable pageable) {
+        log.info("Trying to find all streets");
         return streetDAO.findAll(pageable);
     }
 
     public Street findByStreetId(Integer id) {
+        log.info("Trying to find street by id{}:",id);
         return streetDAO.findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException("Street with id: [%s] is not present in database"

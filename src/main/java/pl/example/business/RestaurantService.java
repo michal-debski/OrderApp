@@ -39,21 +39,24 @@ public class RestaurantService {
 
     @Transactional
     public Restaurant saveRestaurant(Restaurant restaurant, RestaurantOwner restaurantOwner, Address address) {
-
+        log.info("Trying to save Restaurant{}:", restaurant);
         return restaurantDAO.saveRestaurant(restaurant, restaurantOwner, address);
     }
 
     public void deleteRestaurant(Integer restaurantId) {
+        log.info("Trying to delete Restaurant{}:", restaurantId);
         restaurantDAO.deleteRestaurant(restaurantId);
     }
 
 
     public List<Restaurant> findByRestaurantOwnerId(Integer id) {
+        log.info("Trying to find Restaurant{}:", id);
         return restaurantDAO.findByRestaurantOwnerId(id);
     }
 
 
     public List<Restaurant> findAllByStreetName(String street) {
+        log.info("Trying to find all Restaurants by street{}:", street);
         return restaurantDAO.findAllByStreetName(street);
     }
 }

@@ -1,6 +1,7 @@
 package pl.example.business;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.example.api.controller.exception.NotFoundException;
@@ -15,6 +16,7 @@ import java.util.Random;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class OrderService {
 
     private final OrderDAO orderDAO;
@@ -55,10 +57,13 @@ public class OrderService {
                 .client(clientService.findLoggedClient())
                 .restaurant(restaurantService.findRestaurantById(restaurantId))
                 .build();
+        log.info("Creating order before saving order: {}", orderPlaced);
         Order savedOrder = orderDAO.saveOrder(orderPlaced);
+        log.info("Saving order: {}", savedOrder);
         if (!selectedMeals.isEmpty()) {
             orderItemService.saveOrderItem(selectedMeals, quantity, savedOrder);
             savedOrder.setTotalPrice(orderDAO.getTotalOrderPrice(savedOrder.getOrderId()));
+            log.info("Order was saved: {}", savedOrder);
             return orderDAO.saveOrder(savedOrder);
         }
         else {

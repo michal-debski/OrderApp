@@ -27,26 +27,30 @@ public class MealMenuService {
     }
 
     public List<Meal> findAllBySelectedRestaurant(Integer id) {
-
-        return mealDAO.findAllBySelectedRestaurant(id);
+        List<Meal> selectedMealsByRestaurant = mealDAO.findAllBySelectedRestaurant(id);
+        log.info("Available meals for restaurant: [{}]", selectedMealsByRestaurant);
+        return selectedMealsByRestaurant;
     }
 
     @Transactional
     public Meal makeMealForRestaurant(Meal meal, Restaurant restaurant) {
-
+        log.info("Making meal for restaurant: [{}]", restaurant);
         return mealDAO.save(meal, restaurant);
     }
 
     public void deleteMeal(Integer id) {
+        log.info("Trying to delete meal with id: [{}]", id);
         mealDAO.deleteById(id);
     }
 
     public Optional<Meal> findMealById(Integer mealId) {
+         log.info("Trying to find meal with id: [{}]", mealId);
         return mealDAO.findById(mealId);
     }
 
     @Transactional
     public void updateMeal(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant) {
+        log.info("Trying to update meal with name: [{}], description: [{}]", name, description);
         mealDAO.update(meal, name, description, price, restaurant);
     }
 }

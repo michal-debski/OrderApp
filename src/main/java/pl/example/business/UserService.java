@@ -22,7 +22,7 @@ public class UserService {
     @Transactional
     public User registerNewUser(User user) {
         User created = userDAO.registerNewUser(user);
-
+        log.info("Trying to create new user");
         if ("RESTAURANT_OWNER".equals(user.getRole())) {
             RestaurantOwner restaurantOwner = RestaurantOwner.builder()
                     .name(user.getName())
@@ -41,6 +41,7 @@ public class UserService {
                     .build();
             clientService.saveClient(client);
         }
+        log.info("User created: {}", created);
         return created;
     }
 
