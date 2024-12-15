@@ -8,6 +8,7 @@ import java.util.Set;
 @With
 @Data
 @Setter
+@Getter
 @EqualsAndHashCode(of = "restaurantId")
 @ToString(of = {"restaurantId", "restaurantName", "phone", "email"})
 public class Restaurant {
