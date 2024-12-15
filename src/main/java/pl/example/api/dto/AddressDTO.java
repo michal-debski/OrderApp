@@ -1,11 +1,11 @@
 package pl.example.api.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.With;
 
 @With
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public record AddressDTO (String country, String city, String street, String number){
+
+public record AddressDTO(String country, String city, String street, String number) {
 
 }
