@@ -42,13 +42,12 @@ public class OrderService {
     }
 
 
-    @Transactional
     public List<Order> findOrderByClientId(Integer clientId) {
         return orderDAO.findByClientId(clientId);
     }
 
     @Transactional
-    public Order buildOrder(Integer restaurantId, List<String> selectedMeals, Integer quantity) {
+    public Order buildOrder(Integer restaurantId, List<String> selectedMeals, List<Integer> quantity) {
         OffsetDateTime dateOfOrder = OffsetDateTime.now();
         Order orderPlaced = Order.builder()
                 .orderNumber(generateOrderNumber())

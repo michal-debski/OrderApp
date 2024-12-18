@@ -64,11 +64,11 @@ public class ClientOrderController {
     @PostMapping("/addOrder/{restaurantId}/menu")
     public String placeOrder(
             @PathVariable String restaurantId,
-            @RequestParam("meals") List<String> selectedMeals,
-            @RequestParam("quantity") Integer quantity,
+            @RequestParam(value = "meals", required = false) List<String> selectedMeals,
+            @RequestParam(value = "quantities", required = false) List<Integer> quantities,
             Model model
     ) {
-        Order order = orderService.buildOrder(Integer.valueOf(restaurantId), selectedMeals, quantity);
+        Order order = orderService.buildOrder(Integer.valueOf(restaurantId), selectedMeals, quantities);
         OrderDTO orderDTOToShow = orderMapper
                 .mapToDTO(order);
 
