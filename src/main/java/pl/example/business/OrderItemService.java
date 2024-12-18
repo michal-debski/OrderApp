@@ -21,12 +21,12 @@ public class OrderItemService {
 
 
     @Transactional
-    public void saveOrderItem(List<String> selectedMeals, Integer quantity, Order order) {
+    public void saveOrderItem(List<String> selectedMeals, List<Integer> quantities, Order order) {
         List<Integer> mealIds = selectedMeals.stream()
                 .map(Integer::valueOf)
                 .toList();
-        List<OrderItem> orderItems = new ArrayList<>();
-        creatingOrderItemsListBasedOnOrderInfo(quantity, order, mealIds, orderItems);
+
+        List<OrderItem> orderItems = creatingOrderItemsListBasedOnOrderInfo(quantities, order, mealIds);
         log.info("Created list of order item: {} ", orderItems);
         saveAllOrderItemsFromList(orderItems);
         log.info("Saved order items: {}", orderItems);
@@ -39,23 +39,27 @@ public class OrderItemService {
         log.info("Deleted order items by orderId: {}", orderId);
     }
 
-    private void creatingOrderItemsListBasedOnOrderInfo(
-            Integer quantity,
+    private List<OrderItem> creatingOrderItemsListBasedOnOrderInfo(
+            List<Integer> quantities,
             Order order,
-            List<Integer> mealIds,
-            List<OrderItem> orderItems
+            List<Integer> mealIds
     ) {
-        for (Integer meal : mealIds) {
+        List<OrderItem> orderItems = new ArrayList<>();
+        for (int i = 0; i < mealIds.size(); i++) {
 
-            Meal mealTemp = mealMenuService.findMealById(meal).orElseThrow();
-
-            OrderItem orderItemFromClient = OrderItem.builder()
-                    .meal(mealTemp)
-                    .quantity(quantity)
-                    .order(order)
-                    .build();
-            orderItems.add(orderItemFromClient);
+            Integer meal = mealIds.get(i);
+            Integer quantity = quantities.get(i);
+            if (quantity != 0) {
+                Meal mealTemp = mealMenuService.findMealById(meal).orElseThrow();
+                OrderItem orderItemFromClient = OrderItem.builder()
+                        .meal(mealTemp)
+                        .quantity(quantity)
+                        .order(order)
+                        .build();
+                orderItems.add(orderItemFromClient);
+            }
         }
+        return orderItems;
     }
 
     private void saveAllOrderItemsFromList(List<OrderItem> orderItems) {

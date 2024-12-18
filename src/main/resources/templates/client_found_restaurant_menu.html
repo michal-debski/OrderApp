@@ -146,15 +146,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="meal : ${meals}">
-                        <td th:if="${meal.category != null}" th:text="${meal.category.name}">Category Name</td>
-                        <td th:unless="${meal.category != null}">No Category</td>
+                    <tr th:each="meal, mealStat : ${meals}">
+                        <td th:text="${meal.category?.name ?: 'No Category'}"></td>
                         <td th:text="${meal.name}"></td>
                         <td th:text="${meal.price}"></td>
                         <td th:text="${meal.description}"></td>
+
+                        <!-- Checkbox powiązany z mealId -->
                         <td>
-                            <input type="number" min="0" value="1" name="quantity" style="width: 50px;">
-                            <input type="checkbox" name="meals" th:value="${meal.mealId}">
+                            <input type="checkbox" th:name="meals" th:value="${meal.mealId}">
+                        </td>
+                        <!-- Powiązanie pola quantity z indeksem -->
+                        <td>
+                        <input type="number" min="0" th:name="quantities" value="0" style="width: 50px;">
                         </td>
                     </tr>
                     </tbody>
