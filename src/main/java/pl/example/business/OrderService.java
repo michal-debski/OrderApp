@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.example.api.controller.exception.NotFoundException;
+import pl.example.api.controller.exception.OrderException;
 import pl.example.business.dao.OrderDAO;
 import pl.example.domain.Order;
 
@@ -64,10 +64,9 @@ public class OrderService {
             savedOrder.setTotalPrice(orderDAO.getTotalOrderPrice(savedOrder.getOrderId()));
             log.info("Order was saved: {}", savedOrder);
             return orderDAO.saveOrder(savedOrder);
-        }
-        else {
+        } else {
             orderDAO.deleteOrder(orderPlaced);
-            throw new NotFoundException("You didn't choose any meals to your order");
+            throw new OrderException("You didn't choose any meals to your order");
         }
     }
 

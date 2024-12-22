@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.example.api.controller.exception.NotFoundException;
+import pl.example.api.controller.exception.OrderNotFoundException;
 import pl.example.api.dto.OrderDTO;
 import pl.example.api.dto.mapper.OrderMapper;
 import pl.example.business.OrderService;
@@ -39,7 +39,7 @@ public class RestaurantOwnerOrderController {
 
         Order orderByOrderNumber = orderService.findByOrderNumber(orderNumber)
                 .orElseThrow(
-                        () -> new NotFoundException("Order with order number [%s] does not exist".formatted(orderNumber)
+                        () -> new OrderNotFoundException("Order with order number [%s] does not exist".formatted(orderNumber)
                         ));
         OrderDTO orderDTO = orderMapper.mapToDTO(orderByOrderNumber);
 
@@ -54,7 +54,7 @@ public class RestaurantOwnerOrderController {
     ) {
         Order orderByOrderNumber = orderService.findByOrderNumber(orderNumber)
                 .orElseThrow(
-                        () -> new NotFoundException("Order with order number [%s] does not exist".formatted(orderNumber)
+                        () -> new OrderNotFoundException("Order with order number [%s] does not exist".formatted(orderNumber)
                         ));
         orderByOrderNumber.setStatus(orderDTO.status());
         orderService.updateOrder(orderByOrderNumber);

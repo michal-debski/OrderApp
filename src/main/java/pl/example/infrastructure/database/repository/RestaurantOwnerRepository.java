@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
-import pl.example.api.controller.exception.NotFoundException;
+import pl.example.api.controller.exception.RestaurantOwnerNotFoundException;
 import pl.example.business.dao.RestaurantOwnerDAO;
 import pl.example.domain.RestaurantOwner;
 import pl.example.infrastructure.database.entity.RestaurantOwnerEntity;
@@ -25,7 +25,7 @@ public class RestaurantOwnerRepository implements RestaurantOwnerDAO {
     public RestaurantOwner findById(Integer id) {
         return restaurantOwnerJpaRepository.findById(id)
                 .map(restaurantOwnerEntityMapper::mapFromEntity).orElseThrow(
-                        () -> new NotFoundException("Restaurant Owner not found")
+                        () -> new RestaurantOwnerNotFoundException("Restaurant Owner not found")
                 );
 
     }
