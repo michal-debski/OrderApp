@@ -23,24 +23,32 @@ public class UserService {
     public User registerNewUser(User user) {
         User created = userDAO.registerNewUser(user);
         log.info("Trying to create new user");
-        if ("RESTAURANT_OWNER".equals(user.getRole())) {
-            RestaurantOwner restaurantOwner = RestaurantOwner.builder()
-                    .name(user.getName())
-                    .surname(user.getSurname())
-                    .email(user.getEmail())
-                    .phone(user.getPhone())
-                    .build();
-            restaurantOwnerService.saveRestaurantOwner(restaurantOwner);
+        switch (user.getRole()) {
+            case "RESTAURANT_OWNER":
+                RestaurantOwner restaurantOwner = RestaurantOwner.builder()
+                        .name(user.getName())
+                        .surname(user.getSurname())
+                        .email(user.getEmail())
+                        .phone(user.getPhone())
+                        .build();
+                restaurantOwnerService.saveRestaurantOwner(restaurantOwner);
+                break;
+
+            case "CLIENT":
+                Client client = Client.builder()
+                        .name(user.getName())
+                        .surname(user.getSurname())
+                        .phone(user.getPhone())
+                        .email(user.getEmail())
+                        .build();
+                clientService.saveClient(client);
+                break;
+
+            default:
+                log.warn("Unknown role: {}", user.getRole());
+                break;
         }
-        if ("CLIENT".equals(user.getRole())) {
-            Client client = Client.builder()
-                    .name(user.getName())
-                    .surname(user.getSurname())
-                    .phone(user.getPhone())
-                    .email(user.getEmail())
-                    .build();
-            clientService.saveClient(client);
-        }
+
         log.info("User created: {}", created);
         return created;
     }
