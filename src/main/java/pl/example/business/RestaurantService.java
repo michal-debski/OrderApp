@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.example.api.controller.exception.NotFoundException;
+import pl.example.api.controller.exception.RestaurantNotFoundException;
 import pl.example.business.dao.RestaurantDAO;
 import pl.example.domain.Address;
 import pl.example.domain.Restaurant;
@@ -32,7 +32,7 @@ public class RestaurantService {
     public Restaurant findRestaurantById(Integer id) {
         Optional<Restaurant> restaurant = restaurantDAO.findById(id);
         if (restaurant.isEmpty()) {
-            throw new NotFoundException("Could not find restaurant by name: [%s]".formatted(id));
+            throw new RestaurantNotFoundException("Could not find restaurant by name: [%s]".formatted(id));
         }
         return restaurant.get();
     }

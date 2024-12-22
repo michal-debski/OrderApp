@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.example.api.controller.exception.NotFoundException;
+import pl.example.api.controller.exception.MealNotFoundException;
 import pl.example.api.dto.CategoryDTO;
 import pl.example.api.dto.MealDTO;
 import pl.example.api.dto.mapper.CategoryMapper;
@@ -107,7 +107,7 @@ public class RestaurantOwnerMealController {
     ) {
         Meal meal = mealMenuService.findMealById(mealId)
                 .orElseThrow(
-                        () -> new NotFoundException("Meal with Id: [%s] does not exist in database".formatted(mealId))
+                        () -> new MealNotFoundException("Meal with Id: [%s] does not exist in database".formatted(mealId))
                 );
         String name = mealDTO.name();
         String description = mealDTO.description();
