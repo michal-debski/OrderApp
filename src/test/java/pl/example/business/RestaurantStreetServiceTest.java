@@ -36,9 +36,9 @@ class RestaurantStreetServiceTest {
     void shouldFindAll() {
 
         List<RestaurantStreet> restaurantStreetList = List.of(kindOfRestaurantStreet(), kindOfRestaurantStreet1());
-        when(restaurantStreetDAO.findAll()).thenReturn(restaurantStreetList);
+        when(restaurantStreetDAO.findAllRestaurantStreets()).thenReturn(restaurantStreetList);
 
-        List<RestaurantStreet> result = restaurantStreetService.findAll();
+        List<RestaurantStreet> result = restaurantStreetService.findAllRestaurantStreets();
 
         Assertions.assertThat(result).isNotEmpty();
         assertEquals(2,result.size());
@@ -54,13 +54,13 @@ class RestaurantStreetServiceTest {
         List<String> restaurantStreets =
                 List.of(String.valueOf(street.getStreetId()), String.valueOf(secondStreet.getStreetId()));
 
-        when(streetService.findById(1)).thenReturn(street);
-        when(streetService.findById(2)).thenReturn(secondStreet);
+        when(streetService.findByStreetId(1)).thenReturn(street);
+        when(streetService.findByStreetId(2)).thenReturn(secondStreet);
 
-        restaurantStreetService.save(restaurant,restaurantStreets);
+        restaurantStreetService.saveRestaurantStreets(restaurant,restaurantStreets);
 
-        Mockito.verify(streetService, times(1)).findById(1);
-        Mockito.verify(streetService, times(1)).findById(2);
-        Mockito.verify(restaurantStreetDAO, times(2)).save(any(RestaurantStreet.class));
+        Mockito.verify(streetService, times(1)).findByStreetId(1);
+        Mockito.verify(streetService, times(1)).findByStreetId(2);
+        Mockito.verify(restaurantStreetDAO, times(2)).saveRestaurantStreet(any(RestaurantStreet.class));
     }
 }

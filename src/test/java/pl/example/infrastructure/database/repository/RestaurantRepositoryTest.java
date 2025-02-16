@@ -83,24 +83,24 @@ class RestaurantRepositoryTest {
 
 
     @Test
-    void shouldFindById() {
+    void shouldFindRestaurantById() {
         when(restaurantJpaRepository.findById(5)).thenReturn(Optional.ofNullable(restaurantEntity1));
         when(restaurantEntityMapper.mapFromEntity(restaurantEntity1)).thenReturn(restaurant1);
 
-        Optional<Restaurant> result = restaurantRepository.findById(5);
+        Optional<Restaurant> result = restaurantRepository.findRestaurantById(5);
 
         Assertions.assertThat(result).isPresent();
         assertEquals(restaurant1, result.get());
     }
 
     @Test
-    void shouldFindAll() {
+    void shouldFindAllRestaurants() {
         when(restaurantJpaRepository.findAll()).thenReturn(List.of(restaurantEntity, restaurantEntity1, restaurantEntity2));
         when(restaurantEntityMapper.mapFromEntity(restaurantEntity)).thenReturn(restaurant);
         when(restaurantEntityMapper.mapFromEntity(restaurantEntity1)).thenReturn(restaurant1);
         when(restaurantEntityMapper.mapFromEntity(restaurantEntity2)).thenReturn(restaurant2);
 
-        List<Restaurant> allRestaurants = restaurantRepository.findAll();
+        List<Restaurant> allRestaurants = restaurantRepository.findAllRestaurants();
 
         assertNotNull(allRestaurants);
         assertEquals(3, allRestaurants.size());
@@ -136,11 +136,11 @@ class RestaurantRepositoryTest {
     }
 
     @Test
-    void shouldFindAllByStreetName() {
+    void shouldFindAllRestaurantsByStreetName() {
 
         when(restaurantJpaRepository.findAllByStreetName("Testowa")).thenReturn(List.of(restaurantEntity));
 
-        List<Restaurant> allByStreetName = restaurantRepository.findAllByStreetName("Testowa");
+        List<Restaurant> allByStreetName = restaurantRepository.findAllRestaurantByStreetName("Testowa");
 
         assertEquals(1, allByStreetName.size());
 

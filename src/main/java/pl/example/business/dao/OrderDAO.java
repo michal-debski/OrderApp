@@ -12,14 +12,14 @@ public interface OrderDAO {
 
     void deleteOrder(Order entity);
 
-    Optional<Order> findByOrderNumber(String orderNumber);
+    Optional<Order> findOrderByOrderNumber(String orderNumber);
 
-    List<Order> findByClientId(Integer id);
+    List<Order> findOrderByClientId(Integer id);
 
 
     BigDecimal getTotalOrderPrice(Integer id);
 
     List<Order> findAll();
 
-    void update(Order order);
+    void updateOrder(Order order);
 }

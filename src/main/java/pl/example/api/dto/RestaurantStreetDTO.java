@@ -6,7 +6,10 @@ import pl.example.domain.Street;
 
 
 @Builder
-public record RestaurantStreetDTO(Integer id, Street street, Restaurant restaurant) {
+public record RestaurantStreetDTO(
+        Integer id,
+        Street street,
+        Restaurant restaurant) {
 
 
 }

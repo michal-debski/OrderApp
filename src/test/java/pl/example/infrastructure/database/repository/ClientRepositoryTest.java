@@ -53,11 +53,11 @@ class ClientRepositoryTest {
     }
 
     @Test
-    void shouldFindByEmail() {
+    void shouldFindClientByEmail() {
         when(clientJpaRepository.findByEmail("jan.testowy@gmail.com")).thenReturn(Optional.of(clientEntity));
         when(clientEntityMapper.mapFromEntity(clientEntity)).thenReturn(client);
 
-        Optional<Client> clientFound = clientRepository.findByEmail("jan.testowy@gmail.com");
+        Optional<Client> clientFound = clientRepository.findClientByEmail("jan.testowy@gmail.com");
 
         org.assertj.core.api.Assertions.assertThat(clientFound).isPresent();
         assertEquals(client, clientFound.get());
@@ -81,11 +81,11 @@ class ClientRepositoryTest {
 
 
     @Test
-    void shouldFindById() {
+    void shouldFindClientById() {
         when(clientJpaRepository.findById(1)).thenReturn(Optional.of(clientEntity));
         when(clientEntityMapper.mapFromEntity(clientEntity)).thenReturn(client);
 
-        Optional<Client> clientById = clientRepository.findById(1);
+        Optional<Client> clientById = clientRepository.findClientById(1);
 
         org.assertj.core.api.Assertions.assertThat(clientById).isPresent();
         Assertions.assertEquals(client, clientById.get());

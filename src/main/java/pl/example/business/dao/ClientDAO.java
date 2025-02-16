@@ -7,11 +7,11 @@ import java.util.Optional;
 public interface ClientDAO {
 
 
-    Optional<Client> findByEmail(String email);
+    Optional<Client> findClientByEmail(String email);
 
     Client saveClient(Client client);
 
-    Optional<Client> findById(Integer clientId);
+    Optional<Client> findClientById(Integer clientId);
 
     Client findLoggedClient();
 }

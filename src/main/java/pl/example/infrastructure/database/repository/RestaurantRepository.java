@@ -35,13 +35,13 @@ public class RestaurantRepository implements RestaurantDAO {
 
 
     @Override
-    public Optional<Restaurant> findById(Integer id) {
+    public Optional<Restaurant> findRestaurantById(Integer id) {
         return restaurantJpaRepository.findById(id)
                 .map(restaurantEntityMapper::mapFromEntity);
     }
 
     @Override
-    public List<Restaurant> findAll() {
+    public List<Restaurant> findAllRestaurants() {
         return restaurantJpaRepository.findAll().stream()
                 .map(restaurantEntityMapper::mapFromEntity)
                 .toList();
@@ -65,7 +65,7 @@ public class RestaurantRepository implements RestaurantDAO {
     }
 
     @Override
-    public List<Restaurant> findAllByStreetName(String street) {
+    public List<Restaurant> findAllRestaurantByStreetName(String street) {
         return restaurantJpaRepository.findAllByStreetName(street)
                 .stream().map(restaurantEntityMapper::mapFromEntity)
                 .toList();

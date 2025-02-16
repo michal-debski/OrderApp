@@ -21,13 +21,13 @@ public class MealMenuService {
     private final MealDAO mealDAO;
 
     public List<Meal> findAllMeals() {
-        List<Meal> meals = mealDAO.findAll();
+        List<Meal> meals = mealDAO.findAllMeals();
         log.info("Available meals: [{}]", meals);
         return meals;
     }
 
     public List<Meal> findAllBySelectedRestaurant(Integer id) {
-        List<Meal> selectedMealsByRestaurant = mealDAO.findAllBySelectedRestaurant(id);
+        List<Meal> selectedMealsByRestaurant = mealDAO.findAllMealsBySelectedRestaurant(id);
         log.info("Available meals for restaurant: [{}]", selectedMealsByRestaurant);
         return selectedMealsByRestaurant;
     }
@@ -35,7 +35,7 @@ public class MealMenuService {
     @Transactional
     public Meal makeMealForRestaurant(Meal meal, Restaurant restaurant) {
         log.info("Making meal for restaurant: [{}]", restaurant);
-        return mealDAO.save(meal, restaurant);
+        return mealDAO.saveMeal(meal, restaurant);
     }
 
     public void deleteMeal(Integer id) {
@@ -45,12 +45,12 @@ public class MealMenuService {
 
     public Optional<Meal> findMealById(Integer mealId) {
          log.info("Trying to find meal with id: [{}]", mealId);
-        return mealDAO.findById(mealId);
+        return mealDAO.findMealById(mealId);
     }
 
     @Transactional
     public void updateMeal(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant) {
         log.info("Trying to update meal with name: [{}], description: [{}]", name, description);
-        mealDAO.update(meal, name, description, price, restaurant);
+        mealDAO.updateMeal(meal, name, description, price, restaurant);
     }
 }

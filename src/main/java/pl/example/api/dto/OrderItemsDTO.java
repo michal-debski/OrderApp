@@ -6,5 +6,7 @@ import java.util.List;
 
 
 @Builder
-public record OrderItemsDTO(List<OrderItemDTO> orderItems) {
+public record OrderItemsDTO(
+        List<OrderItemDTO> orderItems
+) {
 }

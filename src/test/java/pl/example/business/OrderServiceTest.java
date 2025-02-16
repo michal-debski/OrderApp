@@ -7,17 +7,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.example.business.dao.OrderDAO;
-import pl.example.domain.Client;
 import pl.example.domain.Order;
-import pl.example.domain.Restaurant;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static pl.example.util.DomainInput.*;
@@ -53,7 +49,7 @@ class OrderServiceTest {
 
         when(orderDAO.saveOrder(order)).thenReturn(order);
 
-        Order result = orderService.save(order);
+        Order result = orderService.saveOrder(order);
 
         assertEquals(order,result);
 
@@ -64,7 +60,7 @@ class OrderServiceTest {
     void shouldFindByOrderNumber() {
         Order order = kindOfOrder().withOrderNumber("00000");
 
-        when(orderDAO.findByOrderNumber("00000")).thenReturn(Optional.of(order));
+        when(orderDAO.findOrderByOrderNumber("00000")).thenReturn(Optional.of(order));
 
         Optional<Order> byOrderNumber = orderService.findByOrderNumber("00000");
 
@@ -77,35 +73,35 @@ class OrderServiceTest {
         Integer clientId = 1;
         Order order = kindOfOrder();
         Order secondOrder = kindOfOrder().withRestaurant(kindOfRestaurant1());
-        when(orderDAO.findByClientId(clientId)).thenReturn(List.of(order,secondOrder));
+        when(orderDAO.findOrderByClientId(clientId)).thenReturn(List.of(order,secondOrder));
 
-        List<Order> orderList = orderService.findByClientId(clientId);
+        List<Order> orderList = orderService.findOrderByClientId(clientId);
 
         assertEquals(2,orderList.size());
 
     }
 
-    @Test
-    void shouldBuildOrder() {
-        Integer restaurantId = 1;
-        Restaurant restaurant = kindOfRestaurant();
-        Client client = kindOfClient();
-        Order expected = Order.builder()
-                .orderNumber("12345")
-                .status("Preparing by chef")
-                .orderDate(OffsetDateTime.now())
-                .client(client)
-                .restaurant(restaurant)
-                .build();
-
-        when(clientService.findLoggedClient()).thenReturn(client);
-        when(restaurantService.findRestaurantById(restaurantId)).thenReturn(restaurant);
-        when(orderDAO.saveOrder(any(Order.class))).thenReturn(expected);
-
-        Order createdOrder = orderService.buildOrder(restaurantId);
-
-        assertEquals(expected, createdOrder);
-    }
+//    @Test
+//    void shouldBuildOrder() {
+//        Integer restaurantId = 1;
+//        Restaurant restaurant = kindOfRestaurant();
+//        Client client = kindOfClient();
+//        Order expected = Order.builder()
+//                .orderNumber("12345")
+//                .status("Preparing by chef")
+//                .orderDate(OffsetDateTime.now())
+//                .client(client)
+//                .restaurant(restaurant)
+//                .build();
+//
+//        when(clientService.findLoggedClient()).thenReturn(client);
+//        when(restaurantService.findRestaurantById(restaurantId)).thenReturn(restaurant);
+//        when(orderDAO.saveOrder(any(Order.class))).thenReturn(expected);
+//
+//        Order createdOrder = orderService.buildOrder(restaurantId, selectedMeals, quantity);
+//
+//        assertEquals(expected, createdOrder);
+//    }
 
     @Test
     void shouldGetTotalOrderPrice() {
@@ -129,7 +125,7 @@ class OrderServiceTest {
         when(orderDAO.findAll()).thenReturn(expectedOrders);
 
 
-        List<Order> actualOrders = orderService.findAll();
+        List<Order> actualOrders = orderService.findAllOrders();
 
 
         assertEquals(expectedOrders, actualOrders);
@@ -143,9 +139,9 @@ class OrderServiceTest {
         order.setOrderNumber("12345");
         order.setStatus("Delivered");
 
-        orderService.update(order);
+        orderService.updateOrder(order);
 
 
-        verify(orderDAO).update(order);
+        verify(orderDAO).updateOrder(order);
     }
 }

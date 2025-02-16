@@ -28,7 +28,12 @@ public class OrderService {
 
 
     public void deleteOrder(Order order) {
-        orderDAO.deleteOrder(order);
+        if (!order.isCancellable()){
+            orderItemService.deleteOrderItemsByOrderId(order.getOrderId());
+            orderDAO.deleteOrder(order);
+        } else {
+            log.warn("You cannot delete order, because order has been ordered more than 10 minutes ago.");
+        }
     }
 
 
@@ -38,13 +43,13 @@ public class OrderService {
 
 
     public Optional<Order> findByOrderNumber(String orderNumber) {
-        return orderDAO.findByOrderNumber(orderNumber);
+        return orderDAO.findOrderByOrderNumber(orderNumber);
     }
 
 
     @Transactional
     public List<Order> findOrderByClientId(Integer clientId) {
-        return orderDAO.findByClientId(clientId);
+        return orderDAO.findOrderByClientId(clientId);
     }
 
     @Transactional
@@ -72,6 +77,19 @@ public class OrderService {
         }
     }
 
+    public BigDecimal getTotalOrderPrice(Integer id) {
+        return orderDAO.getTotalOrderPrice(id);
+    }
+
+    public List<Order> findAllOrders() {
+        return orderDAO.findAll();
+    }
+
+    @Transactional
+    public void updateOrder(Order order) {
+        orderDAO.updateOrder(order);
+    }
+
     private String generateOrderNumber() {
         return "%s%s%s%s-%s%s".formatted(
                 randomChar('A', 'Z'),
@@ -81,10 +99,6 @@ public class OrderService {
                 randomInt(10, 100),
                 randomInt(10, 100)
         );
-    }
-
-    public BigDecimal getTotalOrderPrice(Integer id) {
-        return orderDAO.getTotalOrderPrice(id);
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -97,12 +111,4 @@ public class OrderService {
         return (char) new Random().nextInt(max - min) + min;
     }
 
-    public List<Order> findAllOrders() {
-        return orderDAO.findAll();
-    }
-
-    @Transactional
-    public void updateOrder(Order order) {
-        orderDAO.update(order);
-    }
 }

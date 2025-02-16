@@ -8,9 +8,17 @@ import java.util.Set;
 
 
 @Builder
-
-public record OrderDTO(Integer orderId, String orderNumber, BigDecimal totalPrice, String status, String orderDate,
-                       ClientDTO client, RestaurantDTO restaurant, Set<OrderItem> orderItems) {
+public record OrderDTO(
+        Integer orderId,
+        String orderNumber,
+        BigDecimal totalPrice,
+        String status,
+        String orderDate,
+        ClientDTO client,
+        RestaurantDTO restaurant,
+        Set<OrderItem> orderItems,
+        boolean isCancellable
+) {
 
 
 }

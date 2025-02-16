@@ -34,13 +34,13 @@ public class OrderRepository implements OrderDAO {
     }
 
     @Override
-    public Optional<Order> findByOrderNumber(String orderNumber) {
+    public Optional<Order> findOrderByOrderNumber(String orderNumber) {
         return orderJpaRepository.findByOrderNumber(orderNumber)
                 .map(orderEntityMapper::mapFromEntity);
     }
 
     @Override
-    public List<Order> findByClientId(Integer id) {
+    public List<Order> findOrderByClientId(Integer id) {
         return orderJpaRepository.findByClientId(id).stream()
                 .map(orderEntityMapper::mapFromEntity).toList();
     }
@@ -52,7 +52,7 @@ public class OrderRepository implements OrderDAO {
     }
 
     @Override
-    public void update(Order order) {
+    public void updateOrder(Order order) {
         orderJpaRepository.save(orderEntityMapper.mapToEntity(order));
     }
 

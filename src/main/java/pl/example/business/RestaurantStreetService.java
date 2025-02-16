@@ -22,7 +22,7 @@ public class RestaurantStreetService {
     private final StreetService streetService;
 
     public List<RestaurantStreet> findAllRestaurantStreets() {
-        List<RestaurantStreet> restaurantStreets = restaurantStreetDAO.findAll();
+        List<RestaurantStreet> restaurantStreets = restaurantStreetDAO.findAllRestaurantStreets();
         log.info("Available streets: [{}]", restaurantStreets.size());
         return restaurantStreets;
     }
@@ -43,7 +43,7 @@ public class RestaurantStreetService {
     private void saveAllGivenStreets(List<RestaurantStreet> restaurantStreetsList) {
         for (RestaurantStreet restaurantStreet : restaurantStreetsList) {
 
-            restaurantStreetDAO.save(restaurantStreet);
+            restaurantStreetDAO.saveRestaurantStreet(restaurantStreet);
 
         }
     }

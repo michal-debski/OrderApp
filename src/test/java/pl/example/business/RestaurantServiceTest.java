@@ -33,9 +33,9 @@ class RestaurantServiceTest {
     @Test
     void shouldFindAll() {
 
-        when(restaurantDAO.findAll()).thenReturn(List.of(kindOfRestaurant(), kindOfRestaurant1()));
+        when(restaurantDAO.findAllRestaurants()).thenReturn(List.of(kindOfRestaurant(), kindOfRestaurant1()));
 
-        List<Restaurant> result = restaurantService.findAll();
+        List<Restaurant> result = restaurantService.findAllRestaurants();
 
         assertEquals(2, result.size());
     }
@@ -44,7 +44,7 @@ class RestaurantServiceTest {
     void shouldFindRestaurantById() {
         Restaurant restaurant = kindOfRestaurant();
 
-        when(restaurantDAO.findById(4)).thenReturn(Optional.of(restaurant));
+        when(restaurantDAO.findRestaurantById(4)).thenReturn(Optional.of(restaurant));
 
         Restaurant result = restaurantService.findRestaurantById(4);
 
@@ -94,11 +94,11 @@ class RestaurantServiceTest {
     void shouldFindAllByStreetName() {
         String streetName = "Testowa";
 
-        when(restaurantDAO.findAllByStreetName(streetName)).thenReturn(List.of(kindOfRestaurant(), kindOfRestaurant1()));
+        when(restaurantDAO.findAllRestaurantByStreetName(streetName)).thenReturn(List.of(kindOfRestaurant(), kindOfRestaurant1()));
         List<Restaurant> allByStreetName = restaurantService.findAllByStreetName(streetName);
 
         assertEquals(2, allByStreetName.size());
-        Mockito.verify(restaurantDAO).findAllByStreetName(streetName);
+        Mockito.verify(restaurantDAO).findAllRestaurantByStreetName(streetName);
 
     }
 }

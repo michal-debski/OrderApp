@@ -68,23 +68,23 @@ class OrderRepositoryTest {
     }
 
     @Test
-    void shouldFindByOrderNumber() {
+    void shouldFindOrderByOrderNumber() {
 
         when(orderJpaRepository.findByOrderNumber("123")).thenReturn(Optional.of(orderEntity));
         when(orderEntityMapper.mapFromEntity(orderEntity)).thenReturn(order);
 
-        Optional<Order> byOrderNumber = orderRepository.findByOrderNumber("123");
+        Optional<Order> byOrderNumber = orderRepository.findOrderByOrderNumber("123");
 
         org.assertj.core.api.Assertions.assertThat(byOrderNumber).isPresent();
         Assertions.assertEquals(order,byOrderNumber.get());
     }
 
     @Test
-    void shouldFindByClientId() {
+    void shouldFindOrderByClientId() {
 
         when(orderJpaRepository.findByClientId(4)).thenReturn(List.of(orderEntity));
         when(orderEntityMapper.mapFromEntity(orderEntity)).thenReturn(order);
-        List<Order> orderList = orderRepository.findByClientId(4);
+        List<Order> orderList = orderRepository.findOrderByClientId(4);
 
         Assertions.assertEquals(1, orderList.size());
     }
@@ -101,10 +101,10 @@ class OrderRepositoryTest {
     }
 
     @Test
-    void shouldUpdate() {
+    void shouldUpdateOrder() {
         when(orderEntityMapper.mapToEntity(order)).thenReturn(orderEntity);
 
-        orderRepository.update(order);
+        orderRepository.updateOrder(order);
 
         verify(orderJpaRepository, times(1)).save(orderEntity);
     }

@@ -10,6 +10,8 @@ import pl.example.api.dto.mapper.OrderMapper;
 import pl.example.business.OrderService;
 import pl.example.domain.Order;
 
+import static java.lang.String.format;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/restaurantOwner/orders")
@@ -38,9 +40,9 @@ public class RestaurantOwnerOrderController {
     ) {
 
         Order orderByOrderNumber = orderService.findByOrderNumber(orderNumber)
-                .orElseThrow(
-                        () -> new NotFoundException("Order with order number [%s] does not exist".formatted(orderNumber)
-                        ));
+                .orElseThrow(() ->
+                        new NotFoundException("Order with order number [%s] does not exist".formatted(orderNumber))
+                );
         OrderDTO orderDTO = orderMapper.mapToDTO(orderByOrderNumber);
 
         model.addAttribute("order", orderDTO);
@@ -53,12 +55,12 @@ public class RestaurantOwnerOrderController {
             @ModelAttribute("order") OrderDTO orderDTO
     ) {
         Order orderByOrderNumber = orderService.findByOrderNumber(orderNumber)
-                .orElseThrow(
-                        () -> new NotFoundException("Order with order number [%s] does not exist".formatted(orderNumber)
-                        ));
+                .orElseThrow(() ->
+                        new NotFoundException("Order with order number [%s] does not exist".formatted(orderNumber))
+                );
         orderByOrderNumber.setStatus(orderDTO.status());
         orderService.updateOrder(orderByOrderNumber);
-        return String.format("redirect:/restaurantOwner/orders", orderNumber);
+        return format("redirect:/restaurantOwner/orders", orderNumber);
 
     }
 

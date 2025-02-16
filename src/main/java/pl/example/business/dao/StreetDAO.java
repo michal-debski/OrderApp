@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface StreetDAO {
 
-    Page<Street> findAll(Pageable pageable);
-    Optional<Street> findById(Integer streetId);
+    Page<Street> findAllStreets(Pageable pageable);
+    Optional<Street> findStreetById(Integer streetId);
 }

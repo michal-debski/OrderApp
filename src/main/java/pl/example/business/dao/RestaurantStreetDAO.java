@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface RestaurantStreetDAO {
 
-    List<RestaurantStreet> findAll();
+    List<RestaurantStreet> findAllRestaurantStreets();
 
-    RestaurantStreet save(RestaurantStreet restaurantStreet);
+    RestaurantStreet saveRestaurantStreet(RestaurantStreet restaurantStreet);
 
 }

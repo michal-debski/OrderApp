@@ -47,13 +47,13 @@ class StreetRepositoryTest {
     }
 
     @Test
-    void shouldFindAll() {
+    void shouldFindAllStreets() {
         Pageable pageable = PageRequest.of(0, 10);
         Page<StreetEntity> streetEntityPage = new PageImpl<>(Collections.singletonList(streetEntity));
         when(streetJpaRepository.findAll(pageable)).thenReturn(streetEntityPage);
         when(streetEntityMapper.mapFromEntity(any(StreetEntity.class))).thenReturn(street);
 
-        Page<Street> result = streetRepository.findAll(pageable);
+        Page<Street> result = streetRepository.findAllStreets(pageable);
 
         assertNotNull(result);
         assertEquals(1, result.getTotalElements());
@@ -61,11 +61,11 @@ class StreetRepositoryTest {
     }
 
     @Test
-    void shouldFindById() {
+    void shouldFindStreetById() {
         when(streetJpaRepository.findById(1)).thenReturn(Optional.of(streetEntity));
         when(streetEntityMapper.mapFromEntity(streetEntity)).thenReturn(street);
 
-        Street result = streetRepository.findById(1).orElseThrow();
+        Street result = streetRepository.findStreetById(1).orElseThrow();
 
         assertNotNull(result);
         assertEquals(1, result.getStreetId());

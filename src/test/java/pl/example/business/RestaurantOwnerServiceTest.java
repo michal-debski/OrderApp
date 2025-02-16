@@ -26,9 +26,9 @@ class RestaurantOwnerServiceTest {
     void shouldFindById() {
         RestaurantOwner restaurantOwner = kindOfRestaurantOwner().withRestaurantOwnerId(1);
 
-        when(restaurantOwnerDAO.findById(1)).thenReturn(restaurantOwner);
+        when(restaurantOwnerDAO.findRestaurantOwnerById(1)).thenReturn(restaurantOwner);
 
-        RestaurantOwner result = restaurantOwnerService.findById(restaurantOwner.getRestaurantOwnerId());
+        RestaurantOwner result = restaurantOwnerService.findRestaurantOwnerById(restaurantOwner.getRestaurantOwnerId());
 
         assertEquals(restaurantOwner, result);
     }

@@ -41,20 +41,20 @@ class CategoryRepositoryTest {
     }
 
     @Test
-    void findAll() {
+    void findAllCategories() {
         when(categoryJpaRepository.findAll()).thenReturn(List.of(categoryEntity, secondCategoryEntity));
         when(categoryEntityMapper.mapFromEntity(categoryEntity)).thenReturn(category);
         when(categoryEntityMapper.mapFromEntity(secondCategoryEntity)).thenReturn(secondCategory);
-        List<Category> categoryList = categoryRepository.findAll();
+        List<Category> categoryList = categoryRepository.findAllCategories();
 
         Assertions.assertEquals(2, categoryList.size());
     }
 
     @Test
-    void findById() {
+    void findCategoryById() {
         when(categoryJpaRepository.findById(1)).thenReturn(Optional.of(categoryEntity));
         when(categoryEntityMapper.mapFromEntity(categoryEntity)).thenReturn(category);
-        Optional<Category> categoryById = categoryRepository.findById(1);
+        Optional<Category> categoryById = categoryRepository.findCategoryById(1);
         Assertions.assertEquals(categoryById.get().getName(), "MAIN DISH");
     }
 }

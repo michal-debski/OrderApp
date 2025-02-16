@@ -13,14 +13,14 @@ public interface RestaurantDAO {
 
 
 
-    Optional<Restaurant> findById(Integer id);
+    Optional<Restaurant> findRestaurantById(Integer id);
 
-    List<Restaurant> findAll();
+    List<Restaurant> findAllRestaurants();
 
     Restaurant saveRestaurant(Restaurant restaurant,  RestaurantOwner restaurantOwner, Address address);
 
     void deleteRestaurant(Integer restaurantId);
 
 
-    List<Restaurant> findAllByStreetName(String street);
+    List<Restaurant> findAllRestaurantByStreetName(String street);
 }

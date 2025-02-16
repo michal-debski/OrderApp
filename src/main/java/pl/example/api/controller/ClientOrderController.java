@@ -85,7 +85,6 @@ public class ClientOrderController {
     ) {
         Order order = orderService.findByOrderNumber(orderNumber).orElseThrow();
 
-        orderItemService.deleteOrderItemsByOrderId(order.getOrderId());
         orderService.deleteOrder(order);
 
         return "redirect:/client/orders";

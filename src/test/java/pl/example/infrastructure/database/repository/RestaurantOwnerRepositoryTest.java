@@ -52,11 +52,11 @@ class RestaurantOwnerRepositoryTest {
     }
 
     @Test
-    void shouldFindById() {
+    void shouldFindRestaurantOwnerById() {
         when(restaurantOwnerJpaRepository.findById(1)).thenReturn(Optional.of(restaurantOwnerEntity));
         when(restaurantOwnerEntityMapper.mapFromEntity(restaurantOwnerEntity)).thenReturn(restaurantOwner);
 
-        RestaurantOwner restaurantOwnerFound = restaurantOwnerRepository.findById(1);
+        RestaurantOwner restaurantOwnerFound = restaurantOwnerRepository.findRestaurantOwnerById(1);
         Assertions.assertEquals(restaurantOwner, restaurantOwnerFound);
     }
 

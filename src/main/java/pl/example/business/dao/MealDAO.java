@@ -10,18 +10,18 @@ import java.util.Set;
 
 public interface MealDAO {
 
-    Set<Meal> findByCategory(Integer categoryId);
+    Set<Meal> findMealsByCategory(Integer categoryId);
 
-    List<Meal> findAll();
+    List<Meal> findAllMeals();
 
-    Meal save(Meal meal, Restaurant restaurant);
+    Meal saveMeal(Meal meal, Restaurant restaurant);
 
     void deleteById(Integer id);
 
-    List<Meal> findAllBySelectedRestaurant(Integer id);
+    List<Meal> findAllMealsBySelectedRestaurant(Integer id);
 
-    Optional<Meal> findById(Integer mealId);
+    Optional<Meal> findMealById(Integer mealId);
 
-    void update(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant);
+    void updateMeal(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant);
 
 }

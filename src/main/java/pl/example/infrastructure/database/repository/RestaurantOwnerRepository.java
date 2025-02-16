@@ -22,7 +22,7 @@ public class RestaurantOwnerRepository implements RestaurantOwnerDAO {
     private final UserJpaRepository userJpaRepository;
 
     @Override
-    public RestaurantOwner findById(Integer id) {
+    public RestaurantOwner findRestaurantOwnerById(Integer id) {
         return restaurantOwnerJpaRepository.findById(id)
                 .map(restaurantOwnerEntityMapper::mapFromEntity).orElseThrow(
                         () -> new NotFoundException("Restaurant Owner not found")

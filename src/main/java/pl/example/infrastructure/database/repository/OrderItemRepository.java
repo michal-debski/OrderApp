@@ -15,7 +15,7 @@ public class OrderItemRepository implements OrderItemDAO {
     private final OrderItemMapperEntity orderItemMapperEntity;
 
     @Override
-    public OrderItem save(OrderItem orderItem) {
+    public OrderItem saveOrderItem(OrderItem orderItem) {
         OrderItemEntity orderEntity = orderItemMapperEntity.mapToEntity(orderItem);
         OrderItemEntity save = orderItemJpaRepository.save(orderEntity);
         return orderItemMapperEntity.mapFromEntity(save);

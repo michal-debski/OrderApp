@@ -4,7 +4,7 @@ import pl.example.domain.OrderItem;
 
 public interface OrderItemDAO {
 
-    OrderItem save(OrderItem orderItem);
+    OrderItem saveOrderItem(OrderItem orderItem);
 
 
     void deleteOrderItemsByOrderId(Integer orderId);

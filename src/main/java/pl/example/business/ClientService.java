@@ -16,7 +16,7 @@ public class ClientService {
 
 
     public Client findClientById(Integer id) {
-        return clientDAO.findById(id).orElseThrow();
+        return clientDAO.findClientById(id).orElseThrow();
     }
 
     @Transactional

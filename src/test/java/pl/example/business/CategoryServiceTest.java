@@ -31,9 +31,9 @@ class CategoryServiceTest {
         Category soup = kindOfCategory().withName("SOUP");
         Category drink = kindOfCategory().withName("DRINK");
 
-        when(categoryDAO.findAll()).thenReturn(List.of(mainDish, dessert, soup, drink));
+        when(categoryDAO.findAllCategories()).thenReturn(List.of(mainDish, dessert, soup, drink));
 
-        List<Category> allCategories = categoryService.findAll();
+        List<Category> allCategories = categoryService.findAllCategories();
 
         assertEquals(4, allCategories.size());
     }
@@ -42,9 +42,9 @@ class CategoryServiceTest {
     void findById() {
         Category category = kindOfCategory().withCategoryId(1);
 
-        when(categoryDAO.findById(1)).thenReturn(Optional.of(category));
+        when(categoryDAO.findCategoryById(1)).thenReturn(Optional.of(category));
 
-        Category result = categoryService.findById(category.getCategoryId());
+        Category result = categoryService.findCategoryById(category.getCategoryId());
 
         assertEquals(category, result);
     }

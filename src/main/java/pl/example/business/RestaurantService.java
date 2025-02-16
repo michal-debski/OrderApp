@@ -23,14 +23,14 @@ public class RestaurantService {
 
 
     public List<Restaurant> findAllRestaurants() {
-        List<Restaurant> restaurants = restaurantDAO.findAll();
+        List<Restaurant> restaurants = restaurantDAO.findAllRestaurants();
         log.info("Available restaurants: [{}]", restaurants.size());
         return restaurants;
     }
 
     @Transactional
     public Restaurant findRestaurantById(Integer id) {
-        Optional<Restaurant> restaurant = restaurantDAO.findById(id);
+        Optional<Restaurant> restaurant = restaurantDAO.findRestaurantById(id);
         if (restaurant.isEmpty()) {
             throw new NotFoundException("Could not find restaurant by name: [%s]".formatted(id));
         }
@@ -57,7 +57,7 @@ public class RestaurantService {
 
     public List<Restaurant> findAllByStreetName(String street) {
         log.info("Trying to find all Restaurants by street{}:", street);
-        return restaurantDAO.findAllByStreetName(street);
+        return restaurantDAO.findAllRestaurantByStreetName(street);
     }
 }
 

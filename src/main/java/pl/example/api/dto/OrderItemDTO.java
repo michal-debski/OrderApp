@@ -5,7 +5,12 @@ import lombok.Builder;
 
 @Builder
 
-public record OrderItemDTO(Integer orderItemId, Integer quantity, MealDTO meal, OrderDTO order) {
+public record OrderItemDTO(
+        Integer orderItemId,
+        Integer quantity,
+        MealDTO meal,
+        OrderDTO order
+) {
 
 
 }

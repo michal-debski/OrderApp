@@ -3,6 +3,7 @@ package pl.example.domain;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -22,4 +23,8 @@ public class Order {
     Restaurant restaurant;
 
     Set<OrderItem> orderItems;
+
+    public boolean isCancellable(){
+        return LocalDateTime.now().isBefore(orderDate.toLocalDateTime().plusMinutes(10));
+    }
 }

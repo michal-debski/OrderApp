@@ -29,21 +29,21 @@ public class MealRepository implements MealDAO {
 
 
     @Override
-    public Set<Meal> findByCategory(Integer categoryId) {
+    public Set<Meal> findMealsByCategory(Integer categoryId) {
         return mealJpaRepository.findByCategory(categoryId).stream()
                 .map(mealEntityMapper::mapFromEntity).collect(Collectors.toSet());
     }
 
 
     @Override
-    public List<Meal> findAll() {
+    public List<Meal> findAllMeals() {
         return mealJpaRepository.findAll().stream()
                 .map(mealEntityMapper::mapFromEntity)
                 .toList();
     }
 
     @Override
-    public Meal save(Meal meal, Restaurant restaurant) {
+    public Meal saveMeal(Meal meal, Restaurant restaurant) {
         MealEntity mealEntity = mealEntityMapper.mapToEntity(meal);
         RestaurantEntity restaurantEntity = getRestaurantEntityByName(restaurant);
         mealEntity.setRestaurant(restaurantEntity);
@@ -58,19 +58,19 @@ public class MealRepository implements MealDAO {
     }
 
     @Override
-    public List<Meal> findAllBySelectedRestaurant(Integer id) {
+    public List<Meal> findAllMealsBySelectedRestaurant(Integer id) {
         return mealJpaRepository.findAllBySelectedRestaurant(id)
                 .stream().map(mealEntityMapper::mapFromEntity).toList();
     }
 
     @Override
-    public Optional<Meal> findById(Integer mealId) {
+    public Optional<Meal> findMealById(Integer mealId) {
         return mealJpaRepository.findById(mealId)
                 .map(mealEntityMapper::mapFromEntity);
     }
 
     @Override
-    public void update(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant) {
+    public void updateMeal(Meal meal, String name, String description, BigDecimal price, Restaurant restaurant) {
         meal.setName(name);
         meal.setDescription(description);
         meal.setPrice(price);

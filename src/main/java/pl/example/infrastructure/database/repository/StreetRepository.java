@@ -19,14 +19,14 @@ public class StreetRepository implements StreetDAO {
     private final StreetEntityMapper streetEntityMapper;
 
     @Override
-    public Page<Street> findAll(Pageable pageable) {
+    public Page<Street> findAllStreets(Pageable pageable) {
         return streetJpaRepository.findAll(pageable)
                 .map(streetEntityMapper::mapFromEntity);
 
     }
 
     @Override
-    public Optional<Street> findById(Integer streetId) {
+    public Optional<Street> findStreetById(Integer streetId) {
         return streetJpaRepository.findById(streetId)
                 .map(streetEntityMapper::mapFromEntity);
     }

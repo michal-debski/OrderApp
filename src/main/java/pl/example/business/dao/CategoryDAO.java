@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface CategoryDAO {
 
-    List<Category> findAll();
+    List<Category> findAllCategories();
 
-    Optional<Category> findById(Integer Id);
+    Optional<Category> findCategoryById(Integer Id);
 
 
 }

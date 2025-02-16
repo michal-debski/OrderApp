@@ -4,5 +4,9 @@ import lombok.Builder;
 
 @Builder
 
-public record CategoryDTO(Integer categoryId, String name) {
+public record CategoryDTO(
+        Integer categoryId,
+        String name
+) {
+
 }

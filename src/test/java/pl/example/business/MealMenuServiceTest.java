@@ -33,9 +33,9 @@ class MealMenuServiceTest {
         Meal meal = kindOfMeal();
         Meal secondMeal = kindOfMeal1();
 
-        when(mealDAO.findAll()).thenReturn(List.of(meal, secondMeal));
+        when(mealDAO.findAllMeals()).thenReturn(List.of(meal, secondMeal));
 
-        List<Meal> allMeals = mealMenuService.findAll();
+        List<Meal> allMeals = mealMenuService.findAllMeals();
 
         assertEquals(2, allMeals.size());
     }
@@ -46,7 +46,7 @@ class MealMenuServiceTest {
         Meal meal = kindOfMeal();
         Meal secondMeal = kindOfMeal1();
 
-        when(mealDAO.findAllBySelectedRestaurant(restaurant.getRestaurantId())).thenReturn(List.of(meal, secondMeal));
+        when(mealDAO.findAllMealsBySelectedRestaurant(restaurant.getRestaurantId())).thenReturn(List.of(meal, secondMeal));
 
         List<Meal> allMealsBySelectedRestaurant = mealMenuService
                 .findAllBySelectedRestaurant(restaurant.getRestaurantId());
@@ -60,7 +60,7 @@ class MealMenuServiceTest {
         Restaurant restaurant = kindOfRestaurant();
         Meal meal = kindOfMeal();
 
-        when(mealDAO.save(meal, restaurant)).thenReturn(meal);
+        when(mealDAO.saveMeal(meal, restaurant)).thenReturn(meal);
 
         Meal createdMeal = mealMenuService.makeMealForRestaurant(meal, restaurant);
 
@@ -71,7 +71,7 @@ class MealMenuServiceTest {
     void delete() {
         Integer mealId = 1;
 
-        mealMenuService.delete(mealId);
+        mealMenuService.deleteMeal(mealId);
 
 
         verify(mealDAO).deleteById(mealId);
@@ -81,7 +81,7 @@ class MealMenuServiceTest {
     void findMealById() {
         Meal meal = kindOfMeal().withMealId(10);
 
-        when(mealDAO.findById(10)).thenReturn(Optional.of(meal));
+        when(mealDAO.findMealById(10)).thenReturn(Optional.of(meal));
 
         Optional<Meal> result = mealMenuService.findMealById(10);
 
@@ -97,9 +97,9 @@ class MealMenuServiceTest {
         meal.setName("testing meal");
         Restaurant restaurant = kindOfRestaurant();
         // When
-        mealMenuService.update(meal, meal.getName(), meal.getDescription(), meal.getPrice(), restaurant);
+        mealMenuService.updateMeal(meal, meal.getName(), meal.getDescription(), meal.getPrice(), restaurant);
 
         // Then
-        verify(mealDAO).update(meal, meal.getName(), meal.getDescription(), meal.getPrice(), restaurant);
+        verify(mealDAO).updateMeal(meal, meal.getName(), meal.getDescription(), meal.getPrice(), restaurant);
     }
 }

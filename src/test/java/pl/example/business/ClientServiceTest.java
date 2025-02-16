@@ -28,9 +28,9 @@ class ClientServiceTest {
     void findById() {
         Client client = kindOfClient().withClientId(1);
 
-        when(clientDAO.findById(1)).thenReturn(Optional.of(client));
+        when(clientDAO.findClientById(1)).thenReturn(Optional.of(client));
 
-        Client result = clientService.findById(client.getClientId());
+        Client result = clientService.findClientById(client.getClientId());
 
         assertEquals(client, result);
     }

@@ -37,9 +37,9 @@ class StreetServiceTest {
         Pageable pageable = PageRequest.of(0, 10);
         List<Street> streetList = List.of(kindOfStreet(), kindOfStreet1());
         Page<Street> streetsPage = new PageImpl<>(streetList, pageable, streetList.size());
-        when(streetDAO.findAll(pageable)).thenReturn(streetsPage);
+        when(streetDAO.findAllStreets(pageable)).thenReturn(streetsPage);
 
-        Page<Street> result = streetService.findAll(pageable);
+        Page<Street> result = streetService.findAllStreets(pageable);
         Assertions.assertThat(result).isNotEmpty();
         org.junit.jupiter.api.Assertions.assertEquals(2, result.getNumberOfElements());
     }
@@ -47,9 +47,9 @@ class StreetServiceTest {
     @Test
     void shouldFindById() {
         Street street = kindOfStreet().withStreetId(1);
-        when(streetDAO.findById(1)).thenReturn(Optional.of(street));
+        when(streetDAO.findStreetById(1)).thenReturn(Optional.of(street));
 
-        Street result = streetService.findById(1);
+        Street result = streetService.findByStreetId(1);
 
         assertEquals(street, result);
 
@@ -58,11 +58,11 @@ class StreetServiceTest {
     @Test
     void shouldThrowExceptionWhenNotFindById() {
         Integer id = 1;
-        when(streetDAO.findById(id)).thenReturn(Optional.empty());
+        when(streetDAO.findStreetById(id)).thenReturn(Optional.empty());
 
         EntityNotFoundException exception = assertThrows(
                 EntityNotFoundException.class,
-                () -> streetService.findById(id));
+                () -> streetService.findByStreetId(id));
         Assertions.assertThat(exception.getMessage())
                 .isEqualTo("Street with id: [%s] is not present in database".formatted(id));
     }

@@ -32,7 +32,6 @@ class AddressRepositoryTest {
     @BeforeEach
     public void setUp() {
         address = Address.builder().city("SampleCity").build();
-
         addressEntity = new AddressEntity();
         addressEntity.setCity("SampleCity");
     }

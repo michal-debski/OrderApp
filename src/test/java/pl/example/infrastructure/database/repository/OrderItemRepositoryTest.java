@@ -42,12 +42,12 @@ class OrderItemRepositoryTest {
 
 
     @Test
-    void shouldSave() {
+    void shouldSaveOrderItem() {
         when(orderItemMapperEntity.mapToEntity(orderItem)).thenReturn(orderItemEntity);
         when(orderItemJpaRepository.save(orderItemEntity)).thenReturn(orderItemEntity);
         when(orderItemMapperEntity.mapFromEntity(orderItemEntity)).thenReturn(orderItem);
 
-        OrderItem savedOrder = orderItemRepository.save(orderItem);
+        OrderItem savedOrder = orderItemRepository.saveOrderItem(orderItem);
 
         Assertions.assertEquals(orderItem, savedOrder);
     }

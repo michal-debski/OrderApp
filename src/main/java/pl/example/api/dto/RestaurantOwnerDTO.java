@@ -4,5 +4,10 @@ import lombok.Builder;
 
 @Builder
 
-public record RestaurantOwnerDTO(Integer restaurantOwnerId, String name, String surname, String email) {
+public record RestaurantOwnerDTO(
+        Integer restaurantOwnerId,
+        String name,
+        String surname,
+        String email
+) {
 }

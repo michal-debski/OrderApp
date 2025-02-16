@@ -57,36 +57,36 @@ class MealRepositoryTest {
     }
 
     @Test
-    void shouldFindByCategory() {
+    void shouldFindMealsByCategory() {
         when(mealJpaRepository.findByCategory(1)).thenReturn(Set.of(mealEntity, mealEntity1));
         when(mealEntityMapper.mapFromEntity(mealEntity)).thenReturn(meal);
         when(mealEntityMapper.mapFromEntity(mealEntity1)).thenReturn(meal1);
 
-        Set<Meal> meals = mealRepository.findByCategory(1);
+        Set<Meal> meals = mealRepository.findMealsByCategory(1);
         Assertions.assertEquals(2, meals.size());
 
     }
 
     @Test
-    void shouldFindAll() {
+    void shouldFindAllMeals() {
         when(mealJpaRepository.findAll()).thenReturn(List.of(mealEntity, mealEntity1));
         when(mealEntityMapper.mapFromEntity(mealEntity)).thenReturn(meal);
         when(mealEntityMapper.mapFromEntity(mealEntity1)).thenReturn(meal1);
 
-        List<Meal> meals = mealRepository.findAll();
+        List<Meal> meals = mealRepository.findAllMeals();
         Assertions.assertEquals(2, meals.size());
 
     }
 
     @Test
-    void shouldSave() {
+    void shouldSaveMeal() {
         when(restaurantJpaRepository.findByRestaurantName(restaurant.getRestaurantName()))
                 .thenReturn(Optional.of(restaurantEntity));
         when(mealEntityMapper.mapToEntity(meal1)).thenReturn(mealEntity1);
         when(mealJpaRepository.save(mealEntity1)).thenReturn(mealEntity1);
         when(mealEntityMapper.mapFromEntity(mealEntity1)).thenReturn(meal1);
 
-        Meal save = mealRepository.save(meal1, restaurant);
+        Meal save = mealRepository.saveMeal(meal1, restaurant);
         Assertions.assertEquals(2, save.getMealId());
     }
 
@@ -100,32 +100,32 @@ class MealRepositoryTest {
     }
 
     @Test
-    void shouldFindAllBySelectedRestaurant() {
+    void shouldFindAllMealsBySelectedRestaurant() {
         when(mealJpaRepository.findAllBySelectedRestaurant(4)).thenReturn(List.of(mealEntity, mealEntity1));
         when(mealEntityMapper.mapFromEntity(mealEntity)).thenReturn(meal);
         when(mealEntityMapper.mapFromEntity(mealEntity1)).thenReturn(meal1);
 
-        List<Meal> result = mealRepository.findAllBySelectedRestaurant(4);
+        List<Meal> result = mealRepository.findAllMealsBySelectedRestaurant(4);
         Assertions.assertEquals(2, result.size());
 
     }
 
     @Test
-    void shouldFindById() {
+    void shouldFindMealById() {
         when(mealJpaRepository.findById(1)).thenReturn(Optional.of(mealEntity));
         when(mealEntityMapper.mapFromEntity(mealEntity)).thenReturn(meal);
 
-        Optional<Meal> mealById = mealRepository.findById(1);
+        Optional<Meal> mealById = mealRepository.findMealById(1);
 
         org.assertj.core.api.Assertions.assertThat(mealById).isPresent();
         Assertions.assertEquals(meal, mealById.get());
     }
 
     @Test
-    void shouldUpdate() {
+    void shouldUpdateMeal() {
         when(mealEntityMapper.mapToEntity(meal)).thenReturn(mealEntity);
 
-        mealRepository.update(meal, "", "", new BigDecimal("1"), meal.getRestaurant());
+        mealRepository.updateMeal(meal, "", "", new BigDecimal("1"), meal.getRestaurant());
         Assertions.assertEquals("", meal.getName());
     }
 }

@@ -7,9 +7,7 @@ import pl.example.business.dao.ClientDAO;
 import pl.example.domain.Client;
 import pl.example.infrastructure.database.entity.ClientEntity;
 import pl.example.infrastructure.database.repository.jpa.ClientJpaRepository;
-import pl.example.infrastructure.database.repository.jpa.OrderJpaRepository;
 import pl.example.infrastructure.database.repository.mapper.ClientEntityMapper;
-import pl.example.infrastructure.database.repository.mapper.OrderEntityMapper;
 import pl.example.infrastructure.security.UserJpaRepository;
 
 import java.util.Optional;
@@ -25,7 +23,7 @@ public class ClientRepository implements ClientDAO {
 
 
     @Override
-    public Optional<Client> findByEmail(String email) {
+    public Optional<Client> findClientByEmail(String email) {
         return clientJpaRepository.findByEmail(email)
                 .map(clientEntityMapper::mapFromEntity);
     }
@@ -39,7 +37,7 @@ public class ClientRepository implements ClientDAO {
     }
 
     @Override
-    public Optional<Client> findById(Integer clientId) {
+    public Optional<Client> findClientById(Integer clientId) {
         return clientJpaRepository.findById(clientId)
                 .map(clientEntityMapper::mapFromEntity);
     }

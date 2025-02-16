@@ -19,7 +19,7 @@ public class RestaurantStreetRepository implements RestaurantStreetDAO {
 
 
     @Override
-    public List<RestaurantStreet> findAll() {
+    public List<RestaurantStreet> findAllRestaurantStreets() {
         return restaurantStreetJpaRepository.findAll().stream()
                 .map(restaurantStreetEntityMapper::mapFromEntity)
                 .toList();
@@ -27,7 +27,7 @@ public class RestaurantStreetRepository implements RestaurantStreetDAO {
 
 
     @Override
-    public RestaurantStreet save(RestaurantStreet restaurantStreet) {
+    public RestaurantStreet saveRestaurantStreet(RestaurantStreet restaurantStreet) {
 
         return restaurantStreetEntityMapper.mapFromEntity(restaurantStreetJpaRepository
                 .save(restaurantStreetEntityMapper.mapToEntity(restaurantStreet)));

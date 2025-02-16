@@ -17,7 +17,7 @@ public class RestaurantOwnerService {
 
     public RestaurantOwner findRestaurantOwnerById(Integer restaurantOwnerId) {
         log.info("Trying to find Restaurant Owner: {}", restaurantOwnerId);
-        return restaurantOwnerDAO.findById(restaurantOwnerId);
+        return restaurantOwnerDAO.findRestaurantOwnerById(restaurantOwnerId);
     }
 
     @Transactional

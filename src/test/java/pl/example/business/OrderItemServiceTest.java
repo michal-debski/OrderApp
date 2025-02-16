@@ -40,11 +40,11 @@ class OrderItemServiceTest {
         when(mealMenuService.findMealById(2)).thenReturn(Optional.of(secondMeal));
 
 
-        orderItemService.save(selectedMeals, quantity, order);
+        orderItemService.saveOrderItem(selectedMeals, quantity, order);
 
 
         verify(mealMenuService, times(2)).findMealById(anyInt());
-        verify(orderItemDAO, times(2)).save(any(OrderItem.class));
+        verify(orderItemDAO, times(2)).saveOrderItem(any(OrderItem.class));
     }
 
     @Test

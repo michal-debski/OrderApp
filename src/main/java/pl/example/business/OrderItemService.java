@@ -60,7 +60,7 @@ public class OrderItemService {
 
     private void saveAllOrderItemsFromList(List<OrderItem> orderItems) {
         for (OrderItem orderItemToSave : orderItems) {
-            orderItemDAO.save(orderItemToSave);
+            orderItemDAO.saveOrderItem(orderItemToSave);
         }
     }
 
