@@ -2,6 +2,7 @@ package pl.example.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.example.infrastructure.security.UserEntity;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -32,13 +33,13 @@ public class OrderEntity {
     @Column(name = "status")
     private String status;
 
-
     @Column(name = "order_date")
     private OffsetDateTime orderDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
-    private ClientEntity client;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;

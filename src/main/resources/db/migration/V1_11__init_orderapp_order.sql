@@ -5,13 +5,13 @@ ORDER_NUMBER VARCHAR(15) NOT NULL,
 TOTAL_PRICE  NUMERIC (5,2),
 STATUS      VARCHAR(40)     NOT NULL,
 ORDER_DATE TIMESTAMP WITH TIME ZONE NOT NULL,
-CLIENT_ID INT NOT NULL,
+USER_ID INT NOT NULL,
 RESTAURANT_ID INT NOT NULL,
 PRIMARY KEY (ORDER_ID),
     UNIQUE (ORDER_NUMBER),
-    CONSTRAINT fk_order_client
-        FOREIGN KEY (client_id)
-            REFERENCES client (client_id),
+    CONSTRAINT fk_order_user
+        FOREIGN KEY (user_id)
+            REFERENCES order_app_user (user_id),
              CONSTRAINT fk_order_RESTAURANT
                     FOREIGN KEY (RESTAURANT_id)
                         REFERENCES RESTAURANT (RESTAURANT_id)

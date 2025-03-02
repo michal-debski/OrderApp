@@ -1,11 +1,11 @@
 package pl.example.business.dao;
 
-import pl.example.domain.RestaurantOwner;
+import pl.example.domain.User;
 
 public interface RestaurantOwnerDAO {
-    RestaurantOwner findRestaurantOwnerById(Integer id);
+    User findRestaurantOwnerByEmail(String email);
 
-    RestaurantOwner saveRestaurantOwner(RestaurantOwner restaurantOwner);
+    User saveRestaurantOwner(User restaurantOwner);
 
-    RestaurantOwner findLoggedRestaurantOwner();
+    User findLoggedRestaurantOwner();
 }

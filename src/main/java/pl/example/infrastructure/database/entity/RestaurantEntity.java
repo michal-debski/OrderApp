@@ -2,6 +2,7 @@ package pl.example.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.example.infrastructure.security.UserEntity;
 
 import java.util.Set;
 
@@ -30,13 +31,17 @@ public class  RestaurantEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<RestaurantStreetEntity> restaurantStreets;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_owner_id")
-    private RestaurantOwnerEntity restaurantOwner;
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<OrderEntity> orders;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<MealEntity> meals;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressEntity address;

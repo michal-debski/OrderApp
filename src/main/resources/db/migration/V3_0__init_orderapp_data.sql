@@ -1,22 +1,8 @@
-
-
-insert into client (name, surname, phone, email)
-values
-('John', 'Doe', '123-456-789', 'john.doe@example.com'),
-('Alice', 'Smith', '987-654-321', 'alice.smith@example.com'),
-('Bob', 'Johnson', '555-555-555', 'bob.johnson@example.com');
-
-insert into restaurant_owner(name, surname, phone, email)
-values
-('Stefan', 'Stefanowicz','123-456-789','stefan@miastowa.com'),
-('Agata', 'Agrafka','987-654-321', 'agata@victi.com' ),
-('Tomasz', 'Tomaszewski',  '555-555-555','tomasz@tomani.com');
-
 insert into address (country, city, street, number) values ('Polska', 'Warszawa', 'Złota','1');
 insert into address (country, city, street, number) values ('Polska', 'Warszawa', 'Srebrna','2');
 insert into address (country, city, street, number) values ('Polska', 'Warszawa', 'Brązowa','3');
 
-INSERT INTO RESTAURANT(NAME, EMAIL, PHONE, ADDRESS_ID, RESTAURANT_OWNER_ID)
+INSERT INTO RESTAURANT(NAME, EMAIL, PHONE, ADDRESS_ID, USER_ID)
 VALUES
 ('Miastowa','miastowa@gmail.com', '666 777 888', 1 , 1),
 ('Victi', 'victi@gmail.com', '777 888 999', 2, 2),

@@ -26,10 +26,7 @@ public class ClientHomeController {
     public String showAllOrders(
             Model model
     ) {
-
-        var ordersDTOs = orderService.findOrderByClientId(
-                        clientService.findLoggedClient().getClientId()
-                ).stream()
+        var ordersDTOs = orderService.findOrderByClientEmail(clientService.findLoggedClient().getEmail()).stream()
                 .map(orderMapper::mapToDTO);
 
         model.addAttribute("ordersDTOs", ordersDTOs);

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.RestaurantOwnerDAO;
-import pl.example.domain.RestaurantOwner;
+import pl.example.domain.User;
 
 @Service
 @AllArgsConstructor
@@ -15,18 +15,18 @@ public class RestaurantOwnerService {
     private final RestaurantOwnerDAO restaurantOwnerDAO;
 
 
-    public RestaurantOwner findRestaurantOwnerById(Integer restaurantOwnerId) {
-        log.info("Trying to find Restaurant Owner: {}", restaurantOwnerId);
-        return restaurantOwnerDAO.findRestaurantOwnerById(restaurantOwnerId);
+    public User findRestaurantOwnerByEmail(String email) {
+        log.info("Trying to find Restaurant Owner: {}", email);
+        return restaurantOwnerDAO.findRestaurantOwnerByEmail(email);
     }
 
     @Transactional
-    public RestaurantOwner saveRestaurantOwner(RestaurantOwner restaurantOwner) {
+    public User saveRestaurantOwner(User restaurantOwner) {
         log.info("Trying to save Restaurant Owner: {}", restaurantOwner);
         return restaurantOwnerDAO.saveRestaurantOwner(restaurantOwner);
     }
 
-    public RestaurantOwner findLoggedRestaurantOwner() {
+    public User findLoggedRestaurantOwner() {
         return restaurantOwnerDAO.findLoggedRestaurantOwner();
     }
 }

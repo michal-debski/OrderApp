@@ -19,7 +19,7 @@ public class Order {
     BigDecimal totalPrice;
     String status;
     OffsetDateTime orderDate;
-    Client client;
+    User user;
     Restaurant restaurant;
 
     Set<OrderItem> orderItems;

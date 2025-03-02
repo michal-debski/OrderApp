@@ -40,8 +40,8 @@ public class OrderRepository implements OrderDAO {
     }
 
     @Override
-    public List<Order> findOrderByClientId(Integer id) {
-        return orderJpaRepository.findByClientId(id).stream()
+    public List<Order> findOrderByClientId(String email) {
+        return orderJpaRepository.findByClientEmail(email).stream()
                 .map(orderEntityMapper::mapFromEntity).toList();
     }
 

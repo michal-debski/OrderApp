@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.OrderItemDAO;
-import pl.example.domain.Meal;
 import pl.example.domain.Order;
 import pl.example.domain.OrderItem;
 
@@ -21,12 +20,12 @@ public class OrderItemService {
 
 
     @Transactional
-    public void saveOrderItem(List<String> selectedMeals, Integer quantity, Order order) {
+    public void saveOrderItem(List<String> selectedMeals, List<Integer> quantities, Order order) {
         List<Integer> mealIds = selectedMeals.stream()
                 .map(Integer::valueOf)
                 .toList();
         List<OrderItem> orderItems = new ArrayList<>();
-        creatingOrderItemsListBasedOnOrderInfo(quantity, order, mealIds, orderItems);
+        creatingOrderItemsListBasedOnOrderInfo(quantities, order, mealIds, orderItems);
         log.info("Created list of order item: {} ", orderItems);
         saveAllOrderItemsFromList(orderItems);
         log.info("Saved order items: {}", orderItems);
@@ -40,22 +39,21 @@ public class OrderItemService {
     }
 
     private void creatingOrderItemsListBasedOnOrderInfo(
-            Integer quantity,
+            List<Integer> quantities,
             Order order,
             List<Integer> mealIds,
             List<OrderItem> orderItems
     ) {
-        for (Integer meal : mealIds) {
-
-            Meal mealTemp = mealMenuService.findMealById(meal).orElseThrow();
-
+        for (int i = 0; i < mealIds.size(); i++) {
             OrderItem orderItemFromClient = OrderItem.builder()
-                    .meal(mealTemp)
-                    .quantity(quantity)
+                    .meal(mealMenuService.findMealById(mealIds.get(i)).orElseThrow())
+                    .quantity(quantities.get(i))
                     .order(order)
                     .build();
             orderItems.add(orderItemFromClient);
         }
+
+
     }
 
     private void saveAllOrderItemsFromList(List<OrderItem> orderItems) {

@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/restaurantOwner/restaurants")
-public class RestaurantOwnerStreetController {
+public class   RestaurantOwnerStreetController {
     private RestaurantStreetService restaurantStreetService;
     private RestaurantService restaurantService;
 

@@ -12,7 +12,7 @@ import pl.example.business.RestaurantOwnerService;
 import pl.example.business.RestaurantService;
 import pl.example.domain.Address;
 import pl.example.domain.Restaurant;
-import pl.example.domain.RestaurantOwner;
+import pl.example.domain.User;
 
 @Controller
 @RequiredArgsConstructor
@@ -40,7 +40,7 @@ public class RestaurantController {
             @ModelAttribute("addressDTO") AddressDTO addressDTO,
             Model model
     ) {
-        RestaurantOwner loggedRestaurantOwner = restaurantOwnerService.findLoggedRestaurantOwner();
+        User loggedRestaurantOwner = restaurantOwnerService.findLoggedRestaurantOwner();
         Address address = addressMapper.map(addressDTO);
         Restaurant restaurant = restaurantMapper.mapFromDto(restaurantDTO);
         restaurantService.saveRestaurant(restaurant, loggedRestaurantOwner, address);

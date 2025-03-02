@@ -9,7 +9,6 @@ import lombok.With;
 @Value
 @Builder
 @Data
-
 public class OrderItem {
     Integer orderItemId;
     Integer quantity;

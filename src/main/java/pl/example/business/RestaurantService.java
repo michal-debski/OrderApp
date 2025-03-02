@@ -8,7 +8,7 @@ import pl.example.api.controller.exception.NotFoundException;
 import pl.example.business.dao.RestaurantDAO;
 import pl.example.domain.Address;
 import pl.example.domain.Restaurant;
-import pl.example.domain.RestaurantOwner;
+import pl.example.domain.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +38,7 @@ public class RestaurantService {
     }
 
     @Transactional
-    public Restaurant saveRestaurant(Restaurant restaurant, RestaurantOwner restaurantOwner, Address address) {
+    public Restaurant saveRestaurant(Restaurant restaurant, User restaurantOwner, Address address) {
         log.info("Trying to save Restaurant{}:", restaurant);
         return restaurantDAO.saveRestaurant(restaurant, restaurantOwner, address);
     }
@@ -49,9 +49,9 @@ public class RestaurantService {
     }
 
 
-    public List<Restaurant> findByRestaurantOwnerId(Integer id) {
-        log.info("Trying to find Restaurant{}:", id);
-        return restaurantDAO.findByRestaurantOwnerId(id);
+    public List<Restaurant> findByRestaurantOwnerEmail(String email) {
+        log.info("Trying to find Restaurant by Restaurant Owner email: {}", email);
+        return restaurantDAO.findByRestaurantOwnerEmail(email);
     }
 
 

@@ -19,10 +19,12 @@ public interface RestaurantEntityMapper {
 
 
     RestaurantEntity mapToEntity(Restaurant restaurant);
+
     Set<RestaurantEntity> mapToEntity(Set<Restaurant> restaurants);
 
     @Mapping(target = "restaurant", ignore = true)
     RestaurantStreet mapFromEntity(RestaurantStreetEntity entity);
+
     @Mapping(target = "restaurant", ignore = true)
     RestaurantStreetEntity mapToEntity(RestaurantStreet entity);
 

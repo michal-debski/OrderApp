@@ -18,6 +18,6 @@ public class Restaurant {
     String phone;
     String email;
     Address address;
-    RestaurantOwner restaurantOwner;
+    User restaurantOwner;
     Set<RestaurantStreet> restaurantStreets;
 }

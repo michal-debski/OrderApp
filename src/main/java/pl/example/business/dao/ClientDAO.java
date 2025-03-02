@@ -1,17 +1,17 @@
 package pl.example.business.dao;
 
-import pl.example.domain.Client;
+import pl.example.domain.User;
 
 import java.util.Optional;
 
 public interface ClientDAO {
 
 
-    Optional<Client> findClientByEmail(String email);
+    Optional<User> findClientByEmail(String email);
 
-    Client saveClient(Client client);
+    User saveClient(User client);
 
-    Optional<Client> findClientById(Integer clientId);
+    Optional<User> findClientById(Integer clientId);
 
-    Client findLoggedClient();
+    User findLoggedClient();
 }

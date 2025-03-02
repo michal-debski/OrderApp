@@ -19,10 +19,10 @@ public interface OrderJpaRepository extends JpaRepository<OrderEntity, Integer> 
 
     @Query("""
             SELECT ord FROM OrderEntity ord
-            INNER JOIN FETCH ord.client cli
-            WHERE cli.id = :id
+            INNER JOIN FETCH ord.user cli
+            WHERE cli.email = :email
             """)
-    List<OrderEntity> findByClientId(@Param("id") Integer id);
+    List<OrderEntity> findByClientEmail(@Param("email") String email);
 
     @Query(
             """

@@ -47,26 +47,25 @@ public class OrderService {
     }
 
 
-    @Transactional
-    public List<Order> findOrderByClientId(Integer clientId) {
-        return orderDAO.findOrderByClientId(clientId);
+    public List<Order> findOrderByClientEmail(String email) {
+        return orderDAO.findOrderByClientId(email);
     }
 
     @Transactional
-    public Order buildOrder(Integer restaurantId, List<String> selectedMeals, Integer quantity) {
+    public Order buildOrder(Integer restaurantId, List<String> selectedMeals, List<Integer> quantities) {
         OffsetDateTime dateOfOrder = OffsetDateTime.now();
         Order orderPlaced = Order.builder()
                 .orderNumber(generateOrderNumber())
                 .status("Preparing by chef")
                 .orderDate(dateOfOrder)
-                .client(clientService.findLoggedClient())
+                .user(clientService.findLoggedClient())
                 .restaurant(restaurantService.findRestaurantById(restaurantId))
                 .build();
         log.info("Creating order before saving order: {}", orderPlaced);
         Order savedOrder = orderDAO.saveOrder(orderPlaced);
         log.info("Saving order: {}", savedOrder);
         if (!selectedMeals.isEmpty()) {
-            orderItemService.saveOrderItem(selectedMeals, quantity, savedOrder);
+            orderItemService.saveOrderItem(selectedMeals, quantities, savedOrder);
             savedOrder.setTotalPrice(orderDAO.getTotalOrderPrice(savedOrder.getOrderId()));
             log.info("Order was saved: {}", savedOrder);
             return orderDAO.saveOrder(savedOrder);

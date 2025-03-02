@@ -9,7 +9,6 @@ import pl.example.api.dto.mapper.MealMapper;
 import pl.example.api.dto.mapper.OrderMapper;
 import pl.example.api.dto.mapper.RestaurantMapper;
 import pl.example.business.MealMenuService;
-import pl.example.business.OrderItemService;
 import pl.example.business.OrderService;
 import pl.example.business.RestaurantService;
 import pl.example.domain.Order;
@@ -24,7 +23,6 @@ public class ClientOrderController {
     private final MealMenuService mealMenuService;
     private final OrderService orderService;
     private final OrderMapper orderMapper;
-    private final OrderItemService orderItemService;
     private final RestaurantMapper restaurantMapper;
 
     private final MealMapper mealMapper;
@@ -65,10 +63,10 @@ public class ClientOrderController {
     public String placeOrder(
             @PathVariable String restaurantId,
             @RequestParam("meals") List<String> selectedMeals,
-            @RequestParam("quantity") Integer quantity,
+            @RequestParam("quantities") List<Integer> quantities,
             Model model
     ) {
-        Order order = orderService.buildOrder(Integer.valueOf(restaurantId), selectedMeals, quantity);
+        Order order = orderService.buildOrder(Integer.valueOf(restaurantId), selectedMeals, quantities);
         OrderDTO orderDTOToShow = orderMapper
                 .mapToDTO(order);
 

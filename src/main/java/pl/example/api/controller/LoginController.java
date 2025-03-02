@@ -45,7 +45,7 @@ public class LoginController {
                 .findFirst()
                 .orElseThrow(() -> new SecurityException("Something went terribly wrong with security. There is no role assigned to the user"))
                 .toString();
-        log.info("Current user role: {}", authorities);
+        log.info("User: {} logged into application, Current user role: {}", authentication.getPrincipal(), authorities);
 
         return switch (authorities) {
             case "CLIENT" -> "client_homepage";

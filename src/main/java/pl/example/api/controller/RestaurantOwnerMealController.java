@@ -48,7 +48,9 @@ public class RestaurantOwnerMealController {
     public String addMealForm(@PathVariable Integer restaurantId,
                               @ModelAttribute MealDTO mealDTO,
                               Model model) {
-        List<CategoryDTO> categoryDTOs = categoryService.findAllCategories().stream().map(categoryMapper::map).toList();
+        List<CategoryDTO> categoryDTOs = categoryService.findAllCategories().stream()
+                .map(categoryMapper::map)
+                .toList();
 
         model.addAttribute("categories", categoryDTOs);
         model.addAttribute("meal", mealDTO);
@@ -63,8 +65,6 @@ public class RestaurantOwnerMealController {
             Model model
     ) {
         Restaurant restaurant = restaurantService.findRestaurantById(restaurantId);
-
-
         Meal mealToSave = mealMapper.map(mealDTO);
         mealMenuService.makeMealForRestaurant(mealToSave, restaurant);
         model.addAttribute("name", mealDTO.name());

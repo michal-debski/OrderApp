@@ -14,7 +14,7 @@ public record OrderDTO(
         BigDecimal totalPrice,
         String status,
         String orderDate,
-        ClientDTO client,
+        UserDTO client,
         RestaurantDTO restaurant,
         Set<OrderItem> orderItems,
         boolean isCancellable

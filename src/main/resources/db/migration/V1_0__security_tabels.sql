@@ -1,7 +1,10 @@
 CREATE TABLE order_app_user
 (
     user_id   SERIAL        NOT NULL,
+    name      VARCHAR(32)   NOT NULL,
+    surname   VARCHAR(32)   NOT NULL,
     user_name VARCHAR(32)   NOT NULL,
+    phone     VARCHAR(64)   NOT NULL,
     email     VARCHAR(32)   NOT NULL,
     password  VARCHAR(128)  NOT NULL,
     PRIMARY KEY (user_id)

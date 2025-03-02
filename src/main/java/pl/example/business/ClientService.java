@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.example.business.dao.ClientDAO;
-import pl.example.domain.Client;
+import pl.example.domain.User;
 
 @Service
 @AllArgsConstructor
@@ -15,19 +15,19 @@ public class ClientService {
     private final ClientDAO clientDAO;
 
 
-    public Client findClientById(Integer id) {
+    public User findClientById(Integer id) {
         return clientDAO.findClientById(id).orElseThrow();
     }
 
     @Transactional
-    public Client saveClient(Client client) {
-        Client savedClient = clientDAO.saveClient(client);
+    public User saveClient(User client) {
+        User savedClient = clientDAO.saveClient(client);
         log.info("Saving client {}", savedClient);
         return savedClient;
 
     }
 
-    public Client findLoggedClient(){
+    public User findLoggedClient(){
         return clientDAO.findLoggedClient();
     }
 }

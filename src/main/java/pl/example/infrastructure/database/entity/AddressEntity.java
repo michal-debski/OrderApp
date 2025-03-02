@@ -3,8 +3,6 @@ package pl.example.infrastructure.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @EqualsAndHashCode(of = "addressId")
@@ -32,8 +30,8 @@ public class AddressEntity {
     @Column(name = "number")
     private String number;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "address")
-    private Set<RestaurantEntity> restaurants;
+    @OneToOne(mappedBy = "address")
+    private RestaurantEntity restaurant;
 
 
 }

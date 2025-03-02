@@ -18,7 +18,6 @@ import pl.example.business.RestaurantStreetService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -45,8 +44,8 @@ public class RestaurantOwnerHomeController {
     ) {
         Map<Integer, List<MealDTO>> mealsMap = new HashMap<>();
 
-        var restaurantsDTO = restaurantService.findByRestaurantOwnerId(
-                        restaurantOwnerService.findLoggedRestaurantOwner().getRestaurantOwnerId()
+        var restaurantsDTO = restaurantService.findByRestaurantOwnerEmail(
+                        restaurantOwnerService.findLoggedRestaurantOwner().getEmail()
                 ).stream()
                 .map(restaurantMapper::map).toList();
         for (RestaurantDTO restaurant : restaurantsDTO) {
