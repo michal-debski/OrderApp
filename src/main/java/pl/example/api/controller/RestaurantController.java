@@ -23,7 +23,7 @@ public class RestaurantController {
     private final RestaurantMapper restaurantMapper;
     private final AddressMapper addressMapper;
 
-    @GetMapping("/addRestaurant")
+    @GetMapping("/newRestaurant")
     public String addRestaurantForm(
             @ModelAttribute RestaurantDTO restaurantDTO,
             @ModelAttribute AddressDTO addressDTO,
@@ -34,7 +34,7 @@ public class RestaurantController {
         return "restaurant_new";
     }
 
-    @PostMapping("/addRestaurant")
+    @PostMapping("/newRestaurant")
     public String makeRestaurant(
             @ModelAttribute("restaurantDTO") RestaurantDTO restaurantDTO,
             @ModelAttribute("addressDTO") AddressDTO addressDTO,

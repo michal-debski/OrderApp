@@ -44,7 +44,7 @@ public class RestaurantOwnerMealController {
         return "restaurant_meals";
     }
 
-    @GetMapping("/{restaurantId}/addMeal")
+    @GetMapping("/{restaurantId}/meal")
     public String addMealForm(@PathVariable Integer restaurantId,
                               @ModelAttribute MealDTO mealDTO,
                               Model model) {
@@ -58,7 +58,7 @@ public class RestaurantOwnerMealController {
     }
 
 
-    @PostMapping("/{restaurantId}/addMeal")
+    @PostMapping("/{restaurantId}/meal")
     public String addMealToMenu(
             @PathVariable Integer restaurantId,
             @Valid @ModelAttribute("mealDTO") MealDTO mealDTO,
@@ -75,7 +75,7 @@ public class RestaurantOwnerMealController {
         return "redirect:/restaurantOwner/restaurants";
     }
 
-    @DeleteMapping("/{restaurantId}/{mealId}/cancelMeal")
+    @DeleteMapping("/{restaurantId}/{mealId}")
     public String deleteMealByRestaurant(
             @PathVariable String restaurantId,
             @PathVariable String mealId
@@ -84,7 +84,7 @@ public class RestaurantOwnerMealController {
         return format("redirect:/restaurantOwner/restaurants/{restaurantId}/meals", restaurantId);
     }
 
-    @GetMapping("/{restaurantId}/{mealId}/update")
+    @GetMapping("/{restaurantId}/{mealId}")
     public String updateMealForm(
             @PathVariable Integer restaurantId,
             @PathVariable Integer mealId,
@@ -99,7 +99,7 @@ public class RestaurantOwnerMealController {
         return "meal_update";
     }
 
-    @PutMapping("/{restaurantId}/{mealId}/update")
+    @PutMapping("/{restaurantId}/{mealId}")
     public String updateMeal(
             @PathVariable Integer restaurantId,
             @PathVariable Integer mealId,

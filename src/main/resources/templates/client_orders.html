@@ -115,7 +115,7 @@
             <a th:href="@{'/logout'}">Logout</a>
         </div>
         <div class="col-md-3">
-            <a th:href="@{'/client'+ '/addOrder'}">Restaurants</a>
+            <a th:href="@{'/client'+ '/order'}">Restaurants</a>
         </div>
         <div class="col-md-3">
             <a th:href="@{'/client'+ '/orders'}">Orders</a>
@@ -143,7 +143,7 @@
                         <a th:href="@{'/client' + '/order/'+ ${order.orderNumber} + '/orderDetails'}"
                            class="btn btn-info"
                            role="button">Order details</a>
-                        <form action="#" th:action="@{'/client' + '/order/'+${order.orderNumber} + '/cancelOrder'}"
+                        <form action="#" th:action="@{'/client' + '/order/'+${order.orderNumber} + '/order'}"
                               th:method="delete">
                             <button type="submit" class="btn btn-danger">Cancel Order</button>
                         </form></td>

@@ -33,7 +33,7 @@ public class RestaurantOwnerOrderController {
         return "restaurants_orders";
     }
 
-    @GetMapping("/{orderNumber}/updateOrder")
+    @GetMapping("/{orderNumber}")
     public String updateMealForm(
             @PathVariable String orderNumber,
             Model model
@@ -49,7 +49,7 @@ public class RestaurantOwnerOrderController {
         return "order_update";
     }
 
-    @PutMapping("/{orderNumber}/updateOrder")
+    @PutMapping("/{orderNumber}")
     public String updateOrderStatus(
             @PathVariable String orderNumber,
             @ModelAttribute("order") OrderDTO orderDTO

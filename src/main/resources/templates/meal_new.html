@@ -118,7 +118,7 @@
             <a th:href="@{'/logout'}">Logout</a>
         </div>
         <div class="col-md-3">
-            <a th:href="@{'/client'+ '/addOrder'}">Restaurants</a>
+            <a th:href="@{'/client'+ '/order'}">Restaurants</a>
         </div>
         <div class="col-md-3">
             <a th:href="@{'/client'+ '/orders'}">Orders</a>
@@ -132,7 +132,7 @@
             <h2>Set details of your meal</h2>
 
             <form action="#" th:object='${meal}'
-                  th:action="@{'/restaurantOwner' + '/restaurants/'+ ${restaurantId} + '/addMeal'}" method="post">
+                  th:action="@{'/restaurantOwner' + '/restaurants/'+ ${restaurantId} + '/meal'}" method="post">
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <div class="mb-3">

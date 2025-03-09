@@ -16,8 +16,7 @@ public record OrderDTO(
         String orderDate,
         UserDTO client,
         RestaurantDTO restaurant,
-        Set<OrderItem> orderItems,
-        boolean isCancellable
+        Set<OrderItem> orderItems
 ) {
 
 

@@ -27,12 +27,12 @@ public class ClientOrderController {
 
     private final MealMapper mealMapper;
 
-    @GetMapping("/addOrder")
+    @GetMapping("/order")
     public String showForm() {
         return "client_restaurant_select";
     }
 
-    @PostMapping("/addOrder/{street}/restaurants")
+    @PostMapping("/order/{street}/restaurants")
     public String showRestaurantsByStreet(
             @RequestParam String street,
             Model model
@@ -44,7 +44,7 @@ public class ClientOrderController {
 
     }
 
-    @GetMapping("/addOrder/{restaurantId}/menu")
+    @GetMapping("/order/{restaurantId}/menu")
     public String showMenuForCreatedOrder(
             @PathVariable String restaurantId,
             Model model
@@ -59,7 +59,7 @@ public class ClientOrderController {
         return "client_found_restaurant_menu";
     }
 
-    @PostMapping("/addOrder/{restaurantId}/menu")
+    @PostMapping("/order/{restaurantId}/menu")
     public String placeOrder(
             @PathVariable String restaurantId,
             @RequestParam("meals") List<String> selectedMeals,
@@ -77,7 +77,7 @@ public class ClientOrderController {
     }
 
 
-    @DeleteMapping("/order/{orderNumber}/cancelOrder")
+    @DeleteMapping("/order/{orderNumber}")
     public String deleteOrder(
             @PathVariable String orderNumber
     ) {
