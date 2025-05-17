@@ -18,9 +18,9 @@ import pl.example.util.integration.configuration.PersistenceContainerTestConfigu
 class OrderItemJpaRepositoryTest {
     private OrderItemJpaRepository orderItemJpaRepository;
 
-    @Transactional
-    @Test
-    void shouldDeleteOrderItemsByOrderId() {
-
-    }
+//    @Transactional
+//    @Test
+//    void shouldDeleteOrderItemsByOrderId() {
+//
+//    }
 }

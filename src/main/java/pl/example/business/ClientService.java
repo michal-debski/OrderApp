@@ -15,10 +15,6 @@ public class ClientService {
     private final ClientDAO clientDAO;
 
 
-    public User findClientById(Integer id) {
-        return clientDAO.findClientById(id).orElseThrow();
-    }
-
     @Transactional
     public User saveClient(User client) {
         User savedClient = clientDAO.saveClient(client);

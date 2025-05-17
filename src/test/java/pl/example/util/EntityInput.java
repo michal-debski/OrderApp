@@ -17,7 +17,7 @@ public class EntityInput {
         return RestaurantEntity.builder()
                 .restaurantId(4)
                 .restaurantName("test1")
-                .restaurantOwner(kindOfRestaurantOwnerEntity())
+                .user(kindOfRestaurantOwnerEntity())
                 .address(AddressEntity.builder()
                         .country("Poland")
                         .city("Warsaw")
@@ -33,7 +33,7 @@ public class EntityInput {
         return RestaurantEntity.builder()
                 .restaurantId(5)
                 .restaurantName("test2")
-                .restaurantOwner(kindOfRestaurantOwnerEntity1())
+                .user(kindOfRestaurantOwnerEntity1())
                 .address(AddressEntity.builder()
                         .country("Poland")
                         .city("Warsaw")
@@ -49,7 +49,7 @@ public class EntityInput {
         return RestaurantEntity.builder()
                 .restaurantId(6)
                 .restaurantName("test3")
-                .restaurantOwner(kindOfRestaurantOwnerEntity())
+                .user(kindOfRestaurantOwnerEntity())
                 .address(AddressEntity.builder()
                         .country("Poland")
                         .city("Warsaw")
@@ -61,9 +61,8 @@ public class EntityInput {
                 .build();
     }
 
-    private static RestaurantOwnerEntity kindOfRestaurantOwnerEntity1() {
-        return RestaurantOwnerEntity.builder()
-                .restaurantOwnerId(4)
+    private static UserEntity kindOfRestaurantOwnerEntity1() {
+        return UserEntity.builder()
                 .name("Jan")
                 .surname("Testowy")
                 .email("adam.testowy@gmail.com")
@@ -71,9 +70,8 @@ public class EntityInput {
                 .build();
     }
 
-    public static RestaurantOwnerEntity kindOfRestaurantOwnerEntity() {
-        return RestaurantOwnerEntity.builder()
-                .restaurantOwnerId(3)
+    public static UserEntity kindOfRestaurantOwnerEntity() {
+        return UserEntity.builder()
                 .name("Adam")
                 .surname("Testowy")
                 .email("test@gmail.com")
@@ -109,9 +107,8 @@ public class EntityInput {
                 .build();
     }
 
-    public static ClientEntity kindOfClientEntity() {
-        return ClientEntity.builder()
-                .clientId(1)
+    public static UserEntity kindOfClientEntity() {
+        return UserEntity.builder()
                 .name("Jan")
                 .surname("Testowy")
                 .email("jan.testowy@gmail.com")
@@ -119,9 +116,8 @@ public class EntityInput {
                 .build();
     }
 
-    private static ClientEntity kindOfClientEntity1() {
-        return ClientEntity.builder()
-                .clientId(2)
+    private static UserEntity kindOfClientEntity1() {
+        return UserEntity.builder()
                 .name("Adam")
                 .surname("Testowy")
                 .email("adam.testowy@gmail.com")
@@ -161,7 +157,7 @@ public class EntityInput {
     public static OrderEntity kindOfOrderEntity() {
         return OrderEntity.builder()
                 .orderId(1)
-                .client(kindOfClientEntity())
+                .user(kindOfClientEntity())
                 .orderNumber("123")
                 .orderDate(OffsetDateTime.of(
                         2024, 1, 1, 12, 0, 0, 0, ZoneOffset.UTC))
@@ -174,7 +170,7 @@ public class EntityInput {
     public static OrderEntity kindOfOrderEntity1() {
         return OrderEntity.builder()
                 .orderId(2)
-                .client(EntityInput.kindOfClientEntity1())
+                .user(EntityInput.kindOfClientEntity1())
                 .orderNumber("124")
                 .orderDate(OffsetDateTime.of(
                         2024, 2, 2, 12, 0, 0, 0, ZoneOffset.UTC))

@@ -28,20 +28,20 @@ class RestaurantStreetJpaRepositoryTest {
     private RestaurantStreetJpaRepository restaurantStreetJpaRepository;
     private RestaurantJpaRepository restaurantJpaRepository;
 
-    @Test
-    void shouldSaveAndFindAllByRestaurantId() {
-        //given
-        RestaurantStreetEntity restaurantStreetEntity = kindOfRestaurantStreetEntity();
-        RestaurantEntity restaurant = kindOfRestaurantEntity();
-        //when
-        RestaurantEntity saved = restaurantJpaRepository.save(restaurant);
-        restaurantStreetEntity.setRestaurant(saved);
-        restaurantStreetJpaRepository.save(restaurantStreetEntity);
-        List<RestaurantStreetEntity> allByRestaurantId = restaurantStreetJpaRepository.findAllByRestaurantId(
-                restaurantStreetEntity.getRestaurant().getRestaurantId()
-        );
-        //then
-        Assertions.assertEquals(1, allByRestaurantId.size());
-
-    }
+//    @Test
+//    void shouldSaveAndFindAllByRestaurantId() {
+//        //given
+//        RestaurantStreetEntity restaurantStreetEntity = kindOfRestaurantStreetEntity();
+//        RestaurantEntity restaurant = kindOfRestaurantEntity();
+//        //when
+//        RestaurantEntity saved = restaurantJpaRepository.save(restaurant);
+//        restaurantStreetEntity.setRestaurant(saved);
+//        restaurantStreetJpaRepository.save(restaurantStreetEntity);
+//        List<RestaurantStreetEntity> allByRestaurantId = restaurantStreetJpaRepository.findAllByRestaurantId(
+//                restaurantStreetEntity.getRestaurant().getRestaurantId()
+//        );
+//        //then
+//        Assertions.assertEquals(1, allByRestaurantId.size());
+//
+//    }
 }

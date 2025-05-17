@@ -80,7 +80,7 @@ class RestaurantOwnerMealControllerTest {
 //
 //    @Test
 //    void testAddMealToMenu() throws Exception {
-//        mockMvc.perform(post("/restaurantOwner/restaurants/1/addMeal")
+//        mockMvc.perform(post("/restaurantOwner/restaurants/1/meal")
 //                        .param("name", "Test Meal")
 //                        .param("description", "A delicious test meal")
 //                        .param("price", "9.99"))
@@ -95,7 +95,7 @@ class RestaurantOwnerMealControllerTest {
 //        String mealId = "1";
 //
 //        mockMvc.perform(
-//                        delete("/restaurantOwner/restaurants/{restaurantId}/{mealId}/cancelMeal",
+//                        delete("/restaurantOwner/restaurants/{restaurantId}/{mealId}",
 //                                restaurantId, mealId))
 //                .andExpect(status().is3xxRedirection())
 //                .andExpect(redirectedUrl("/restaurantOwner/restaurants/" + restaurantId + "/meals"));
@@ -116,7 +116,7 @@ class RestaurantOwnerMealControllerTest {
 //        when(mealMapper.map(mockMeal)).thenReturn(mockMealDTO);
 //
 //
-//        mockMvc.perform(get("/restaurantOwner/restaurants/{restaurantId}/{mealId}/update", 1, 1))
+//        mockMvc.perform(get("/restaurantOwner/restaurants/{restaurantId}/{mealId}", 1, 1))
 //                .andExpect(status().isOk())
 //                .andExpect(view().name("meal_update"))
 //                .andExpect(model().attributeExists("meal"))
@@ -138,7 +138,7 @@ class RestaurantOwnerMealControllerTest {
 //
 //        when(restaurantService.findRestaurantById(1)).thenReturn(restaurant);
 //
-//        mockMvc.perform(put("/restaurantOwner/restaurants/{restaurantId}/{mealId}/update", 1, 1)
+//        mockMvc.perform(put("/restaurantOwner/restaurants/{restaurantId}/{mealId}", 1, 1)
 //                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
 //                        .param("name", mealDTO.getName())
 //                        .param("description", mealDTO.getDescription())

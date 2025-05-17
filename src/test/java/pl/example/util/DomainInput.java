@@ -59,9 +59,8 @@ public class DomainInput {
                 .build();
     }
 
-    public static RestaurantOwner kindOfRestaurantOwner1() {
-        return RestaurantOwner.builder()
-                .restaurantOwnerId(4)
+    public static User kindOfRestaurantOwner1() {
+        return User.builder()
                 .name("Jan")
                 .surname("Testowy")
                 .email("adam.testowy@gmail.com")
@@ -69,9 +68,8 @@ public class DomainInput {
                 .build();
     }
 
-    public static RestaurantOwner kindOfRestaurantOwner() {
-        return RestaurantOwner.builder()
-                .restaurantOwnerId(3)
+    public static User kindOfRestaurantOwner() {
+        return User.builder()
                 .name("Adam")
                 .surname("Testowy")
                 .email("test@gmail.com")
@@ -100,9 +98,8 @@ public class DomainInput {
                 .build();
     }
 
-    public static Client kindOfClient() {
-        return Client.builder()
-                .clientId(1)
+    public static User kindOfClient() {
+        return User.builder()
                 .name("Jan")
                 .surname("Testowy")
                 .email("jan.testowy@gmail.com")
@@ -110,9 +107,8 @@ public class DomainInput {
                 .build();
     }
 
-    private static Client kindOfClient1() {
-        return Client.builder()
-                .clientId(2)
+    private static User kindOfClient1() {
+        return User.builder()
                 .name("Adam")
                 .surname("Testowy")
                 .email("adam.testowy@gmail.com")
@@ -152,7 +148,7 @@ public class DomainInput {
     public static Order kindOfOrder() {
         return Order.builder()
                 .orderId(1)
-                .client(kindOfClient())
+                .user(kindOfClient())
                 .orderNumber("123")
                 .orderDate(OffsetDateTime.of(
                         2024, 1, 1, 12, 0, 0, 0, ZoneOffset.UTC))
@@ -165,7 +161,7 @@ public class DomainInput {
     public static Order kindOfOrder1() {
         return Order.builder()
                 .orderId(2)
-                .client(DomainInput.kindOfClient1())
+                .user(DomainInput.kindOfClient1())
                 .orderNumber("124")
                 .orderDate(OffsetDateTime.of(
                         2024, 2, 2, 12, 0, 0, 0, ZoneOffset.UTC))

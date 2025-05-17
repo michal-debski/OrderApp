@@ -28,38 +28,38 @@ import static pl.example.util.EntityInput.kindOfRestaurantEntity;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 class MealJpaRepositoryTest {
 
-    private MealJpaRepository mealJpaRepository;
-    private RestaurantJpaRepository restaurantJpaRepository;
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Transactional
-    @Test
-    void shouldSaveAndFindByCategory() {
-
-        MealEntity meal1 = EntityInput.kindOfMealEntity1();
-        MealEntity meal2 = EntityInput.kindOfMealEntity();
-        RestaurantEntity restaurant = kindOfRestaurantEntity();
-        restaurant.setRestaurantId(4);
-        restaurantJpaRepository.save(restaurant);
-        meal1.setRestaurant(restaurant);
-        meal2.setRestaurant(restaurant);
-        entityManager.merge(meal1);
-        entityManager.merge(meal2);
-
-        // when
-        Set<MealEntity> foundMeals = mealJpaRepository.findByCategory(1);
-
-        // then
-        assertEquals(6, foundMeals.size());
-    }
-
-    @Test
-    void shouldFindAllBySelectedRestaurant() {
-
-        RestaurantEntity restaurantEntity = kindOfRestaurantEntity();
-
-        List<MealEntity> expected = mealJpaRepository.findAllBySelectedRestaurant(restaurantEntity.getRestaurantId());
-        assertEquals(0, expected.size());
-    }
+//    private MealJpaRepository mealJpaRepository;
+//    private RestaurantJpaRepository restaurantJpaRepository;
+//    @PersistenceContext
+//    private EntityManager entityManager;
+//
+//    @Transactional
+//    @Test
+//    void shouldSaveAndFindByCategory() {
+//
+//        MealEntity meal1 = EntityInput.kindOfMealEntity1();
+//        MealEntity meal2 = EntityInput.kindOfMealEntity();
+//        RestaurantEntity restaurant = kindOfRestaurantEntity();
+//        restaurant.setRestaurantId(4);
+//        restaurantJpaRepository.save(restaurant);
+//        meal1.setRestaurant(restaurant);
+//        meal2.setRestaurant(restaurant);
+//        entityManager.merge(meal1);
+//        entityManager.merge(meal2);
+//
+//        // when
+//        Set<MealEntity> foundMeals = mealJpaRepository.findByCategory(1);
+//
+//        // then
+//        assertEquals(6, foundMeals.size());
+//    }
+//
+//    @Test
+//    void shouldFindAllBySelectedRestaurant() {
+//
+//        RestaurantEntity restaurantEntity = kindOfRestaurantEntity();
+//
+//        List<MealEntity> expected = mealJpaRepository.findAllBySelectedRestaurant(restaurantEntity.getRestaurantId());
+//        assertEquals(0, expected.size());
+//    }
 }

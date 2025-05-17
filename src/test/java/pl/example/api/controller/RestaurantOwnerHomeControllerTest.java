@@ -1,22 +1,33 @@
 package pl.example.api.controller;
 
 import lombok.AllArgsConstructor;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.ui.Model;
 import pl.example.api.dto.mapper.MealMapper;
 import pl.example.api.dto.mapper.RestaurantMapper;
-import pl.example.api.dto.mapper.RestaurantOwnerMapper;
 import pl.example.api.dto.mapper.RestaurantStreetMapper;
+import pl.example.api.dto.mapper.UserMapper;
 import pl.example.business.MealMenuService;
 import pl.example.business.RestaurantOwnerService;
 import pl.example.business.RestaurantService;
 import pl.example.business.RestaurantStreetService;
 
+import static org.junit.Assert.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
 @AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(controllers = RestaurantOwnerHomeController.class)
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 class RestaurantOwnerHomeControllerTest {
     @MockBean
     private RestaurantService restaurantService;
@@ -39,29 +50,34 @@ class RestaurantOwnerHomeControllerTest {
     @MockBean
     private MealMapper mealMapper;
     @MockBean
-    private RestaurantOwnerMapper restaurantOwnerMapper;
+    private UserMapper restaurantOwnerMapper;
 
-//    @MockBean
-//    private Model model;
-//
-//    @InjectMocks
-//    private RestaurantOwnerHomeController restaurantOwnerHomeController;
-//
-//    @BeforeEach
-//    void setUp() {
-//        MockitoAnnotations.openMocks(this);
-//    }
-//
-//    @Test
-//    void restaurantOwnerHomePage() {
-//        String viewName = restaurantOwnerHomeController.restaurantOwnerHomePage();
-//        assertEquals("restaurantOwner_homepage", viewName);
-//    }
-//
-//    @Test
-//    void showRestaurants() {
-        // Arrange
-    //    RestaurantOwnerDTO loggedRestaurantOwnerDTO = new RestaurantOwnerDTO();
+    @Autowired
+    private MockMvc mockMvc;
+
+    @InjectMocks
+    private RestaurantOwnerHomeController restaurantOwnerHomeController;
+
+    @Test
+    void restaurantOwnerHomePage() throws Exception {
+        String viewName = restaurantOwnerHomeController.restaurantOwnerHomePage();
+
+        mockMvc.perform(get("/restaurantOwner"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(viewName));
+
+    }
+
+    @Test
+    void showRestaurants() throws Exception {
+
+        mockMvc.perform(get("/restaurantOwner/restaurants"))
+                .andExpect(status().isOk());
+//                .andExpect(view().name(viewName));
+
+    }
+//        Arrange
+//        RestaurantOwnerDTO loggedRestaurantOwnerDTO = new RestaurantOwnerDTO();
 //        loggedRestaurantOwnerDTO.setRestaurantOwnerId(1);
 //        RestaurantOwner loggedRestaurantOwner = RestaurantOwner.builder().build();
 //
